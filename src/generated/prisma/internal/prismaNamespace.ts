@@ -384,7 +384,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
-  User: 'User'
+  User: 'User',
+  Property: 'Property'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -400,7 +401,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user"
+    modelProps: "user" | "property"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -478,6 +479,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Property: {
+      payload: Prisma.$PropertyPayload<ExtArgs>
+      fields: Prisma.PropertyFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PropertyFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PropertyFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyPayload>
+        }
+        findFirst: {
+          args: Prisma.PropertyFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PropertyFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyPayload>
+        }
+        findMany: {
+          args: Prisma.PropertyFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyPayload>[]
+        }
+        create: {
+          args: Prisma.PropertyCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyPayload>
+        }
+        createMany: {
+          args: Prisma.PropertyCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PropertyCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyPayload>[]
+        }
+        delete: {
+          args: Prisma.PropertyDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyPayload>
+        }
+        update: {
+          args: Prisma.PropertyUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyPayload>
+        }
+        deleteMany: {
+          args: Prisma.PropertyDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PropertyUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PropertyUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyPayload>[]
+        }
+        upsert: {
+          args: Prisma.PropertyUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyPayload>
+        }
+        aggregate: {
+          args: Prisma.PropertyAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProperty>
+        }
+        groupBy: {
+          args: Prisma.PropertyGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PropertyGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PropertyCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PropertyCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -530,6 +605,41 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const PropertyScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  description: 'description',
+  address: 'address',
+  area: 'area',
+  city: 'city',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  floorLabel: 'floorLabel',
+  totalFloors: 'totalFloors',
+  totalUnits: 'totalUnits',
+  unitsPerFloor: 'unitsPerFloor',
+  startingPrice: 'startingPrice',
+  handoverDate: 'handoverDate',
+  landArea: 'landArea',
+  facing: 'facing',
+  roadSize: 'roadSize',
+  parkingAvailable: 'parkingAvailable',
+  liftAvailable: 'liftAvailable',
+  generatorBackup: 'generatorBackup',
+  securityAvailable: 'securityAvailable',
+  imageUrls: 'imageUrls',
+  amenities: 'amenities',
+  status: 'status',
+  isFeatured: 'isFeatured',
+  isPublished: 'isPublished',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PropertyScalarFieldEnum = (typeof PropertyScalarFieldEnum)[keyof typeof PropertyScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -608,6 +718,20 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 
@@ -735,6 +859,7 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
+  property?: Prisma.PropertyOmit
 }
 
 /* Types for Logging */

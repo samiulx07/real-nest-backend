@@ -8,8 +8,10 @@ router.get("/health", (req, res) => {
 
 // Import routes
 import authRoutes from "./auth.route";
+import propertyRoutes from "./property.route";
 
 // Mount routes
 router.use("/auth", authRoutes);
+router.use("/properties", propertyRoutes);
 
 export default router;

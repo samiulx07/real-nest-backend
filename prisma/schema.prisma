@@ -28,3 +28,49 @@ model User {
 
   @@map("users")
 }
+
+model Property {
+  id                String   @id @default(uuid())
+
+  title             String
+  slug              String   @unique
+  description       String?
+
+  address           String
+  area              String
+  city              String   @default("Dhaka")
+
+  latitude          Float?
+  longitude         Float?
+
+  floorLabel        String   // Example: G+10
+  totalFloors       Int
+  totalUnits        Int
+  unitsPerFloor     Int?
+
+  startingPrice     Float?
+
+  handoverDate      DateTime?
+  landArea          String?  // Example: 8 Katha
+  facing            String?  // North, South, East, West
+  roadSize          String?  // Example: 20 Feet Road
+
+  parkingAvailable Boolean  @default(false)
+  liftAvailable    Boolean  @default(false)
+  generatorBackup  Boolean  @default(false)
+  securityAvailable Boolean @default(false)
+
+  imageUrls         String[]
+  amenities         String[]
+
+  status            String?  
+  // Example: Ongoing, Completed, Ready to Move, Handovered
+
+  isFeatured        Boolean  @default(false)
+  isPublished       Boolean  @default(true)
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("properties")
+}

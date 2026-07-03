@@ -48,7 +48,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.defineExtension = exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
+exports.defineExtension = exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.PropertyScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/client"));
 /**
  * Prisma Errors
@@ -103,7 +103,8 @@ exports.JsonNull = runtime.JsonNull;
  */
 exports.AnyNull = runtime.AnyNull;
 exports.ModelName = {
-    User: 'User'
+    User: 'User',
+    Property: 'Property'
 };
 /**
  * Enums
@@ -122,6 +123,37 @@ exports.UserScalarFieldEnum = {
     password: 'password',
     role: 'role',
     isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.PropertyScalarFieldEnum = {
+    id: 'id',
+    title: 'title',
+    slug: 'slug',
+    description: 'description',
+    address: 'address',
+    area: 'area',
+    city: 'city',
+    latitude: 'latitude',
+    longitude: 'longitude',
+    floorLabel: 'floorLabel',
+    totalFloors: 'totalFloors',
+    totalUnits: 'totalUnits',
+    unitsPerFloor: 'unitsPerFloor',
+    startingPrice: 'startingPrice',
+    handoverDate: 'handoverDate',
+    landArea: 'landArea',
+    facing: 'facing',
+    roadSize: 'roadSize',
+    parkingAvailable: 'parkingAvailable',
+    liftAvailable: 'liftAvailable',
+    generatorBackup: 'generatorBackup',
+    securityAvailable: 'securityAvailable',
+    imageUrls: 'imageUrls',
+    amenities: 'amenities',
+    status: 'status',
+    isFeatured: 'isFeatured',
+    isPublished: 'isPublished',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 };

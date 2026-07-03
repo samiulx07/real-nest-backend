@@ -51,7 +51,8 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  User: 'User'
+  User: 'User',
+  Property: 'Property'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -83,6 +84,41 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const PropertyScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  description: 'description',
+  address: 'address',
+  area: 'area',
+  city: 'city',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  floorLabel: 'floorLabel',
+  totalFloors: 'totalFloors',
+  totalUnits: 'totalUnits',
+  unitsPerFloor: 'unitsPerFloor',
+  startingPrice: 'startingPrice',
+  handoverDate: 'handoverDate',
+  landArea: 'landArea',
+  facing: 'facing',
+  roadSize: 'roadSize',
+  parkingAvailable: 'parkingAvailable',
+  liftAvailable: 'liftAvailable',
+  generatorBackup: 'generatorBackup',
+  securityAvailable: 'securityAvailable',
+  imageUrls: 'imageUrls',
+  amenities: 'amenities',
+  status: 'status',
+  isFeatured: 'isFeatured',
+  isPublished: 'isPublished',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PropertyScalarFieldEnum = (typeof PropertyScalarFieldEnum)[keyof typeof PropertyScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -10,6 +10,8 @@ router.get("/health", (req, res) => {
 });
 // Import routes
 const auth_route_1 = __importDefault(require("./auth.route"));
+const property_route_1 = __importDefault(require("./property.route"));
 // Mount routes
 router.use("/auth", auth_route_1.default);
+router.use("/properties", property_route_1.default);
 exports.default = router;
