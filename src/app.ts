@@ -25,9 +25,27 @@ app.use(
     },
   })
 );
+// Configure allowed CORS origins
+const allowedOrigins = env.FRONTEND_URL
+  ? env.FRONTEND_URL.split(",").map((url) => url.trim())
+  : ["http://localhost:3000"];
+
 app.use(
   cors({
-    origin: env.FRONTEND_URL,
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps, curl, postman)
+      if (!origin) return callback(null, true);
+
+      const isAllowed = allowedOrigins.some((allowed) => {
+        return allowed === origin || (env.NODE_ENV === "development" && origin.startsWith("http://localhost:"));
+      });
+
+      if (isAllowed) {
+        callback(null, true);
+      } else {
+        callback(new Error(`Origin ${origin} not allowed by CORS`));
+      }
+    },
     credentials: true,
   })
 );

@@ -10,8 +10,12 @@ export const swaggerDocument = {
   },
   servers: [
     {
+      url: "/api/v1",
+      description: "Current Server (Relative Path)",
+    },
+    {
       url: "http://localhost:5000/api/v1",
-      description: "Development Server",
+      description: "Local Development Server",
     },
   ],
   paths: {
