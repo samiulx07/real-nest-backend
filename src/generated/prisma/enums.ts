@@ -17,3 +17,12 @@ export const UserRole = {
 } as const
 
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+
+
+export const FlatStatus = {
+  AVAILABLE: 'AVAILABLE',
+  BOOKED: 'BOOKED',
+  SOLD: 'SOLD'
+} as const
+
+export type FlatStatus = (typeof FlatStatus)[keyof typeof FlatStatus]

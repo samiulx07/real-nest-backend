@@ -52,7 +52,8 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  Property: 'Property'
+  Property: 'Property',
+  Flat: 'Flat'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -119,6 +120,31 @@ export const PropertyScalarFieldEnum = {
 } as const
 
 export type PropertyScalarFieldEnum = (typeof PropertyScalarFieldEnum)[keyof typeof PropertyScalarFieldEnum]
+
+
+export const FlatScalarFieldEnum = {
+  id: 'id',
+  propertyId: 'propertyId',
+  title: 'title',
+  flatNumber: 'flatNumber',
+  floorNumber: 'floorNumber',
+  beds: 'beds',
+  baths: 'baths',
+  kitchens: 'kitchens',
+  balconies: 'balconies',
+  size: 'size',
+  price: 'price',
+  status: 'status',
+  description: 'description',
+  imageUrls: 'imageUrls',
+  amenities: 'amenities',
+  isFeatured: 'isFeatured',
+  isPublished: 'isPublished',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FlatScalarFieldEnum = (typeof FlatScalarFieldEnum)[keyof typeof FlatScalarFieldEnum]
 
 
 export const SortOrder = {

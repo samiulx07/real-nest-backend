@@ -57,11 +57,18 @@ if (env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-// Swagger API Documentation
+// Serve raw OpenAPI JSON Spec
+app.get("/api-docs.json", (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  res.json(swaggerDocument);
+});
+
+// Swagger API Documentation UI
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// Routes
+// API Routes
 app.use("/api/v1", routes);
+
 
 // Root Endpoint
 app.get("/", (req, res) => {

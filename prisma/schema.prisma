@@ -72,5 +72,45 @@ model Property {
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 
+  flats             Flat[]
+
   @@map("properties")
 }
+
+enum FlatStatus {
+  AVAILABLE
+  BOOKED
+  SOLD
+}
+
+model Flat {
+  id            String     @id @default(uuid())
+  propertyId    String
+  property      Property   @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  title         String     // e.g., "Flat 4A - Deluxe Corner Unit"
+  flatNumber    String     // e.g., "4A"
+  floorNumber   Int        // e.g., 4 (0 = Ground, 1 = 1st floor)
+
+  beds          Int        @default(1)
+  baths         Int        @default(1)
+  kitchens      Int        @default(1)
+  balconies     Int        @default(1)
+
+  size          Float      // Square footage e.g., 1650.0
+  price         Float      // Price in currency (BDT)
+
+  status        FlatStatus @default(AVAILABLE)
+
+  description   String?
+  imageUrls     String[]   @default([])
+  amenities     String[]   @default([])
+
+  isFeatured    Boolean    @default(false)
+  isPublished   Boolean    @default(true)
+
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  @@map("flats")
+}

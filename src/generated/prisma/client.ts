@@ -49,3 +49,8 @@ export type User = Prisma.UserModel
  * 
  */
 export type Property = Prisma.PropertyModel
+/**
+ * Model Flat
+ * 
+ */
+export type Flat = Prisma.FlatModel

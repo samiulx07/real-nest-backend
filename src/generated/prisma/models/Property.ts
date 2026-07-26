@@ -420,6 +420,7 @@ export type PropertyWhereInput = {
   isPublished?: Prisma.BoolFilter<"Property"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Property"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Property"> | Date | string
+  flats?: Prisma.FlatListRelationFilter
 }
 
 export type PropertyOrderByWithRelationInput = {
@@ -452,6 +453,7 @@ export type PropertyOrderByWithRelationInput = {
   isPublished?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  flats?: Prisma.FlatOrderByRelationAggregateInput
 }
 
 export type PropertyWhereUniqueInput = Prisma.AtLeast<{
@@ -487,6 +489,7 @@ export type PropertyWhereUniqueInput = Prisma.AtLeast<{
   isPublished?: Prisma.BoolFilter<"Property"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Property"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Property"> | Date | string
+  flats?: Prisma.FlatListRelationFilter
 }, "id" | "slug">
 
 export type PropertyOrderByWithAggregationInput = {
@@ -591,6 +594,7 @@ export type PropertyCreateInput = {
   isPublished?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  flats?: Prisma.FlatCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateInput = {
@@ -623,6 +627,7 @@ export type PropertyUncheckedCreateInput = {
   isPublished?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  flats?: Prisma.FlatUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUpdateInput = {
@@ -655,6 +660,7 @@ export type PropertyUpdateInput = {
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  flats?: Prisma.FlatUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateInput = {
@@ -687,6 +693,7 @@ export type PropertyUncheckedUpdateInput = {
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  flats?: Prisma.FlatUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyCreateManyInput = {
@@ -903,6 +910,11 @@ export type PropertySumOrderByAggregateInput = {
   startingPrice?: Prisma.SortOrder
 }
 
+export type PropertyScalarRelationFilter = {
+  is?: Prisma.PropertyWhereInput
+  isNot?: Prisma.PropertyWhereInput
+}
+
 export type PropertyCreateimageUrlsInput = {
   set: string[]
 }
@@ -949,6 +961,193 @@ export type PropertyUpdateamenitiesInput = {
   push?: string | string[]
 }
 
+export type PropertyCreateNestedOneWithoutFlatsInput = {
+  create?: Prisma.XOR<Prisma.PropertyCreateWithoutFlatsInput, Prisma.PropertyUncheckedCreateWithoutFlatsInput>
+  connectOrCreate?: Prisma.PropertyCreateOrConnectWithoutFlatsInput
+  connect?: Prisma.PropertyWhereUniqueInput
+}
+
+export type PropertyUpdateOneRequiredWithoutFlatsNestedInput = {
+  create?: Prisma.XOR<Prisma.PropertyCreateWithoutFlatsInput, Prisma.PropertyUncheckedCreateWithoutFlatsInput>
+  connectOrCreate?: Prisma.PropertyCreateOrConnectWithoutFlatsInput
+  upsert?: Prisma.PropertyUpsertWithoutFlatsInput
+  connect?: Prisma.PropertyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PropertyUpdateToOneWithWhereWithoutFlatsInput, Prisma.PropertyUpdateWithoutFlatsInput>, Prisma.PropertyUncheckedUpdateWithoutFlatsInput>
+}
+
+export type PropertyCreateWithoutFlatsInput = {
+  id?: string
+  title: string
+  slug: string
+  description?: string | null
+  address: string
+  area: string
+  city?: string
+  latitude?: number | null
+  longitude?: number | null
+  floorLabel: string
+  totalFloors: number
+  totalUnits: number
+  unitsPerFloor?: number | null
+  startingPrice?: number | null
+  handoverDate?: Date | string | null
+  landArea?: string | null
+  facing?: string | null
+  roadSize?: string | null
+  parkingAvailable?: boolean
+  liftAvailable?: boolean
+  generatorBackup?: boolean
+  securityAvailable?: boolean
+  imageUrls?: Prisma.PropertyCreateimageUrlsInput | string[]
+  amenities?: Prisma.PropertyCreateamenitiesInput | string[]
+  status?: string | null
+  isFeatured?: boolean
+  isPublished?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type PropertyUncheckedCreateWithoutFlatsInput = {
+  id?: string
+  title: string
+  slug: string
+  description?: string | null
+  address: string
+  area: string
+  city?: string
+  latitude?: number | null
+  longitude?: number | null
+  floorLabel: string
+  totalFloors: number
+  totalUnits: number
+  unitsPerFloor?: number | null
+  startingPrice?: number | null
+  handoverDate?: Date | string | null
+  landArea?: string | null
+  facing?: string | null
+  roadSize?: string | null
+  parkingAvailable?: boolean
+  liftAvailable?: boolean
+  generatorBackup?: boolean
+  securityAvailable?: boolean
+  imageUrls?: Prisma.PropertyCreateimageUrlsInput | string[]
+  amenities?: Prisma.PropertyCreateamenitiesInput | string[]
+  status?: string | null
+  isFeatured?: boolean
+  isPublished?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type PropertyCreateOrConnectWithoutFlatsInput = {
+  where: Prisma.PropertyWhereUniqueInput
+  create: Prisma.XOR<Prisma.PropertyCreateWithoutFlatsInput, Prisma.PropertyUncheckedCreateWithoutFlatsInput>
+}
+
+export type PropertyUpsertWithoutFlatsInput = {
+  update: Prisma.XOR<Prisma.PropertyUpdateWithoutFlatsInput, Prisma.PropertyUncheckedUpdateWithoutFlatsInput>
+  create: Prisma.XOR<Prisma.PropertyCreateWithoutFlatsInput, Prisma.PropertyUncheckedCreateWithoutFlatsInput>
+  where?: Prisma.PropertyWhereInput
+}
+
+export type PropertyUpdateToOneWithWhereWithoutFlatsInput = {
+  where?: Prisma.PropertyWhereInput
+  data: Prisma.XOR<Prisma.PropertyUpdateWithoutFlatsInput, Prisma.PropertyUncheckedUpdateWithoutFlatsInput>
+}
+
+export type PropertyUpdateWithoutFlatsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  area?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  floorLabel?: Prisma.StringFieldUpdateOperationsInput | string
+  totalFloors?: Prisma.IntFieldUpdateOperationsInput | number
+  totalUnits?: Prisma.IntFieldUpdateOperationsInput | number
+  unitsPerFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  handoverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  facing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roadSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parkingAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  liftAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  generatorBackup?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  securityAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrls?: Prisma.PropertyUpdateimageUrlsInput | string[]
+  amenities?: Prisma.PropertyUpdateamenitiesInput | string[]
+  status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type PropertyUncheckedUpdateWithoutFlatsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  area?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  floorLabel?: Prisma.StringFieldUpdateOperationsInput | string
+  totalFloors?: Prisma.IntFieldUpdateOperationsInput | number
+  totalUnits?: Prisma.IntFieldUpdateOperationsInput | number
+  unitsPerFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  startingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  handoverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  landArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  facing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roadSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  parkingAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  liftAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  generatorBackup?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  securityAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  imageUrls?: Prisma.PropertyUpdateimageUrlsInput | string[]
+  amenities?: Prisma.PropertyUpdateamenitiesInput | string[]
+  status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type PropertyCountOutputType
+ */
+
+export type PropertyCountOutputType = {
+  flats: number
+}
+
+export type PropertyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  flats?: boolean | PropertyCountOutputTypeCountFlatsArgs
+}
+
+/**
+ * PropertyCountOutputType without action
+ */
+export type PropertyCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PropertyCountOutputType
+   */
+  select?: Prisma.PropertyCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * PropertyCountOutputType without action
+ */
+export type PropertyCountOutputTypeCountFlatsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FlatWhereInput
+}
 
 
 export type PropertySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -981,6 +1180,8 @@ export type PropertySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   isPublished?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  flats?: boolean | Prisma.Property$flatsArgs<ExtArgs>
+  _count?: boolean | Prisma.PropertyCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["property"]>
 
 export type PropertySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1080,10 +1281,18 @@ export type PropertySelectScalar = {
 }
 
 export type PropertyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "description" | "address" | "area" | "city" | "latitude" | "longitude" | "floorLabel" | "totalFloors" | "totalUnits" | "unitsPerFloor" | "startingPrice" | "handoverDate" | "landArea" | "facing" | "roadSize" | "parkingAvailable" | "liftAvailable" | "generatorBackup" | "securityAvailable" | "imageUrls" | "amenities" | "status" | "isFeatured" | "isPublished" | "createdAt" | "updatedAt", ExtArgs["result"]["property"]>
+export type PropertyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  flats?: boolean | Prisma.Property$flatsArgs<ExtArgs>
+  _count?: boolean | Prisma.PropertyCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type PropertyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type PropertyIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $PropertyPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Property"
-  objects: {}
+  objects: {
+    flats: Prisma.$FlatPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     title: string
@@ -1508,6 +1717,7 @@ readonly fields: PropertyFieldRefs;
  */
 export interface Prisma__PropertyClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  flats<T extends Prisma.Property$flatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Property$flatsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FlatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1583,6 +1793,10 @@ export type PropertyFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   omit?: Prisma.PropertyOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PropertyInclude<ExtArgs> | null
+  /**
    * Filter, which Property to fetch.
    */
   where: Prisma.PropertyWhereUniqueInput
@@ -1601,6 +1815,10 @@ export type PropertyFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensio
    */
   omit?: Prisma.PropertyOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PropertyInclude<ExtArgs> | null
+  /**
    * Filter, which Property to fetch.
    */
   where: Prisma.PropertyWhereUniqueInput
@@ -1618,6 +1836,10 @@ export type PropertyFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the Property
    */
   omit?: Prisma.PropertyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PropertyInclude<ExtArgs> | null
   /**
    * Filter, which Property to fetch.
    */
@@ -1667,6 +1889,10 @@ export type PropertyFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extension
    */
   omit?: Prisma.PropertyOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PropertyInclude<ExtArgs> | null
+  /**
    * Filter, which Property to fetch.
    */
   where?: Prisma.PropertyWhereInput
@@ -1714,6 +1940,10 @@ export type PropertyFindManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the Property
    */
   omit?: Prisma.PropertyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PropertyInclude<ExtArgs> | null
   /**
    * Filter, which Properties to fetch.
    */
@@ -1763,6 +1993,10 @@ export type PropertyCreateArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.PropertyOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PropertyInclude<ExtArgs> | null
+  /**
    * The data needed to create a Property.
    */
   data: Prisma.XOR<Prisma.PropertyCreateInput, Prisma.PropertyUncheckedCreateInput>
@@ -1810,6 +2044,10 @@ export type PropertyUpdateArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Property
    */
   omit?: Prisma.PropertyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PropertyInclude<ExtArgs> | null
   /**
    * The data needed to update a Property.
    */
@@ -1877,6 +2115,10 @@ export type PropertyUpsertArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.PropertyOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PropertyInclude<ExtArgs> | null
+  /**
    * The filter to search for the Property to update in case it exists.
    */
   where: Prisma.PropertyWhereUniqueInput
@@ -1903,6 +2145,10 @@ export type PropertyDeleteArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.PropertyOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PropertyInclude<ExtArgs> | null
+  /**
    * Filter which Property to delete.
    */
   where: Prisma.PropertyWhereUniqueInput
@@ -1923,6 +2169,30 @@ export type PropertyDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
+ * Property.flats
+ */
+export type Property$flatsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Flat
+   */
+  select?: Prisma.FlatSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Flat
+   */
+  omit?: Prisma.FlatOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FlatInclude<ExtArgs> | null
+  where?: Prisma.FlatWhereInput
+  orderBy?: Prisma.FlatOrderByWithRelationInput | Prisma.FlatOrderByWithRelationInput[]
+  cursor?: Prisma.FlatWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FlatScalarFieldEnum | Prisma.FlatScalarFieldEnum[]
+}
+
+/**
  * Property without action
  */
 export type PropertyDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1934,4 +2204,8 @@ export type PropertyDefaultArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the Property
    */
   omit?: Prisma.PropertyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PropertyInclude<ExtArgs> | null
 }

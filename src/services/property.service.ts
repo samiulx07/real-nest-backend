@@ -93,6 +93,14 @@ export const getAllProperties = async (filters: any, options: any) => {
 export const getPropertyById = async (id: string) => {
   const result = await prisma.property.findUnique({
     where: { id },
+    include: {
+      flats: {
+        orderBy: [
+          { floorNumber: "asc" },
+          { flatNumber: "asc" },
+        ],
+      },
+    },
   });
 
   if (!result) {
@@ -101,6 +109,7 @@ export const getPropertyById = async (id: string) => {
 
   return result;
 };
+
 
 export const updateProperty = async (id: string, payload: any) => {
   const property = await prisma.property.findUnique({

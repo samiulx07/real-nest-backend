@@ -385,7 +385,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
-  Property: 'Property'
+  Property: 'Property',
+  Flat: 'Flat'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -401,7 +402,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "property"
+    modelProps: "user" | "property" | "flat"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -553,6 +554,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Flat: {
+      payload: Prisma.$FlatPayload<ExtArgs>
+      fields: Prisma.FlatFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FlatFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlatPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FlatFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlatPayload>
+        }
+        findFirst: {
+          args: Prisma.FlatFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlatPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FlatFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlatPayload>
+        }
+        findMany: {
+          args: Prisma.FlatFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlatPayload>[]
+        }
+        create: {
+          args: Prisma.FlatCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlatPayload>
+        }
+        createMany: {
+          args: Prisma.FlatCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FlatCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlatPayload>[]
+        }
+        delete: {
+          args: Prisma.FlatDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlatPayload>
+        }
+        update: {
+          args: Prisma.FlatUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlatPayload>
+        }
+        deleteMany: {
+          args: Prisma.FlatDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FlatUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FlatUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlatPayload>[]
+        }
+        upsert: {
+          args: Prisma.FlatUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FlatPayload>
+        }
+        aggregate: {
+          args: Prisma.FlatAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFlat>
+        }
+        groupBy: {
+          args: Prisma.FlatGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FlatGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FlatCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FlatCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -640,6 +715,31 @@ export const PropertyScalarFieldEnum = {
 } as const
 
 export type PropertyScalarFieldEnum = (typeof PropertyScalarFieldEnum)[keyof typeof PropertyScalarFieldEnum]
+
+
+export const FlatScalarFieldEnum = {
+  id: 'id',
+  propertyId: 'propertyId',
+  title: 'title',
+  flatNumber: 'flatNumber',
+  floorNumber: 'floorNumber',
+  beds: 'beds',
+  baths: 'baths',
+  kitchens: 'kitchens',
+  balconies: 'balconies',
+  size: 'size',
+  price: 'price',
+  status: 'status',
+  description: 'description',
+  imageUrls: 'imageUrls',
+  amenities: 'amenities',
+  isFeatured: 'isFeatured',
+  isPublished: 'isPublished',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FlatScalarFieldEnum = (typeof FlatScalarFieldEnum)[keyof typeof FlatScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -746,6 +846,20 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'FlatStatus'
+ */
+export type EnumFlatStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FlatStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'FlatStatus[]'
+ */
+export type ListEnumFlatStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FlatStatus[]'>
     
 
 /**
@@ -860,6 +974,7 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   property?: Prisma.PropertyOmit
+  flat?: Prisma.FlatOmit
 }
 
 /* Types for Logging */

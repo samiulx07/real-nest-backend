@@ -127,27 +127,7 @@ export const swaggerDocument = {
             },
           },
           "401": {
-            description: "Invalid credentials (password mismatched)",
-            content: {
-              "application/json": {
-                schema: {
-                  $ref: "#/components/schemas/ErrorResponse",
-                },
-              },
-            },
-          },
-          "403": {
-            description: "User account is inactive",
-            content: {
-              "application/json": {
-                schema: {
-                  $ref: "#/components/schemas/ErrorResponse",
-                },
-              },
-            },
-          },
-          "404": {
-            description: "User not found",
+            description: "Invalid credentials",
             content: {
               "application/json": {
                 schema: {
@@ -185,16 +165,6 @@ export const swaggerDocument = {
               },
             },
           },
-          "404": {
-            description: "User not found",
-            content: {
-              "application/json": {
-                schema: {
-                  $ref: "#/components/schemas/ErrorResponse",
-                },
-              },
-            },
-          },
         },
       },
     },
@@ -203,11 +173,7 @@ export const swaggerDocument = {
         summary: "Get Current User Profile",
         description: "Retrieve profile information of the currently authenticated user.",
         tags: ["Authentication"],
-        security: [
-          {
-            bearerAuth: [],
-          },
-        ],
+        security: [{ bearerAuth: [] }],
         responses: {
           "200": {
             description: "User profile retrieved successfully",
@@ -220,17 +186,7 @@ export const swaggerDocument = {
             },
           },
           "401": {
-            description: "Unauthorized, missing, or invalid Bearer access token",
-            content: {
-              "application/json": {
-                schema: {
-                  $ref: "#/components/schemas/ErrorResponse",
-                },
-              },
-            },
-          },
-          "404": {
-            description: "User not found",
+            description: "Unauthorized",
             content: {
               "application/json": {
                 schema: {
@@ -251,10 +207,10 @@ export const swaggerDocument = {
           { name: "search", in: "query", description: "Search by title or address", schema: { type: "string" } },
           { name: "city", in: "query", description: "Filter by city", schema: { type: "string" } },
           { name: "area", in: "query", description: "Filter by area", schema: { type: "string" } },
-          { name: "status", in: "query", description: "Filter by property status (e.g. Ongoing, Completed)", schema: { type: "string" } },
+          { name: "status", in: "query", description: "Filter by property status", schema: { type: "string" } },
           { name: "isFeatured", in: "query", description: "Filter by featured status", schema: { type: "boolean" } },
           { name: "page", in: "query", description: "Page number", schema: { type: "integer", default: 1 } },
-          { name: "limit", in: "query", description: "Number of records per page", schema: { type: "integer", default: 10 } },
+          { name: "limit", in: "query", description: "Records per page", schema: { type: "integer", default: 10 } },
           { name: "sortBy", in: "query", description: "Field to sort by", schema: { type: "string", default: "createdAt" } },
           { name: "sortOrder", in: "query", description: "Sorting order", schema: { type: "string", enum: ["asc", "desc"], default: "desc" } },
         ],
@@ -380,26 +336,6 @@ export const swaggerDocument = {
               },
             },
           },
-          "400": {
-            description: "Invalid inputs",
-            content: {
-              "application/json": {
-                schema: {
-                  $ref: "#/components/schemas/ErrorResponse",
-                },
-              },
-            },
-          },
-          "401": {
-            description: "Unauthorized",
-            content: {
-              "application/json": {
-                schema: {
-                  $ref: "#/components/schemas/ErrorResponse",
-                },
-              },
-            },
-          },
           "404": {
             description: "Property not found",
             content: {
@@ -435,8 +371,79 @@ export const swaggerDocument = {
               },
             },
           },
-          "401": {
-            description: "Unauthorized",
+          "404": {
+            description: "Property not found",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "/flats": {
+      get: {
+        summary: "Get All Flats",
+        description: "Retrieve a paginated list of flats with search, filters (propertyId, beds, baths, price range, status, isFeatured), and sorting.",
+        tags: ["Flats"],
+        parameters: [
+          { name: "search", in: "query", description: "Search by flat title or flat number", schema: { type: "string" } },
+          { name: "propertyId", in: "query", description: "Filter by property UUID", schema: { type: "string", format: "uuid" } },
+          { name: "beds", in: "query", description: "Filter by bedroom count", schema: { type: "integer" } },
+          { name: "baths", in: "query", description: "Filter by bathroom count", schema: { type: "integer" } },
+          { name: "minPrice", in: "query", description: "Minimum price", schema: { type: "number" } },
+          { name: "maxPrice", in: "query", description: "Maximum price", schema: { type: "number" } },
+          { name: "status", in: "query", description: "Filter status", schema: { type: "string", enum: ["AVAILABLE", "BOOKED", "SOLD"] } },
+          { name: "isFeatured", in: "query", description: "Filter featured flats", schema: { type: "boolean" } },
+          { name: "page", in: "query", description: "Page number", schema: { type: "integer", default: 1 } },
+          { name: "limit", in: "query", description: "Records per page", schema: { type: "integer", default: 10 } },
+          { name: "sortBy", in: "query", description: "Field to sort by", schema: { type: "string", default: "createdAt" } },
+          { name: "sortOrder", in: "query", description: "Sort order", schema: { type: "string", enum: ["asc", "desc"], default: "desc" } },
+        ],
+        responses: {
+          "200": {
+            description: "Flats retrieved successfully",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/FlatListResponse",
+                },
+              },
+            },
+          },
+        },
+      },
+      post: {
+        summary: "Create Flat",
+        description: "Add a new flat under a property. Restricted to SUPER_ADMIN, ADMIN, or STAFF.",
+        tags: ["Flats"],
+        security: [{ bearerAuth: [] }],
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/CreateFlatRequest",
+              },
+            },
+          },
+        },
+        responses: {
+          "201": {
+            description: "Flat created successfully",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/FlatResponse",
+                },
+              },
+            },
+          },
+          "400": {
+            description: "Invalid input values",
             content: {
               "application/json": {
                 schema: {
@@ -446,7 +453,115 @@ export const swaggerDocument = {
             },
           },
           "404": {
-            description: "Property not found",
+            description: "Target property not found",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "/flats/{id}": {
+      get: {
+        summary: "Get Single Flat",
+        description: "Retrieve details of a single flat by ID, including nested parent property information.",
+        tags: ["Flats"],
+        parameters: [
+          { name: "id", in: "path", required: true, description: "Flat UUID", schema: { type: "string", format: "uuid" } },
+        ],
+        responses: {
+          "200": {
+            description: "Flat retrieved successfully",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/FlatResponse",
+                },
+              },
+            },
+          },
+          "404": {
+            description: "Flat not found",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+        },
+      },
+      patch: {
+        summary: "Update Flat",
+        description: "Modify dynamic attributes of a flat. Restricted to SUPER_ADMIN, ADMIN, or STAFF.",
+        tags: ["Flats"],
+        security: [{ bearerAuth: [] }],
+        parameters: [
+          { name: "id", in: "path", required: true, description: "Flat UUID", schema: { type: "string", format: "uuid" } },
+        ],
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/UpdateFlatRequest",
+              },
+            },
+          },
+        },
+        responses: {
+          "200": {
+            description: "Flat updated successfully",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/FlatResponse",
+                },
+              },
+            },
+          },
+          "404": {
+            description: "Flat not found",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+        },
+      },
+      delete: {
+        summary: "Delete Flat",
+        description: "Hard-delete a flat from database. Restricted to SUPER_ADMIN, ADMIN, or STAFF.",
+        tags: ["Flats"],
+        security: [{ bearerAuth: [] }],
+        parameters: [
+          { name: "id", in: "path", required: true, description: "Flat UUID", schema: { type: "string", format: "uuid" } },
+        ],
+        responses: {
+          "200": {
+            description: "Flat deleted successfully",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    success: { type: "boolean", example: true },
+                    message: { type: "string", example: "Flat deleted successfully" },
+                  },
+                },
+              },
+            },
+          },
+          "404": {
+            description: "Flat not found",
             content: {
               "application/json": {
                 schema: {
@@ -690,6 +805,105 @@ export const swaggerDocument = {
             type: "array",
             items: {
               $ref: "#/components/schemas/Property",
+            },
+          },
+        },
+      },
+      Flat: {
+        type: "object",
+        properties: {
+          id: { type: "string", format: "uuid" },
+          propertyId: { type: "string", format: "uuid" },
+          title: { type: "string" },
+          flatNumber: { type: "string" },
+          floorNumber: { type: "integer" },
+          beds: { type: "integer" },
+          baths: { type: "integer" },
+          kitchens: { type: "integer" },
+          balconies: { type: "integer" },
+          size: { type: "number" },
+          price: { type: "number" },
+          status: { type: "string", enum: ["AVAILABLE", "BOOKED", "SOLD"] },
+          description: { type: "string", nullable: true },
+          imageUrls: { type: "array", items: { type: "string" } },
+          amenities: { type: "array", items: { type: "string" } },
+          isFeatured: { type: "boolean" },
+          isPublished: { type: "boolean" },
+          createdAt: { type: "string", format: "date-time" },
+          updatedAt: { type: "string", format: "date-time" },
+        },
+      },
+      CreateFlatRequest: {
+        type: "object",
+        required: ["propertyId", "title", "flatNumber", "floorNumber", "size", "price"],
+        properties: {
+          propertyId: { type: "string", format: "uuid", example: "e2b3c4d5-6789-1011-1213-141516171819" },
+          title: { type: "string", example: "Flat 4A - Deluxe Corner Unit" },
+          flatNumber: { type: "string", example: "4A" },
+          floorNumber: { type: "integer", example: 4 },
+          beds: { type: "integer", default: 3, example: 3 },
+          baths: { type: "integer", default: 3, example: 3 },
+          kitchens: { type: "integer", default: 1, example: 1 },
+          balconies: { type: "integer", default: 2, example: 2 },
+          size: { type: "number", example: 1650.0 },
+          price: { type: "number", example: 18500000.0 },
+          status: { type: "string", enum: ["AVAILABLE", "BOOKED", "SOLD"], default: "AVAILABLE" },
+          description: { type: "string", example: "Spacious 3-bedroom corner flat with lake view" },
+          imageUrls: { type: "array", items: { type: "string" }, example: ["https://example.com/flat1.jpg"] },
+          amenities: { type: "array", items: { type: "string" }, example: ["South Facing", "Corner Unit", "Gas Connection"] },
+          isFeatured: { type: "boolean", default: false },
+          isPublished: { type: "boolean", default: true },
+        },
+      },
+      UpdateFlatRequest: {
+        type: "object",
+        properties: {
+          propertyId: { type: "string", format: "uuid" },
+          title: { type: "string" },
+          flatNumber: { type: "string" },
+          floorNumber: { type: "integer" },
+          beds: { type: "integer" },
+          baths: { type: "integer" },
+          kitchens: { type: "integer" },
+          balconies: { type: "integer" },
+          size: { type: "number" },
+          price: { type: "number" },
+          status: { type: "string", enum: ["AVAILABLE", "BOOKED", "SOLD"] },
+          description: { type: "string" },
+          imageUrls: { type: "array", items: { type: "string" } },
+          amenities: { type: "array", items: { type: "string" } },
+          isFeatured: { type: "boolean" },
+          isPublished: { type: "boolean" },
+        },
+      },
+      FlatResponse: {
+        type: "object",
+        properties: {
+          success: { type: "boolean", example: true },
+          message: { type: "string", example: "Flat operation successful" },
+          data: {
+            $ref: "#/components/schemas/Flat",
+          },
+        },
+      },
+      FlatListResponse: {
+        type: "object",
+        properties: {
+          success: { type: "boolean", example: true },
+          message: { type: "string", example: "Flats retrieved successfully" },
+          meta: {
+            type: "object",
+            properties: {
+              page: { type: "integer" },
+              limit: { type: "integer" },
+              total: { type: "integer" },
+              totalPages: { type: "integer" },
+            },
+          },
+          data: {
+            type: "array",
+            items: {
+              $ref: "#/components/schemas/Flat",
             },
           },
         },

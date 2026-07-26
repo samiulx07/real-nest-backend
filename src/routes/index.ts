@@ -9,9 +9,12 @@ router.get("/health", (req, res) => {
 // Import routes
 import authRoutes from "./auth.route";
 import propertyRoutes from "./property.route";
+import flatRoutes from "./flat.route";
 
 // Mount routes
 router.use("/auth", authRoutes);
 router.use("/properties", propertyRoutes);
+router.use("/flats", flatRoutes);
 
 export default router;
+
