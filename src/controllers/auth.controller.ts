@@ -61,3 +61,25 @@ export const getMe = asyncHandler(async (req: Request, res: Response) => {
     data: result,
   });
 });
+
+export const forgotPassword = asyncHandler(async (req: Request, res: Response) => {
+  const result = await authService.forgotPassword(req.body);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: result.message,
+    data: null,
+  });
+});
+
+export const resetPassword = asyncHandler(async (req: Request, res: Response) => {
+  const result = await authService.resetPassword(req.body);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: result.message,
+    data: null,
+  });
+});

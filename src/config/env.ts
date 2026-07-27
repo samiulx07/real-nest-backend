@@ -14,6 +14,8 @@ const envVarsZodSchema = z.object({
   SUPABASE_URL: z.string(),
   SUPABASE_SERVICE_ROLE_KEY: z.string(),
   SUPABASE_BUCKET_NAME: z.string().default("media"),
+  RESEND_API_KEY: z.string().default(""),
+  RESEND_FROM_EMAIL: z.string().default("Real Nest <onboarding@resend.dev>"),
 });
 
 const envVars = envVarsZodSchema.safeParse(process.env);

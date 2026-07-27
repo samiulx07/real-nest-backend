@@ -201,7 +201,7 @@ export const bulkDeleteMedia = async (ids: string[], userId: string, userRole: s
   // For CUSTOMER, filter only their own uploads
   const allowedMedia =
     userRole === "CUSTOMER"
-      ? mediaList.filter((m) => m.uploadedBy === userId)
+      ? mediaList.filter((m: any) => m.uploadedBy === userId)
       : mediaList;
 
   if (allowedMedia.length === 0) {
@@ -210,8 +210,8 @@ export const bulkDeleteMedia = async (ids: string[], userId: string, userRole: s
 
   // Delete from Supabase Storage
   const storagePaths = allowedMedia
-    .map((m) => extractStoragePath(m.fileUrl))
-    .filter((p): p is string => !!p);
+    .map((m: any) => extractStoragePath(m.fileUrl))
+    .filter((p: any): p is string => !!p);
 
   if (storagePaths.length > 0) {
     const { error } = await supabase.storage
@@ -225,7 +225,7 @@ export const bulkDeleteMedia = async (ids: string[], userId: string, userRole: s
 
   // Delete from database
   const deleteResult = await prisma.media.deleteMany({
-    where: { id: { in: allowedMedia.map((m) => m.id) } },
+    where: { id: { in: allowedMedia.map((m: any) => m.id) } },
   });
 
   return { deletedCount: deleteResult.count };
