@@ -30,6 +30,8 @@ model User {
   updatedAt DateTime @updatedAt
 
   media     Media[]
+  bookings  Booking[]
+  payments  Payment[]
 
   @@map("users")
 }
@@ -158,6 +160,8 @@ model Flat {
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
 
+  bookings      Booking[]
+
   @@map("flats")
 }
 
@@ -177,4 +181,85 @@ model Media {
   updatedAt   DateTime @updatedAt
 
   @@map("media")
+}
+
+// ─── Bookings & Payments ──────────────────────────────────
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum PaymentMethod {
+  SSLCOMMERZ
+  BANK_TRANSFER
+  BKASH
+  NAGAD
+  CASH
+}
+
+enum PaymentStatus {
+  PENDING_APPROVAL
+  VALIDATED
+  FAILED
+  CANCELLED
+  REJECTED
+}
+
+model Booking {
+  id            String        @id @default(uuid())
+  bookingNumber String        @unique // e.g. BK-20260727-8912
+  userId        String
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  flatId        String
+  flat          Flat          @relation(fields: [flatId], references: [id], onDelete: Cascade)
+
+  customerName  String
+  customerEmail String
+  customerPhone String
+
+  bookingAmount Float         // Total downpayment / booking amount agreed
+  paidAmount    Float         @default(0)
+  paymentStatus PaymentStatus @default(PENDING_APPROVAL)
+  status        BookingStatus @default(PENDING)
+
+  notes         String?
+  adminNotes    String?
+
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  payments      Payment[]
+
+  @@map("bookings")
+}
+
+model Payment {
+  id            String        @id @default(uuid())
+  tranId        String        @unique // e.g. TXN-20260727-9812
+  valId         String?       // SSLCommerz validation ID
+  bookingId     String
+  booking       Booking       @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  paymentMethod PaymentMethod @default(SSLCOMMERZ)
+  amount        Float
+  currency      String        @default("BDT")
+
+  cardType      String?       // e.g. "BKASH-BKASH", "VISA-DBBL", "NAGAD-NAGAD"
+  bankTranId    String?       // Bank transfer transaction / Ref No
+  senderAccount String?       // Sender account name or mobile number
+  receiptUrl    String?       // Deposit slip image / document URL
+
+  status        PaymentStatus @default(PENDING_APPROVAL)
+  adminNotes    String?
+  paymentDetails Json?        // Raw gateway callback data
+
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@map("payments")
 }

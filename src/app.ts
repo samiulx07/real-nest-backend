@@ -33,8 +33,8 @@ const allowedOrigins = env.FRONTEND_URL
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps, curl, postman)
-      if (!origin) return callback(null, true);
+      // Allow requests with no origin (like mobile apps, curl, postman, form redirects, null origins)
+      if (!origin || origin === "null" || origin.includes("sslcommerz.com")) return callback(null, true);
 
       const isAllowed = allowedOrigins.some((allowed) => {
         return allowed === origin || (env.NODE_ENV === "development" && origin.startsWith("http://localhost:"));
@@ -68,6 +68,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // API Routes
 app.use("/api/v1", routes);
+app.use("/api", routes);
 
 
 // Root Endpoint

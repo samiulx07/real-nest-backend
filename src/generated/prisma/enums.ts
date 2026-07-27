@@ -39,3 +39,35 @@ export const FlatStatus = {
 } as const
 
 export type FlatStatus = (typeof FlatStatus)[keyof typeof FlatStatus]
+
+
+export const BookingStatus = {
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED',
+  CANCELLED: 'CANCELLED',
+  COMPLETED: 'COMPLETED'
+} as const
+
+export type BookingStatus = (typeof BookingStatus)[keyof typeof BookingStatus]
+
+
+export const PaymentMethod = {
+  SSLCOMMERZ: 'SSLCOMMERZ',
+  BANK_TRANSFER: 'BANK_TRANSFER',
+  BKASH: 'BKASH',
+  NAGAD: 'NAGAD',
+  CASH: 'CASH'
+} as const
+
+export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
+
+
+export const PaymentStatus = {
+  PENDING_APPROVAL: 'PENDING_APPROVAL',
+  VALIDATED: 'VALIDATED',
+  FAILED: 'FAILED',
+  CANCELLED: 'CANCELLED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]

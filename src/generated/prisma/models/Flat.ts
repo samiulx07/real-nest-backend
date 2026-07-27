@@ -393,6 +393,7 @@ export type FlatWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Flat"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Flat"> | Date | string
   property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
+  bookings?: Prisma.BookingListRelationFilter
 }
 
 export type FlatOrderByWithRelationInput = {
@@ -422,6 +423,7 @@ export type FlatOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   property?: Prisma.PropertyOrderByWithRelationInput
+  bookings?: Prisma.BookingOrderByRelationAggregateInput
 }
 
 export type FlatWhereUniqueInput = Prisma.AtLeast<{
@@ -454,6 +456,7 @@ export type FlatWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Flat"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Flat"> | Date | string
   property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
+  bookings?: Prisma.BookingListRelationFilter
 }, "id">
 
 export type FlatOrderByWithAggregationInput = {
@@ -546,6 +549,7 @@ export type FlatCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   property: Prisma.PropertyCreateNestedOneWithoutFlatsInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutFlatInput
 }
 
 export type FlatUncheckedCreateInput = {
@@ -574,6 +578,7 @@ export type FlatUncheckedCreateInput = {
   isPublished?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutFlatInput
 }
 
 export type FlatUpdateInput = {
@@ -602,6 +607,7 @@ export type FlatUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   property?: Prisma.PropertyUpdateOneRequiredWithoutFlatsNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutFlatNestedInput
 }
 
 export type FlatUncheckedUpdateInput = {
@@ -630,6 +636,7 @@ export type FlatUncheckedUpdateInput = {
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutFlatNestedInput
 }
 
 export type FlatCreateManyInput = {
@@ -825,6 +832,11 @@ export type FlatSumOrderByAggregateInput = {
   price?: Prisma.SortOrder
 }
 
+export type FlatScalarRelationFilter = {
+  is?: Prisma.FlatWhereInput
+  isNot?: Prisma.FlatWhereInput
+}
+
 export type FlatCreateNestedManyWithoutPropertyInput = {
   create?: Prisma.XOR<Prisma.FlatCreateWithoutPropertyInput, Prisma.FlatUncheckedCreateWithoutPropertyInput> | Prisma.FlatCreateWithoutPropertyInput[] | Prisma.FlatUncheckedCreateWithoutPropertyInput[]
   connectOrCreate?: Prisma.FlatCreateOrConnectWithoutPropertyInput | Prisma.FlatCreateOrConnectWithoutPropertyInput[]
@@ -897,6 +909,20 @@ export type FlatUpdateamenitiesInput = {
   push?: string | string[]
 }
 
+export type FlatCreateNestedOneWithoutBookingsInput = {
+  create?: Prisma.XOR<Prisma.FlatCreateWithoutBookingsInput, Prisma.FlatUncheckedCreateWithoutBookingsInput>
+  connectOrCreate?: Prisma.FlatCreateOrConnectWithoutBookingsInput
+  connect?: Prisma.FlatWhereUniqueInput
+}
+
+export type FlatUpdateOneRequiredWithoutBookingsNestedInput = {
+  create?: Prisma.XOR<Prisma.FlatCreateWithoutBookingsInput, Prisma.FlatUncheckedCreateWithoutBookingsInput>
+  connectOrCreate?: Prisma.FlatCreateOrConnectWithoutBookingsInput
+  upsert?: Prisma.FlatUpsertWithoutBookingsInput
+  connect?: Prisma.FlatWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FlatUpdateToOneWithWhereWithoutBookingsInput, Prisma.FlatUpdateWithoutBookingsInput>, Prisma.FlatUncheckedUpdateWithoutBookingsInput>
+}
+
 export type FlatCreateWithoutPropertyInput = {
   id?: string
   title: string
@@ -922,6 +948,7 @@ export type FlatCreateWithoutPropertyInput = {
   isPublished?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  bookings?: Prisma.BookingCreateNestedManyWithoutFlatInput
 }
 
 export type FlatUncheckedCreateWithoutPropertyInput = {
@@ -949,6 +976,7 @@ export type FlatUncheckedCreateWithoutPropertyInput = {
   isPublished?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutFlatInput
 }
 
 export type FlatCreateOrConnectWithoutPropertyInput = {
@@ -1008,6 +1036,134 @@ export type FlatScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Flat"> | Date | string
 }
 
+export type FlatCreateWithoutBookingsInput = {
+  id?: string
+  title: string
+  flatNumber: string
+  floorNumber: number
+  beds?: number
+  baths?: number
+  kitchens?: number
+  balconies?: number
+  size: number
+  price: number
+  status?: $Enums.FlatStatus
+  completionDate?: Date | string | null
+  furnishing?: string | null
+  facing?: string | null
+  floorType?: string | null
+  hasGasLine?: boolean
+  hasWaterSupply?: boolean
+  description?: string | null
+  imageUrls?: Prisma.FlatCreateimageUrlsInput | string[]
+  amenities?: Prisma.FlatCreateamenitiesInput | string[]
+  isFeatured?: boolean
+  isPublished?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  property: Prisma.PropertyCreateNestedOneWithoutFlatsInput
+}
+
+export type FlatUncheckedCreateWithoutBookingsInput = {
+  id?: string
+  propertyId: string
+  title: string
+  flatNumber: string
+  floorNumber: number
+  beds?: number
+  baths?: number
+  kitchens?: number
+  balconies?: number
+  size: number
+  price: number
+  status?: $Enums.FlatStatus
+  completionDate?: Date | string | null
+  furnishing?: string | null
+  facing?: string | null
+  floorType?: string | null
+  hasGasLine?: boolean
+  hasWaterSupply?: boolean
+  description?: string | null
+  imageUrls?: Prisma.FlatCreateimageUrlsInput | string[]
+  amenities?: Prisma.FlatCreateamenitiesInput | string[]
+  isFeatured?: boolean
+  isPublished?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type FlatCreateOrConnectWithoutBookingsInput = {
+  where: Prisma.FlatWhereUniqueInput
+  create: Prisma.XOR<Prisma.FlatCreateWithoutBookingsInput, Prisma.FlatUncheckedCreateWithoutBookingsInput>
+}
+
+export type FlatUpsertWithoutBookingsInput = {
+  update: Prisma.XOR<Prisma.FlatUpdateWithoutBookingsInput, Prisma.FlatUncheckedUpdateWithoutBookingsInput>
+  create: Prisma.XOR<Prisma.FlatCreateWithoutBookingsInput, Prisma.FlatUncheckedCreateWithoutBookingsInput>
+  where?: Prisma.FlatWhereInput
+}
+
+export type FlatUpdateToOneWithWhereWithoutBookingsInput = {
+  where?: Prisma.FlatWhereInput
+  data: Prisma.XOR<Prisma.FlatUpdateWithoutBookingsInput, Prisma.FlatUncheckedUpdateWithoutBookingsInput>
+}
+
+export type FlatUpdateWithoutBookingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  flatNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  beds?: Prisma.IntFieldUpdateOperationsInput | number
+  baths?: Prisma.IntFieldUpdateOperationsInput | number
+  kitchens?: Prisma.IntFieldUpdateOperationsInput | number
+  balconies?: Prisma.IntFieldUpdateOperationsInput | number
+  size?: Prisma.FloatFieldUpdateOperationsInput | number
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  status?: Prisma.EnumFlatStatusFieldUpdateOperationsInput | $Enums.FlatStatus
+  completionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  furnishing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  facing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  floorType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasGasLine?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasWaterSupply?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrls?: Prisma.FlatUpdateimageUrlsInput | string[]
+  amenities?: Prisma.FlatUpdateamenitiesInput | string[]
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  property?: Prisma.PropertyUpdateOneRequiredWithoutFlatsNestedInput
+}
+
+export type FlatUncheckedUpdateWithoutBookingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  flatNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  beds?: Prisma.IntFieldUpdateOperationsInput | number
+  baths?: Prisma.IntFieldUpdateOperationsInput | number
+  kitchens?: Prisma.IntFieldUpdateOperationsInput | number
+  balconies?: Prisma.IntFieldUpdateOperationsInput | number
+  size?: Prisma.FloatFieldUpdateOperationsInput | number
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  status?: Prisma.EnumFlatStatusFieldUpdateOperationsInput | $Enums.FlatStatus
+  completionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  furnishing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  facing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  floorType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasGasLine?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasWaterSupply?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageUrls?: Prisma.FlatUpdateimageUrlsInput | string[]
+  amenities?: Prisma.FlatUpdateamenitiesInput | string[]
+  isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type FlatCreateManyPropertyInput = {
   id?: string
   title: string
@@ -1060,6 +1216,7 @@ export type FlatUpdateWithoutPropertyInput = {
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bookings?: Prisma.BookingUpdateManyWithoutFlatNestedInput
 }
 
 export type FlatUncheckedUpdateWithoutPropertyInput = {
@@ -1087,6 +1244,7 @@ export type FlatUncheckedUpdateWithoutPropertyInput = {
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutFlatNestedInput
 }
 
 export type FlatUncheckedUpdateManyWithoutPropertyInput = {
@@ -1117,6 +1275,35 @@ export type FlatUncheckedUpdateManyWithoutPropertyInput = {
 }
 
 
+/**
+ * Count Type FlatCountOutputType
+ */
+
+export type FlatCountOutputType = {
+  bookings: number
+}
+
+export type FlatCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  bookings?: boolean | FlatCountOutputTypeCountBookingsArgs
+}
+
+/**
+ * FlatCountOutputType without action
+ */
+export type FlatCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FlatCountOutputType
+   */
+  select?: Prisma.FlatCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * FlatCountOutputType without action
+ */
+export type FlatCountOutputTypeCountBookingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BookingWhereInput
+}
+
 
 export type FlatSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1145,6 +1332,8 @@ export type FlatSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdAt?: boolean
   updatedAt?: boolean
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  bookings?: boolean | Prisma.Flat$bookingsArgs<ExtArgs>
+  _count?: boolean | Prisma.FlatCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["flat"]>
 
 export type FlatSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1236,6 +1425,8 @@ export type FlatSelectScalar = {
 export type FlatOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "propertyId" | "title" | "flatNumber" | "floorNumber" | "beds" | "baths" | "kitchens" | "balconies" | "size" | "price" | "status" | "completionDate" | "furnishing" | "facing" | "floorType" | "hasGasLine" | "hasWaterSupply" | "description" | "imageUrls" | "amenities" | "isFeatured" | "isPublished" | "createdAt" | "updatedAt", ExtArgs["result"]["flat"]>
 export type FlatInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  bookings?: boolean | Prisma.Flat$bookingsArgs<ExtArgs>
+  _count?: boolean | Prisma.FlatCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FlatIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
@@ -1248,6 +1439,7 @@ export type $FlatPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "Flat"
   objects: {
     property: Prisma.$PropertyPayload<ExtArgs>
+    bookings: Prisma.$BookingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1670,6 +1862,7 @@ readonly fields: FlatFieldRefs;
 export interface Prisma__FlatClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   property<T extends Prisma.PropertyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PropertyDefaultArgs<ExtArgs>>): Prisma.Prisma__PropertyClient<runtime.Types.Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  bookings<T extends Prisma.Flat$bookingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Flat$bookingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2122,6 +2315,30 @@ export type FlatDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Flats to delete.
    */
   limit?: number
+}
+
+/**
+ * Flat.bookings
+ */
+export type Flat$bookingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Booking
+   */
+  select?: Prisma.BookingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Booking
+   */
+  omit?: Prisma.BookingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingInclude<ExtArgs> | null
+  where?: Prisma.BookingWhereInput
+  orderBy?: Prisma.BookingOrderByWithRelationInput | Prisma.BookingOrderByWithRelationInput[]
+  cursor?: Prisma.BookingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BookingScalarFieldEnum | Prisma.BookingScalarFieldEnum[]
 }
 
 /**

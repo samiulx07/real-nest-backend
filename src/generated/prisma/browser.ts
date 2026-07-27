@@ -37,3 +37,13 @@ export type Flat = Prisma.FlatModel
  * 
  */
 export type Media = Prisma.MediaModel
+/**
+ * Model Booking
+ * 
+ */
+export type Booking = Prisma.BookingModel
+/**
+ * Model Payment
+ * 
+ */
+export type Payment = Prisma.PaymentModel

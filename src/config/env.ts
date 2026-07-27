@@ -16,6 +16,10 @@ const envVarsZodSchema = z.object({
   SUPABASE_BUCKET_NAME: z.string().default("media"),
   RESEND_API_KEY: z.string().default(""),
   RESEND_FROM_EMAIL: z.string().default("Real Nest <onboarding@resend.dev>"),
+  SSLCOMMERZ_STORE_ID: z.string().default("testbox"),
+  SSLCOMMERZ_STORE_PASSWORD: z.string().default("qwerty"),
+  SSLCOMMERZ_IS_LIVE: z.string().default("false"),
+  BACKEND_BASE_URL: z.string().default("http://localhost:5000"),
 });
 
 const envVars = envVarsZodSchema.safeParse(process.env);

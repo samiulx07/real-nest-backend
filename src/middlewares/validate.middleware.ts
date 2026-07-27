@@ -12,11 +12,19 @@ export const validateRequest = (schema: ZodSchema<any>) =>
     });
     
     // Assign validated data back to request to ensure type safety/defaults are applied
-    // In Express 5, some req properties are getters, so we must use defineProperty
-    Object.defineProperty(req, "body", { value: result.body, enumerable: true });
-    Object.defineProperty(req, "query", { value: result.query, enumerable: true });
-    Object.defineProperty(req, "params", { value: result.params, enumerable: true });
-    Object.defineProperty(req, "cookies", { value: result.cookies, enumerable: true });
+    // Only re-assign properties that were explicitly parsed in the schema
+    if (result.body !== undefined) {
+      Object.defineProperty(req, "body", { value: result.body, writable: true, configurable: true, enumerable: true });
+    }
+    if (result.query !== undefined) {
+      Object.defineProperty(req, "query", { value: result.query, writable: true, configurable: true, enumerable: true });
+    }
+    if (result.params !== undefined) {
+      Object.defineProperty(req, "params", { value: result.params, writable: true, configurable: true, enumerable: true });
+    }
+    if (result.cookies !== undefined) {
+      Object.defineProperty(req, "cookies", { value: result.cookies, writable: true, configurable: true, enumerable: true });
+    }
 
     next();
   });
