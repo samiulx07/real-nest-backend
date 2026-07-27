@@ -33,6 +33,8 @@ export type PropertyAvgAggregateOutputType = {
   totalUnits: number | null
   unitsPerFloor: number | null
   startingPrice: number | null
+  totalParkingSlots: number | null
+  totalBalconies: number | null
 }
 
 export type PropertySumAggregateOutputType = {
@@ -42,6 +44,8 @@ export type PropertySumAggregateOutputType = {
   totalUnits: number | null
   unitsPerFloor: number | null
   startingPrice: number | null
+  totalParkingSlots: number | null
+  totalBalconies: number | null
 }
 
 export type PropertyMinAggregateOutputType = {
@@ -52,6 +56,10 @@ export type PropertyMinAggregateOutputType = {
   address: string | null
   area: string | null
   city: string | null
+  division: string | null
+  district: string | null
+  upazila: string | null
+  union: string | null
   latitude: number | null
   longitude: number | null
   floorLabel: string | null
@@ -60,14 +68,22 @@ export type PropertyMinAggregateOutputType = {
   unitsPerFloor: number | null
   startingPrice: number | null
   handoverDate: Date | null
+  completionDate: Date | null
+  constructionStart: Date | null
   landArea: string | null
   facing: string | null
   roadSize: string | null
+  totalParkingSlots: number | null
+  totalBalconies: number | null
+  buildingAge: string | null
   parkingAvailable: boolean | null
   liftAvailable: boolean | null
   generatorBackup: boolean | null
   securityAvailable: boolean | null
-  status: string | null
+  developerName: string | null
+  rajukApproval: boolean | null
+  reraRegistered: boolean | null
+  status: $Enums.PropertyStatus | null
   isFeatured: boolean | null
   isPublished: boolean | null
   createdAt: Date | null
@@ -82,6 +98,10 @@ export type PropertyMaxAggregateOutputType = {
   address: string | null
   area: string | null
   city: string | null
+  division: string | null
+  district: string | null
+  upazila: string | null
+  union: string | null
   latitude: number | null
   longitude: number | null
   floorLabel: string | null
@@ -90,14 +110,22 @@ export type PropertyMaxAggregateOutputType = {
   unitsPerFloor: number | null
   startingPrice: number | null
   handoverDate: Date | null
+  completionDate: Date | null
+  constructionStart: Date | null
   landArea: string | null
   facing: string | null
   roadSize: string | null
+  totalParkingSlots: number | null
+  totalBalconies: number | null
+  buildingAge: string | null
   parkingAvailable: boolean | null
   liftAvailable: boolean | null
   generatorBackup: boolean | null
   securityAvailable: boolean | null
-  status: string | null
+  developerName: string | null
+  rajukApproval: boolean | null
+  reraRegistered: boolean | null
+  status: $Enums.PropertyStatus | null
   isFeatured: boolean | null
   isPublished: boolean | null
   createdAt: Date | null
@@ -112,6 +140,10 @@ export type PropertyCountAggregateOutputType = {
   address: number
   area: number
   city: number
+  division: number
+  district: number
+  upazila: number
+  union: number
   latitude: number
   longitude: number
   floorLabel: number
@@ -120,13 +152,21 @@ export type PropertyCountAggregateOutputType = {
   unitsPerFloor: number
   startingPrice: number
   handoverDate: number
+  completionDate: number
+  constructionStart: number
   landArea: number
   facing: number
   roadSize: number
+  totalParkingSlots: number
+  totalBalconies: number
+  buildingAge: number
   parkingAvailable: number
   liftAvailable: number
   generatorBackup: number
   securityAvailable: number
+  developerName: number
+  rajukApproval: number
+  reraRegistered: number
   imageUrls: number
   amenities: number
   status: number
@@ -145,6 +185,8 @@ export type PropertyAvgAggregateInputType = {
   totalUnits?: true
   unitsPerFloor?: true
   startingPrice?: true
+  totalParkingSlots?: true
+  totalBalconies?: true
 }
 
 export type PropertySumAggregateInputType = {
@@ -154,6 +196,8 @@ export type PropertySumAggregateInputType = {
   totalUnits?: true
   unitsPerFloor?: true
   startingPrice?: true
+  totalParkingSlots?: true
+  totalBalconies?: true
 }
 
 export type PropertyMinAggregateInputType = {
@@ -164,6 +208,10 @@ export type PropertyMinAggregateInputType = {
   address?: true
   area?: true
   city?: true
+  division?: true
+  district?: true
+  upazila?: true
+  union?: true
   latitude?: true
   longitude?: true
   floorLabel?: true
@@ -172,13 +220,21 @@ export type PropertyMinAggregateInputType = {
   unitsPerFloor?: true
   startingPrice?: true
   handoverDate?: true
+  completionDate?: true
+  constructionStart?: true
   landArea?: true
   facing?: true
   roadSize?: true
+  totalParkingSlots?: true
+  totalBalconies?: true
+  buildingAge?: true
   parkingAvailable?: true
   liftAvailable?: true
   generatorBackup?: true
   securityAvailable?: true
+  developerName?: true
+  rajukApproval?: true
+  reraRegistered?: true
   status?: true
   isFeatured?: true
   isPublished?: true
@@ -194,6 +250,10 @@ export type PropertyMaxAggregateInputType = {
   address?: true
   area?: true
   city?: true
+  division?: true
+  district?: true
+  upazila?: true
+  union?: true
   latitude?: true
   longitude?: true
   floorLabel?: true
@@ -202,13 +262,21 @@ export type PropertyMaxAggregateInputType = {
   unitsPerFloor?: true
   startingPrice?: true
   handoverDate?: true
+  completionDate?: true
+  constructionStart?: true
   landArea?: true
   facing?: true
   roadSize?: true
+  totalParkingSlots?: true
+  totalBalconies?: true
+  buildingAge?: true
   parkingAvailable?: true
   liftAvailable?: true
   generatorBackup?: true
   securityAvailable?: true
+  developerName?: true
+  rajukApproval?: true
+  reraRegistered?: true
   status?: true
   isFeatured?: true
   isPublished?: true
@@ -224,6 +292,10 @@ export type PropertyCountAggregateInputType = {
   address?: true
   area?: true
   city?: true
+  division?: true
+  district?: true
+  upazila?: true
+  union?: true
   latitude?: true
   longitude?: true
   floorLabel?: true
@@ -232,13 +304,21 @@ export type PropertyCountAggregateInputType = {
   unitsPerFloor?: true
   startingPrice?: true
   handoverDate?: true
+  completionDate?: true
+  constructionStart?: true
   landArea?: true
   facing?: true
   roadSize?: true
+  totalParkingSlots?: true
+  totalBalconies?: true
+  buildingAge?: true
   parkingAvailable?: true
   liftAvailable?: true
   generatorBackup?: true
   securityAvailable?: true
+  developerName?: true
+  rajukApproval?: true
+  reraRegistered?: true
   imageUrls?: true
   amenities?: true
   status?: true
@@ -343,6 +423,10 @@ export type PropertyGroupByOutputType = {
   address: string
   area: string
   city: string
+  division: string | null
+  district: string | null
+  upazila: string | null
+  union: string | null
   latitude: number | null
   longitude: number | null
   floorLabel: string
@@ -351,16 +435,24 @@ export type PropertyGroupByOutputType = {
   unitsPerFloor: number | null
   startingPrice: number | null
   handoverDate: Date | null
+  completionDate: Date | null
+  constructionStart: Date | null
   landArea: string | null
   facing: string | null
   roadSize: string | null
+  totalParkingSlots: number | null
+  totalBalconies: number | null
+  buildingAge: string | null
   parkingAvailable: boolean
   liftAvailable: boolean
   generatorBackup: boolean
   securityAvailable: boolean
+  developerName: string | null
+  rajukApproval: boolean
+  reraRegistered: boolean
   imageUrls: string[]
   amenities: string[]
-  status: string | null
+  status: $Enums.PropertyStatus
   isFeatured: boolean
   isPublished: boolean
   createdAt: Date
@@ -398,6 +490,10 @@ export type PropertyWhereInput = {
   address?: Prisma.StringFilter<"Property"> | string
   area?: Prisma.StringFilter<"Property"> | string
   city?: Prisma.StringFilter<"Property"> | string
+  division?: Prisma.StringNullableFilter<"Property"> | string | null
+  district?: Prisma.StringNullableFilter<"Property"> | string | null
+  upazila?: Prisma.StringNullableFilter<"Property"> | string | null
+  union?: Prisma.StringNullableFilter<"Property"> | string | null
   latitude?: Prisma.FloatNullableFilter<"Property"> | number | null
   longitude?: Prisma.FloatNullableFilter<"Property"> | number | null
   floorLabel?: Prisma.StringFilter<"Property"> | string
@@ -406,16 +502,24 @@ export type PropertyWhereInput = {
   unitsPerFloor?: Prisma.IntNullableFilter<"Property"> | number | null
   startingPrice?: Prisma.FloatNullableFilter<"Property"> | number | null
   handoverDate?: Prisma.DateTimeNullableFilter<"Property"> | Date | string | null
+  completionDate?: Prisma.DateTimeNullableFilter<"Property"> | Date | string | null
+  constructionStart?: Prisma.DateTimeNullableFilter<"Property"> | Date | string | null
   landArea?: Prisma.StringNullableFilter<"Property"> | string | null
   facing?: Prisma.StringNullableFilter<"Property"> | string | null
   roadSize?: Prisma.StringNullableFilter<"Property"> | string | null
+  totalParkingSlots?: Prisma.IntNullableFilter<"Property"> | number | null
+  totalBalconies?: Prisma.IntNullableFilter<"Property"> | number | null
+  buildingAge?: Prisma.StringNullableFilter<"Property"> | string | null
   parkingAvailable?: Prisma.BoolFilter<"Property"> | boolean
   liftAvailable?: Prisma.BoolFilter<"Property"> | boolean
   generatorBackup?: Prisma.BoolFilter<"Property"> | boolean
   securityAvailable?: Prisma.BoolFilter<"Property"> | boolean
+  developerName?: Prisma.StringNullableFilter<"Property"> | string | null
+  rajukApproval?: Prisma.BoolFilter<"Property"> | boolean
+  reraRegistered?: Prisma.BoolFilter<"Property"> | boolean
   imageUrls?: Prisma.StringNullableListFilter<"Property">
   amenities?: Prisma.StringNullableListFilter<"Property">
-  status?: Prisma.StringNullableFilter<"Property"> | string | null
+  status?: Prisma.EnumPropertyStatusFilter<"Property"> | $Enums.PropertyStatus
   isFeatured?: Prisma.BoolFilter<"Property"> | boolean
   isPublished?: Prisma.BoolFilter<"Property"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Property"> | Date | string
@@ -431,6 +535,10 @@ export type PropertyOrderByWithRelationInput = {
   address?: Prisma.SortOrder
   area?: Prisma.SortOrder
   city?: Prisma.SortOrder
+  division?: Prisma.SortOrderInput | Prisma.SortOrder
+  district?: Prisma.SortOrderInput | Prisma.SortOrder
+  upazila?: Prisma.SortOrderInput | Prisma.SortOrder
+  union?: Prisma.SortOrderInput | Prisma.SortOrder
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   floorLabel?: Prisma.SortOrder
@@ -439,16 +547,24 @@ export type PropertyOrderByWithRelationInput = {
   unitsPerFloor?: Prisma.SortOrderInput | Prisma.SortOrder
   startingPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   handoverDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  completionDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  constructionStart?: Prisma.SortOrderInput | Prisma.SortOrder
   landArea?: Prisma.SortOrderInput | Prisma.SortOrder
   facing?: Prisma.SortOrderInput | Prisma.SortOrder
   roadSize?: Prisma.SortOrderInput | Prisma.SortOrder
+  totalParkingSlots?: Prisma.SortOrderInput | Prisma.SortOrder
+  totalBalconies?: Prisma.SortOrderInput | Prisma.SortOrder
+  buildingAge?: Prisma.SortOrderInput | Prisma.SortOrder
   parkingAvailable?: Prisma.SortOrder
   liftAvailable?: Prisma.SortOrder
   generatorBackup?: Prisma.SortOrder
   securityAvailable?: Prisma.SortOrder
+  developerName?: Prisma.SortOrderInput | Prisma.SortOrder
+  rajukApproval?: Prisma.SortOrder
+  reraRegistered?: Prisma.SortOrder
   imageUrls?: Prisma.SortOrder
   amenities?: Prisma.SortOrder
-  status?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -467,6 +583,10 @@ export type PropertyWhereUniqueInput = Prisma.AtLeast<{
   address?: Prisma.StringFilter<"Property"> | string
   area?: Prisma.StringFilter<"Property"> | string
   city?: Prisma.StringFilter<"Property"> | string
+  division?: Prisma.StringNullableFilter<"Property"> | string | null
+  district?: Prisma.StringNullableFilter<"Property"> | string | null
+  upazila?: Prisma.StringNullableFilter<"Property"> | string | null
+  union?: Prisma.StringNullableFilter<"Property"> | string | null
   latitude?: Prisma.FloatNullableFilter<"Property"> | number | null
   longitude?: Prisma.FloatNullableFilter<"Property"> | number | null
   floorLabel?: Prisma.StringFilter<"Property"> | string
@@ -475,16 +595,24 @@ export type PropertyWhereUniqueInput = Prisma.AtLeast<{
   unitsPerFloor?: Prisma.IntNullableFilter<"Property"> | number | null
   startingPrice?: Prisma.FloatNullableFilter<"Property"> | number | null
   handoverDate?: Prisma.DateTimeNullableFilter<"Property"> | Date | string | null
+  completionDate?: Prisma.DateTimeNullableFilter<"Property"> | Date | string | null
+  constructionStart?: Prisma.DateTimeNullableFilter<"Property"> | Date | string | null
   landArea?: Prisma.StringNullableFilter<"Property"> | string | null
   facing?: Prisma.StringNullableFilter<"Property"> | string | null
   roadSize?: Prisma.StringNullableFilter<"Property"> | string | null
+  totalParkingSlots?: Prisma.IntNullableFilter<"Property"> | number | null
+  totalBalconies?: Prisma.IntNullableFilter<"Property"> | number | null
+  buildingAge?: Prisma.StringNullableFilter<"Property"> | string | null
   parkingAvailable?: Prisma.BoolFilter<"Property"> | boolean
   liftAvailable?: Prisma.BoolFilter<"Property"> | boolean
   generatorBackup?: Prisma.BoolFilter<"Property"> | boolean
   securityAvailable?: Prisma.BoolFilter<"Property"> | boolean
+  developerName?: Prisma.StringNullableFilter<"Property"> | string | null
+  rajukApproval?: Prisma.BoolFilter<"Property"> | boolean
+  reraRegistered?: Prisma.BoolFilter<"Property"> | boolean
   imageUrls?: Prisma.StringNullableListFilter<"Property">
   amenities?: Prisma.StringNullableListFilter<"Property">
-  status?: Prisma.StringNullableFilter<"Property"> | string | null
+  status?: Prisma.EnumPropertyStatusFilter<"Property"> | $Enums.PropertyStatus
   isFeatured?: Prisma.BoolFilter<"Property"> | boolean
   isPublished?: Prisma.BoolFilter<"Property"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Property"> | Date | string
@@ -500,6 +628,10 @@ export type PropertyOrderByWithAggregationInput = {
   address?: Prisma.SortOrder
   area?: Prisma.SortOrder
   city?: Prisma.SortOrder
+  division?: Prisma.SortOrderInput | Prisma.SortOrder
+  district?: Prisma.SortOrderInput | Prisma.SortOrder
+  upazila?: Prisma.SortOrderInput | Prisma.SortOrder
+  union?: Prisma.SortOrderInput | Prisma.SortOrder
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   floorLabel?: Prisma.SortOrder
@@ -508,16 +640,24 @@ export type PropertyOrderByWithAggregationInput = {
   unitsPerFloor?: Prisma.SortOrderInput | Prisma.SortOrder
   startingPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   handoverDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  completionDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  constructionStart?: Prisma.SortOrderInput | Prisma.SortOrder
   landArea?: Prisma.SortOrderInput | Prisma.SortOrder
   facing?: Prisma.SortOrderInput | Prisma.SortOrder
   roadSize?: Prisma.SortOrderInput | Prisma.SortOrder
+  totalParkingSlots?: Prisma.SortOrderInput | Prisma.SortOrder
+  totalBalconies?: Prisma.SortOrderInput | Prisma.SortOrder
+  buildingAge?: Prisma.SortOrderInput | Prisma.SortOrder
   parkingAvailable?: Prisma.SortOrder
   liftAvailable?: Prisma.SortOrder
   generatorBackup?: Prisma.SortOrder
   securityAvailable?: Prisma.SortOrder
+  developerName?: Prisma.SortOrderInput | Prisma.SortOrder
+  rajukApproval?: Prisma.SortOrder
+  reraRegistered?: Prisma.SortOrder
   imageUrls?: Prisma.SortOrder
   amenities?: Prisma.SortOrder
-  status?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -540,6 +680,10 @@ export type PropertyScalarWhereWithAggregatesInput = {
   address?: Prisma.StringWithAggregatesFilter<"Property"> | string
   area?: Prisma.StringWithAggregatesFilter<"Property"> | string
   city?: Prisma.StringWithAggregatesFilter<"Property"> | string
+  division?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
+  district?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
+  upazila?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
+  union?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
   latitude?: Prisma.FloatNullableWithAggregatesFilter<"Property"> | number | null
   longitude?: Prisma.FloatNullableWithAggregatesFilter<"Property"> | number | null
   floorLabel?: Prisma.StringWithAggregatesFilter<"Property"> | string
@@ -548,16 +692,24 @@ export type PropertyScalarWhereWithAggregatesInput = {
   unitsPerFloor?: Prisma.IntNullableWithAggregatesFilter<"Property"> | number | null
   startingPrice?: Prisma.FloatNullableWithAggregatesFilter<"Property"> | number | null
   handoverDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Property"> | Date | string | null
+  completionDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Property"> | Date | string | null
+  constructionStart?: Prisma.DateTimeNullableWithAggregatesFilter<"Property"> | Date | string | null
   landArea?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
   facing?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
   roadSize?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
+  totalParkingSlots?: Prisma.IntNullableWithAggregatesFilter<"Property"> | number | null
+  totalBalconies?: Prisma.IntNullableWithAggregatesFilter<"Property"> | number | null
+  buildingAge?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
   parkingAvailable?: Prisma.BoolWithAggregatesFilter<"Property"> | boolean
   liftAvailable?: Prisma.BoolWithAggregatesFilter<"Property"> | boolean
   generatorBackup?: Prisma.BoolWithAggregatesFilter<"Property"> | boolean
   securityAvailable?: Prisma.BoolWithAggregatesFilter<"Property"> | boolean
+  developerName?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
+  rajukApproval?: Prisma.BoolWithAggregatesFilter<"Property"> | boolean
+  reraRegistered?: Prisma.BoolWithAggregatesFilter<"Property"> | boolean
   imageUrls?: Prisma.StringNullableListFilter<"Property">
   amenities?: Prisma.StringNullableListFilter<"Property">
-  status?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
+  status?: Prisma.EnumPropertyStatusWithAggregatesFilter<"Property"> | $Enums.PropertyStatus
   isFeatured?: Prisma.BoolWithAggregatesFilter<"Property"> | boolean
   isPublished?: Prisma.BoolWithAggregatesFilter<"Property"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Property"> | Date | string
@@ -572,6 +724,10 @@ export type PropertyCreateInput = {
   address: string
   area: string
   city?: string
+  division?: string | null
+  district?: string | null
+  upazila?: string | null
+  union?: string | null
   latitude?: number | null
   longitude?: number | null
   floorLabel: string
@@ -580,16 +736,24 @@ export type PropertyCreateInput = {
   unitsPerFloor?: number | null
   startingPrice?: number | null
   handoverDate?: Date | string | null
+  completionDate?: Date | string | null
+  constructionStart?: Date | string | null
   landArea?: string | null
   facing?: string | null
   roadSize?: string | null
+  totalParkingSlots?: number | null
+  totalBalconies?: number | null
+  buildingAge?: string | null
   parkingAvailable?: boolean
   liftAvailable?: boolean
   generatorBackup?: boolean
   securityAvailable?: boolean
+  developerName?: string | null
+  rajukApproval?: boolean
+  reraRegistered?: boolean
   imageUrls?: Prisma.PropertyCreateimageUrlsInput | string[]
   amenities?: Prisma.PropertyCreateamenitiesInput | string[]
-  status?: string | null
+  status?: $Enums.PropertyStatus
   isFeatured?: boolean
   isPublished?: boolean
   createdAt?: Date | string
@@ -605,6 +769,10 @@ export type PropertyUncheckedCreateInput = {
   address: string
   area: string
   city?: string
+  division?: string | null
+  district?: string | null
+  upazila?: string | null
+  union?: string | null
   latitude?: number | null
   longitude?: number | null
   floorLabel: string
@@ -613,16 +781,24 @@ export type PropertyUncheckedCreateInput = {
   unitsPerFloor?: number | null
   startingPrice?: number | null
   handoverDate?: Date | string | null
+  completionDate?: Date | string | null
+  constructionStart?: Date | string | null
   landArea?: string | null
   facing?: string | null
   roadSize?: string | null
+  totalParkingSlots?: number | null
+  totalBalconies?: number | null
+  buildingAge?: string | null
   parkingAvailable?: boolean
   liftAvailable?: boolean
   generatorBackup?: boolean
   securityAvailable?: boolean
+  developerName?: string | null
+  rajukApproval?: boolean
+  reraRegistered?: boolean
   imageUrls?: Prisma.PropertyCreateimageUrlsInput | string[]
   amenities?: Prisma.PropertyCreateamenitiesInput | string[]
-  status?: string | null
+  status?: $Enums.PropertyStatus
   isFeatured?: boolean
   isPublished?: boolean
   createdAt?: Date | string
@@ -638,6 +814,10 @@ export type PropertyUpdateInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
+  division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  upazila?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  union?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   floorLabel?: Prisma.StringFieldUpdateOperationsInput | string
@@ -646,16 +826,24 @@ export type PropertyUpdateInput = {
   unitsPerFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   handoverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  constructionStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   landArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   facing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   roadSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalParkingSlots?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBalconies?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  buildingAge?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parkingAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   liftAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   generatorBackup?: Prisma.BoolFieldUpdateOperationsInput | boolean
   securityAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  developerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rajukApproval?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reraRegistered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   imageUrls?: Prisma.PropertyUpdateimageUrlsInput | string[]
   amenities?: Prisma.PropertyUpdateamenitiesInput | string[]
-  status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -671,6 +859,10 @@ export type PropertyUncheckedUpdateInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
+  division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  upazila?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  union?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   floorLabel?: Prisma.StringFieldUpdateOperationsInput | string
@@ -679,16 +871,24 @@ export type PropertyUncheckedUpdateInput = {
   unitsPerFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   handoverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  constructionStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   landArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   facing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   roadSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalParkingSlots?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBalconies?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  buildingAge?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parkingAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   liftAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   generatorBackup?: Prisma.BoolFieldUpdateOperationsInput | boolean
   securityAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  developerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rajukApproval?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reraRegistered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   imageUrls?: Prisma.PropertyUpdateimageUrlsInput | string[]
   amenities?: Prisma.PropertyUpdateamenitiesInput | string[]
-  status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -704,6 +904,10 @@ export type PropertyCreateManyInput = {
   address: string
   area: string
   city?: string
+  division?: string | null
+  district?: string | null
+  upazila?: string | null
+  union?: string | null
   latitude?: number | null
   longitude?: number | null
   floorLabel: string
@@ -712,16 +916,24 @@ export type PropertyCreateManyInput = {
   unitsPerFloor?: number | null
   startingPrice?: number | null
   handoverDate?: Date | string | null
+  completionDate?: Date | string | null
+  constructionStart?: Date | string | null
   landArea?: string | null
   facing?: string | null
   roadSize?: string | null
+  totalParkingSlots?: number | null
+  totalBalconies?: number | null
+  buildingAge?: string | null
   parkingAvailable?: boolean
   liftAvailable?: boolean
   generatorBackup?: boolean
   securityAvailable?: boolean
+  developerName?: string | null
+  rajukApproval?: boolean
+  reraRegistered?: boolean
   imageUrls?: Prisma.PropertyCreateimageUrlsInput | string[]
   amenities?: Prisma.PropertyCreateamenitiesInput | string[]
-  status?: string | null
+  status?: $Enums.PropertyStatus
   isFeatured?: boolean
   isPublished?: boolean
   createdAt?: Date | string
@@ -736,6 +948,10 @@ export type PropertyUpdateManyMutationInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
+  division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  upazila?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  union?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   floorLabel?: Prisma.StringFieldUpdateOperationsInput | string
@@ -744,16 +960,24 @@ export type PropertyUpdateManyMutationInput = {
   unitsPerFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   handoverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  constructionStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   landArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   facing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   roadSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalParkingSlots?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBalconies?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  buildingAge?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parkingAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   liftAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   generatorBackup?: Prisma.BoolFieldUpdateOperationsInput | boolean
   securityAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  developerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rajukApproval?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reraRegistered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   imageUrls?: Prisma.PropertyUpdateimageUrlsInput | string[]
   amenities?: Prisma.PropertyUpdateamenitiesInput | string[]
-  status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -768,6 +992,10 @@ export type PropertyUncheckedUpdateManyInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
+  division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  upazila?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  union?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   floorLabel?: Prisma.StringFieldUpdateOperationsInput | string
@@ -776,16 +1004,24 @@ export type PropertyUncheckedUpdateManyInput = {
   unitsPerFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   handoverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  constructionStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   landArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   facing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   roadSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalParkingSlots?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBalconies?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  buildingAge?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parkingAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   liftAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   generatorBackup?: Prisma.BoolFieldUpdateOperationsInput | boolean
   securityAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  developerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rajukApproval?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reraRegistered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   imageUrls?: Prisma.PropertyUpdateimageUrlsInput | string[]
   amenities?: Prisma.PropertyUpdateamenitiesInput | string[]
-  status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -808,6 +1044,10 @@ export type PropertyCountOrderByAggregateInput = {
   address?: Prisma.SortOrder
   area?: Prisma.SortOrder
   city?: Prisma.SortOrder
+  division?: Prisma.SortOrder
+  district?: Prisma.SortOrder
+  upazila?: Prisma.SortOrder
+  union?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   floorLabel?: Prisma.SortOrder
@@ -816,13 +1056,21 @@ export type PropertyCountOrderByAggregateInput = {
   unitsPerFloor?: Prisma.SortOrder
   startingPrice?: Prisma.SortOrder
   handoverDate?: Prisma.SortOrder
+  completionDate?: Prisma.SortOrder
+  constructionStart?: Prisma.SortOrder
   landArea?: Prisma.SortOrder
   facing?: Prisma.SortOrder
   roadSize?: Prisma.SortOrder
+  totalParkingSlots?: Prisma.SortOrder
+  totalBalconies?: Prisma.SortOrder
+  buildingAge?: Prisma.SortOrder
   parkingAvailable?: Prisma.SortOrder
   liftAvailable?: Prisma.SortOrder
   generatorBackup?: Prisma.SortOrder
   securityAvailable?: Prisma.SortOrder
+  developerName?: Prisma.SortOrder
+  rajukApproval?: Prisma.SortOrder
+  reraRegistered?: Prisma.SortOrder
   imageUrls?: Prisma.SortOrder
   amenities?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -839,6 +1087,8 @@ export type PropertyAvgOrderByAggregateInput = {
   totalUnits?: Prisma.SortOrder
   unitsPerFloor?: Prisma.SortOrder
   startingPrice?: Prisma.SortOrder
+  totalParkingSlots?: Prisma.SortOrder
+  totalBalconies?: Prisma.SortOrder
 }
 
 export type PropertyMaxOrderByAggregateInput = {
@@ -849,6 +1099,10 @@ export type PropertyMaxOrderByAggregateInput = {
   address?: Prisma.SortOrder
   area?: Prisma.SortOrder
   city?: Prisma.SortOrder
+  division?: Prisma.SortOrder
+  district?: Prisma.SortOrder
+  upazila?: Prisma.SortOrder
+  union?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   floorLabel?: Prisma.SortOrder
@@ -857,13 +1111,21 @@ export type PropertyMaxOrderByAggregateInput = {
   unitsPerFloor?: Prisma.SortOrder
   startingPrice?: Prisma.SortOrder
   handoverDate?: Prisma.SortOrder
+  completionDate?: Prisma.SortOrder
+  constructionStart?: Prisma.SortOrder
   landArea?: Prisma.SortOrder
   facing?: Prisma.SortOrder
   roadSize?: Prisma.SortOrder
+  totalParkingSlots?: Prisma.SortOrder
+  totalBalconies?: Prisma.SortOrder
+  buildingAge?: Prisma.SortOrder
   parkingAvailable?: Prisma.SortOrder
   liftAvailable?: Prisma.SortOrder
   generatorBackup?: Prisma.SortOrder
   securityAvailable?: Prisma.SortOrder
+  developerName?: Prisma.SortOrder
+  rajukApproval?: Prisma.SortOrder
+  reraRegistered?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
@@ -879,6 +1141,10 @@ export type PropertyMinOrderByAggregateInput = {
   address?: Prisma.SortOrder
   area?: Prisma.SortOrder
   city?: Prisma.SortOrder
+  division?: Prisma.SortOrder
+  district?: Prisma.SortOrder
+  upazila?: Prisma.SortOrder
+  union?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   floorLabel?: Prisma.SortOrder
@@ -887,13 +1153,21 @@ export type PropertyMinOrderByAggregateInput = {
   unitsPerFloor?: Prisma.SortOrder
   startingPrice?: Prisma.SortOrder
   handoverDate?: Prisma.SortOrder
+  completionDate?: Prisma.SortOrder
+  constructionStart?: Prisma.SortOrder
   landArea?: Prisma.SortOrder
   facing?: Prisma.SortOrder
   roadSize?: Prisma.SortOrder
+  totalParkingSlots?: Prisma.SortOrder
+  totalBalconies?: Prisma.SortOrder
+  buildingAge?: Prisma.SortOrder
   parkingAvailable?: Prisma.SortOrder
   liftAvailable?: Prisma.SortOrder
   generatorBackup?: Prisma.SortOrder
   securityAvailable?: Prisma.SortOrder
+  developerName?: Prisma.SortOrder
+  rajukApproval?: Prisma.SortOrder
+  reraRegistered?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
@@ -908,6 +1182,8 @@ export type PropertySumOrderByAggregateInput = {
   totalUnits?: Prisma.SortOrder
   unitsPerFloor?: Prisma.SortOrder
   startingPrice?: Prisma.SortOrder
+  totalParkingSlots?: Prisma.SortOrder
+  totalBalconies?: Prisma.SortOrder
 }
 
 export type PropertyScalarRelationFilter = {
@@ -961,6 +1237,10 @@ export type PropertyUpdateamenitiesInput = {
   push?: string | string[]
 }
 
+export type EnumPropertyStatusFieldUpdateOperationsInput = {
+  set?: $Enums.PropertyStatus
+}
+
 export type PropertyCreateNestedOneWithoutFlatsInput = {
   create?: Prisma.XOR<Prisma.PropertyCreateWithoutFlatsInput, Prisma.PropertyUncheckedCreateWithoutFlatsInput>
   connectOrCreate?: Prisma.PropertyCreateOrConnectWithoutFlatsInput
@@ -983,6 +1263,10 @@ export type PropertyCreateWithoutFlatsInput = {
   address: string
   area: string
   city?: string
+  division?: string | null
+  district?: string | null
+  upazila?: string | null
+  union?: string | null
   latitude?: number | null
   longitude?: number | null
   floorLabel: string
@@ -991,16 +1275,24 @@ export type PropertyCreateWithoutFlatsInput = {
   unitsPerFloor?: number | null
   startingPrice?: number | null
   handoverDate?: Date | string | null
+  completionDate?: Date | string | null
+  constructionStart?: Date | string | null
   landArea?: string | null
   facing?: string | null
   roadSize?: string | null
+  totalParkingSlots?: number | null
+  totalBalconies?: number | null
+  buildingAge?: string | null
   parkingAvailable?: boolean
   liftAvailable?: boolean
   generatorBackup?: boolean
   securityAvailable?: boolean
+  developerName?: string | null
+  rajukApproval?: boolean
+  reraRegistered?: boolean
   imageUrls?: Prisma.PropertyCreateimageUrlsInput | string[]
   amenities?: Prisma.PropertyCreateamenitiesInput | string[]
-  status?: string | null
+  status?: $Enums.PropertyStatus
   isFeatured?: boolean
   isPublished?: boolean
   createdAt?: Date | string
@@ -1015,6 +1307,10 @@ export type PropertyUncheckedCreateWithoutFlatsInput = {
   address: string
   area: string
   city?: string
+  division?: string | null
+  district?: string | null
+  upazila?: string | null
+  union?: string | null
   latitude?: number | null
   longitude?: number | null
   floorLabel: string
@@ -1023,16 +1319,24 @@ export type PropertyUncheckedCreateWithoutFlatsInput = {
   unitsPerFloor?: number | null
   startingPrice?: number | null
   handoverDate?: Date | string | null
+  completionDate?: Date | string | null
+  constructionStart?: Date | string | null
   landArea?: string | null
   facing?: string | null
   roadSize?: string | null
+  totalParkingSlots?: number | null
+  totalBalconies?: number | null
+  buildingAge?: string | null
   parkingAvailable?: boolean
   liftAvailable?: boolean
   generatorBackup?: boolean
   securityAvailable?: boolean
+  developerName?: string | null
+  rajukApproval?: boolean
+  reraRegistered?: boolean
   imageUrls?: Prisma.PropertyCreateimageUrlsInput | string[]
   amenities?: Prisma.PropertyCreateamenitiesInput | string[]
-  status?: string | null
+  status?: $Enums.PropertyStatus
   isFeatured?: boolean
   isPublished?: boolean
   createdAt?: Date | string
@@ -1063,6 +1367,10 @@ export type PropertyUpdateWithoutFlatsInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
+  division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  upazila?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  union?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   floorLabel?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1071,16 +1379,24 @@ export type PropertyUpdateWithoutFlatsInput = {
   unitsPerFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   handoverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  constructionStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   landArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   facing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   roadSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalParkingSlots?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBalconies?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  buildingAge?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parkingAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   liftAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   generatorBackup?: Prisma.BoolFieldUpdateOperationsInput | boolean
   securityAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  developerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rajukApproval?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reraRegistered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   imageUrls?: Prisma.PropertyUpdateimageUrlsInput | string[]
   amenities?: Prisma.PropertyUpdateamenitiesInput | string[]
-  status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1095,6 +1411,10 @@ export type PropertyUncheckedUpdateWithoutFlatsInput = {
   address?: Prisma.StringFieldUpdateOperationsInput | string
   area?: Prisma.StringFieldUpdateOperationsInput | string
   city?: Prisma.StringFieldUpdateOperationsInput | string
+  division?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  upazila?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  union?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   floorLabel?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1103,16 +1423,24 @@ export type PropertyUncheckedUpdateWithoutFlatsInput = {
   unitsPerFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   startingPrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   handoverDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  constructionStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   landArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   facing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   roadSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  totalParkingSlots?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBalconies?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  buildingAge?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parkingAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   liftAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   generatorBackup?: Prisma.BoolFieldUpdateOperationsInput | boolean
   securityAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  developerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rajukApproval?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  reraRegistered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   imageUrls?: Prisma.PropertyUpdateimageUrlsInput | string[]
   amenities?: Prisma.PropertyUpdateamenitiesInput | string[]
-  status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1158,6 +1486,10 @@ export type PropertySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   address?: boolean
   area?: boolean
   city?: boolean
+  division?: boolean
+  district?: boolean
+  upazila?: boolean
+  union?: boolean
   latitude?: boolean
   longitude?: boolean
   floorLabel?: boolean
@@ -1166,13 +1498,21 @@ export type PropertySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   unitsPerFloor?: boolean
   startingPrice?: boolean
   handoverDate?: boolean
+  completionDate?: boolean
+  constructionStart?: boolean
   landArea?: boolean
   facing?: boolean
   roadSize?: boolean
+  totalParkingSlots?: boolean
+  totalBalconies?: boolean
+  buildingAge?: boolean
   parkingAvailable?: boolean
   liftAvailable?: boolean
   generatorBackup?: boolean
   securityAvailable?: boolean
+  developerName?: boolean
+  rajukApproval?: boolean
+  reraRegistered?: boolean
   imageUrls?: boolean
   amenities?: boolean
   status?: boolean
@@ -1192,6 +1532,10 @@ export type PropertySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   address?: boolean
   area?: boolean
   city?: boolean
+  division?: boolean
+  district?: boolean
+  upazila?: boolean
+  union?: boolean
   latitude?: boolean
   longitude?: boolean
   floorLabel?: boolean
@@ -1200,13 +1544,21 @@ export type PropertySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   unitsPerFloor?: boolean
   startingPrice?: boolean
   handoverDate?: boolean
+  completionDate?: boolean
+  constructionStart?: boolean
   landArea?: boolean
   facing?: boolean
   roadSize?: boolean
+  totalParkingSlots?: boolean
+  totalBalconies?: boolean
+  buildingAge?: boolean
   parkingAvailable?: boolean
   liftAvailable?: boolean
   generatorBackup?: boolean
   securityAvailable?: boolean
+  developerName?: boolean
+  rajukApproval?: boolean
+  reraRegistered?: boolean
   imageUrls?: boolean
   amenities?: boolean
   status?: boolean
@@ -1224,6 +1576,10 @@ export type PropertySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   address?: boolean
   area?: boolean
   city?: boolean
+  division?: boolean
+  district?: boolean
+  upazila?: boolean
+  union?: boolean
   latitude?: boolean
   longitude?: boolean
   floorLabel?: boolean
@@ -1232,13 +1588,21 @@ export type PropertySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   unitsPerFloor?: boolean
   startingPrice?: boolean
   handoverDate?: boolean
+  completionDate?: boolean
+  constructionStart?: boolean
   landArea?: boolean
   facing?: boolean
   roadSize?: boolean
+  totalParkingSlots?: boolean
+  totalBalconies?: boolean
+  buildingAge?: boolean
   parkingAvailable?: boolean
   liftAvailable?: boolean
   generatorBackup?: boolean
   securityAvailable?: boolean
+  developerName?: boolean
+  rajukApproval?: boolean
+  reraRegistered?: boolean
   imageUrls?: boolean
   amenities?: boolean
   status?: boolean
@@ -1256,6 +1620,10 @@ export type PropertySelectScalar = {
   address?: boolean
   area?: boolean
   city?: boolean
+  division?: boolean
+  district?: boolean
+  upazila?: boolean
+  union?: boolean
   latitude?: boolean
   longitude?: boolean
   floorLabel?: boolean
@@ -1264,13 +1632,21 @@ export type PropertySelectScalar = {
   unitsPerFloor?: boolean
   startingPrice?: boolean
   handoverDate?: boolean
+  completionDate?: boolean
+  constructionStart?: boolean
   landArea?: boolean
   facing?: boolean
   roadSize?: boolean
+  totalParkingSlots?: boolean
+  totalBalconies?: boolean
+  buildingAge?: boolean
   parkingAvailable?: boolean
   liftAvailable?: boolean
   generatorBackup?: boolean
   securityAvailable?: boolean
+  developerName?: boolean
+  rajukApproval?: boolean
+  reraRegistered?: boolean
   imageUrls?: boolean
   amenities?: boolean
   status?: boolean
@@ -1280,7 +1656,7 @@ export type PropertySelectScalar = {
   updatedAt?: boolean
 }
 
-export type PropertyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "description" | "address" | "area" | "city" | "latitude" | "longitude" | "floorLabel" | "totalFloors" | "totalUnits" | "unitsPerFloor" | "startingPrice" | "handoverDate" | "landArea" | "facing" | "roadSize" | "parkingAvailable" | "liftAvailable" | "generatorBackup" | "securityAvailable" | "imageUrls" | "amenities" | "status" | "isFeatured" | "isPublished" | "createdAt" | "updatedAt", ExtArgs["result"]["property"]>
+export type PropertyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "description" | "address" | "area" | "city" | "division" | "district" | "upazila" | "union" | "latitude" | "longitude" | "floorLabel" | "totalFloors" | "totalUnits" | "unitsPerFloor" | "startingPrice" | "handoverDate" | "completionDate" | "constructionStart" | "landArea" | "facing" | "roadSize" | "totalParkingSlots" | "totalBalconies" | "buildingAge" | "parkingAvailable" | "liftAvailable" | "generatorBackup" | "securityAvailable" | "developerName" | "rajukApproval" | "reraRegistered" | "imageUrls" | "amenities" | "status" | "isFeatured" | "isPublished" | "createdAt" | "updatedAt", ExtArgs["result"]["property"]>
 export type PropertyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   flats?: boolean | Prisma.Property$flatsArgs<ExtArgs>
   _count?: boolean | Prisma.PropertyCountOutputTypeDefaultArgs<ExtArgs>
@@ -1301,6 +1677,10 @@ export type $PropertyPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     address: string
     area: string
     city: string
+    division: string | null
+    district: string | null
+    upazila: string | null
+    union: string | null
     latitude: number | null
     longitude: number | null
     floorLabel: string
@@ -1309,16 +1689,24 @@ export type $PropertyPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     unitsPerFloor: number | null
     startingPrice: number | null
     handoverDate: Date | null
+    completionDate: Date | null
+    constructionStart: Date | null
     landArea: string | null
     facing: string | null
     roadSize: string | null
+    totalParkingSlots: number | null
+    totalBalconies: number | null
+    buildingAge: string | null
     parkingAvailable: boolean
     liftAvailable: boolean
     generatorBackup: boolean
     securityAvailable: boolean
+    developerName: string | null
+    rajukApproval: boolean
+    reraRegistered: boolean
     imageUrls: string[]
     amenities: string[]
-    status: string | null
+    status: $Enums.PropertyStatus
     isFeatured: boolean
     isPublished: boolean
     createdAt: Date
@@ -1754,6 +2142,10 @@ export interface PropertyFieldRefs {
   readonly address: Prisma.FieldRef<"Property", 'String'>
   readonly area: Prisma.FieldRef<"Property", 'String'>
   readonly city: Prisma.FieldRef<"Property", 'String'>
+  readonly division: Prisma.FieldRef<"Property", 'String'>
+  readonly district: Prisma.FieldRef<"Property", 'String'>
+  readonly upazila: Prisma.FieldRef<"Property", 'String'>
+  readonly union: Prisma.FieldRef<"Property", 'String'>
   readonly latitude: Prisma.FieldRef<"Property", 'Float'>
   readonly longitude: Prisma.FieldRef<"Property", 'Float'>
   readonly floorLabel: Prisma.FieldRef<"Property", 'String'>
@@ -1762,16 +2154,24 @@ export interface PropertyFieldRefs {
   readonly unitsPerFloor: Prisma.FieldRef<"Property", 'Int'>
   readonly startingPrice: Prisma.FieldRef<"Property", 'Float'>
   readonly handoverDate: Prisma.FieldRef<"Property", 'DateTime'>
+  readonly completionDate: Prisma.FieldRef<"Property", 'DateTime'>
+  readonly constructionStart: Prisma.FieldRef<"Property", 'DateTime'>
   readonly landArea: Prisma.FieldRef<"Property", 'String'>
   readonly facing: Prisma.FieldRef<"Property", 'String'>
   readonly roadSize: Prisma.FieldRef<"Property", 'String'>
+  readonly totalParkingSlots: Prisma.FieldRef<"Property", 'Int'>
+  readonly totalBalconies: Prisma.FieldRef<"Property", 'Int'>
+  readonly buildingAge: Prisma.FieldRef<"Property", 'String'>
   readonly parkingAvailable: Prisma.FieldRef<"Property", 'Boolean'>
   readonly liftAvailable: Prisma.FieldRef<"Property", 'Boolean'>
   readonly generatorBackup: Prisma.FieldRef<"Property", 'Boolean'>
   readonly securityAvailable: Prisma.FieldRef<"Property", 'Boolean'>
+  readonly developerName: Prisma.FieldRef<"Property", 'String'>
+  readonly rajukApproval: Prisma.FieldRef<"Property", 'Boolean'>
+  readonly reraRegistered: Prisma.FieldRef<"Property", 'Boolean'>
   readonly imageUrls: Prisma.FieldRef<"Property", 'String[]'>
   readonly amenities: Prisma.FieldRef<"Property", 'String[]'>
-  readonly status: Prisma.FieldRef<"Property", 'String'>
+  readonly status: Prisma.FieldRef<"Property", 'PropertyStatus'>
   readonly isFeatured: Prisma.FieldRef<"Property", 'Boolean'>
   readonly isPublished: Prisma.FieldRef<"Property", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Property", 'DateTime'>

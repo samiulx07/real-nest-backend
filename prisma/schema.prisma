@@ -26,61 +26,96 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  media     Media[]
+
   @@map("users")
 }
 
+// ─── Property ────────────────────────────────────────────
+
+enum PropertyStatus {
+  UPCOMING
+  ONGOING
+  COMPLETED
+  READY_TO_MOVE
+  HANDOVERED
+}
+
 model Property {
-  id                String   @id @default(uuid())
+  id                String         @id @default(uuid())
 
   title             String
-  slug              String   @unique
+  slug              String         @unique
   description       String?
 
+  // ─ Location ─
   address           String
   area              String
-  city              String   @default("Dhaka")
+  city              String         @default("Dhaka")
+  division          String?
+  district          String?
+  upazila           String?
+  union             String?
 
   latitude          Float?
   longitude         Float?
 
-  floorLabel        String   // Example: G+10
+  // ─ Building Specs ─
+  floorLabel        String         // e.g. G+10
   totalFloors       Int
   totalUnits        Int
   unitsPerFloor     Int?
 
   startingPrice     Float?
 
+  // ─ Dates ─
   handoverDate      DateTime?
-  landArea          String?  // Example: 8 Katha
-  facing            String?  // North, South, East, West
-  roadSize          String?  // Example: 20 Feet Road
+  completionDate    DateTime?      // Actual or expected completion
+  constructionStart DateTime?      // Construction start date
 
-  parkingAvailable Boolean  @default(false)
-  liftAvailable    Boolean  @default(false)
-  generatorBackup  Boolean  @default(false)
-  securityAvailable Boolean @default(false)
+  // ─ Land & Physical ─
+  landArea          String?        // e.g. 8 Katha
+  facing            String?        // North, South, East, West
+  roadSize          String?        // e.g. 20 Feet Road
+  totalParkingSlots Int?
+  totalBalconies    Int?
+  buildingAge       String?        // e.g. "New Construction", "2 Years"
+
+  // ─ Facilities ─
+  parkingAvailable  Boolean        @default(false)
+  liftAvailable     Boolean        @default(false)
+  generatorBackup   Boolean        @default(false)
+  securityAvailable Boolean        @default(false)
+
+  // ─ Compliance ─
+  developerName     String?        // Developer / Builder company name
+  rajukApproval     Boolean        @default(false)
+  reraRegistered    Boolean        @default(false)
 
   imageUrls         String[]
   amenities         String[]
 
-  status            String?  
-  // Example: Ongoing, Completed, Ready to Move, Handovered
+  status            PropertyStatus @default(ONGOING)
 
-  isFeatured        Boolean  @default(false)
-  isPublished       Boolean  @default(true)
+  isFeatured        Boolean        @default(false)
+  isPublished       Boolean        @default(true)
 
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
 
   flats             Flat[]
 
   @@map("properties")
 }
 
+// ─── Flat ────────────────────────────────────────────────
+
 enum FlatStatus {
   AVAILABLE
+  RESERVED
   BOOKED
   SOLD
+  UNDER_RENOVATION
 }
 
 model Flat {
@@ -102,6 +137,14 @@ model Flat {
 
   status        FlatStatus @default(AVAILABLE)
 
+  // ─ New detail fields ─
+  completionDate DateTime?  // Flat-level handover date
+  furnishing     String?    // "Unfurnished", "Semi-Furnished", "Fully Furnished"
+  facing         String?    // "North", "South", "East", "West", "Corner"
+  floorType      String?    // "Tiles", "Marble", "Wooden", "Vitrified"
+  hasGasLine     Boolean    @default(false)
+  hasWaterSupply Boolean    @default(true)
+
   description   String?
   imageUrls     String[]   @default([])
   amenities     String[]   @default([])
@@ -113,4 +156,22 @@ model Flat {
   updatedAt     DateTime   @updatedAt
 
   @@map("flats")
-}
+}
+
+// ─── Media ───────────────────────────────────────────────
+
+model Media {
+  id          String   @id @default(uuid())
+  fileName    String
+  fileUrl     String
+  fileSize    Int?
+  mimeType    String?
+  folder      String   @default("general") // properties, flats, profiles, general
+  uploadedBy  String
+  user        User     @relation(fields: [uploadedBy], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("media")
+}

@@ -19,10 +19,23 @@ export const UserRole = {
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 
 
+export const PropertyStatus = {
+  UPCOMING: 'UPCOMING',
+  ONGOING: 'ONGOING',
+  COMPLETED: 'COMPLETED',
+  READY_TO_MOVE: 'READY_TO_MOVE',
+  HANDOVERED: 'HANDOVERED'
+} as const
+
+export type PropertyStatus = (typeof PropertyStatus)[keyof typeof PropertyStatus]
+
+
 export const FlatStatus = {
   AVAILABLE: 'AVAILABLE',
+  RESERVED: 'RESERVED',
   BOOKED: 'BOOKED',
-  SOLD: 'SOLD'
+  SOLD: 'SOLD',
+  UNDER_RENOVATION: 'UNDER_RENOVATION'
 } as const
 
 export type FlatStatus = (typeof FlatStatus)[keyof typeof FlatStatus]

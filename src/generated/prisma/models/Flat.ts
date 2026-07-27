@@ -59,6 +59,12 @@ export type FlatMinAggregateOutputType = {
   size: number | null
   price: number | null
   status: $Enums.FlatStatus | null
+  completionDate: Date | null
+  furnishing: string | null
+  facing: string | null
+  floorType: string | null
+  hasGasLine: boolean | null
+  hasWaterSupply: boolean | null
   description: string | null
   isFeatured: boolean | null
   isPublished: boolean | null
@@ -79,6 +85,12 @@ export type FlatMaxAggregateOutputType = {
   size: number | null
   price: number | null
   status: $Enums.FlatStatus | null
+  completionDate: Date | null
+  furnishing: string | null
+  facing: string | null
+  floorType: string | null
+  hasGasLine: boolean | null
+  hasWaterSupply: boolean | null
   description: string | null
   isFeatured: boolean | null
   isPublished: boolean | null
@@ -99,6 +111,12 @@ export type FlatCountAggregateOutputType = {
   size: number
   price: number
   status: number
+  completionDate: number
+  furnishing: number
+  facing: number
+  floorType: number
+  hasGasLine: number
+  hasWaterSupply: number
   description: number
   imageUrls: number
   amenities: number
@@ -143,6 +161,12 @@ export type FlatMinAggregateInputType = {
   size?: true
   price?: true
   status?: true
+  completionDate?: true
+  furnishing?: true
+  facing?: true
+  floorType?: true
+  hasGasLine?: true
+  hasWaterSupply?: true
   description?: true
   isFeatured?: true
   isPublished?: true
@@ -163,6 +187,12 @@ export type FlatMaxAggregateInputType = {
   size?: true
   price?: true
   status?: true
+  completionDate?: true
+  furnishing?: true
+  facing?: true
+  floorType?: true
+  hasGasLine?: true
+  hasWaterSupply?: true
   description?: true
   isFeatured?: true
   isPublished?: true
@@ -183,6 +213,12 @@ export type FlatCountAggregateInputType = {
   size?: true
   price?: true
   status?: true
+  completionDate?: true
+  furnishing?: true
+  facing?: true
+  floorType?: true
+  hasGasLine?: true
+  hasWaterSupply?: true
   description?: true
   imageUrls?: true
   amenities?: true
@@ -292,6 +328,12 @@ export type FlatGroupByOutputType = {
   size: number
   price: number
   status: $Enums.FlatStatus
+  completionDate: Date | null
+  furnishing: string | null
+  facing: string | null
+  floorType: string | null
+  hasGasLine: boolean
+  hasWaterSupply: boolean
   description: string | null
   imageUrls: string[]
   amenities: string[]
@@ -337,6 +379,12 @@ export type FlatWhereInput = {
   size?: Prisma.FloatFilter<"Flat"> | number
   price?: Prisma.FloatFilter<"Flat"> | number
   status?: Prisma.EnumFlatStatusFilter<"Flat"> | $Enums.FlatStatus
+  completionDate?: Prisma.DateTimeNullableFilter<"Flat"> | Date | string | null
+  furnishing?: Prisma.StringNullableFilter<"Flat"> | string | null
+  facing?: Prisma.StringNullableFilter<"Flat"> | string | null
+  floorType?: Prisma.StringNullableFilter<"Flat"> | string | null
+  hasGasLine?: Prisma.BoolFilter<"Flat"> | boolean
+  hasWaterSupply?: Prisma.BoolFilter<"Flat"> | boolean
   description?: Prisma.StringNullableFilter<"Flat"> | string | null
   imageUrls?: Prisma.StringNullableListFilter<"Flat">
   amenities?: Prisma.StringNullableListFilter<"Flat">
@@ -360,6 +408,12 @@ export type FlatOrderByWithRelationInput = {
   size?: Prisma.SortOrder
   price?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  completionDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  furnishing?: Prisma.SortOrderInput | Prisma.SortOrder
+  facing?: Prisma.SortOrderInput | Prisma.SortOrder
+  floorType?: Prisma.SortOrderInput | Prisma.SortOrder
+  hasGasLine?: Prisma.SortOrder
+  hasWaterSupply?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   imageUrls?: Prisma.SortOrder
   amenities?: Prisma.SortOrder
@@ -386,6 +440,12 @@ export type FlatWhereUniqueInput = Prisma.AtLeast<{
   size?: Prisma.FloatFilter<"Flat"> | number
   price?: Prisma.FloatFilter<"Flat"> | number
   status?: Prisma.EnumFlatStatusFilter<"Flat"> | $Enums.FlatStatus
+  completionDate?: Prisma.DateTimeNullableFilter<"Flat"> | Date | string | null
+  furnishing?: Prisma.StringNullableFilter<"Flat"> | string | null
+  facing?: Prisma.StringNullableFilter<"Flat"> | string | null
+  floorType?: Prisma.StringNullableFilter<"Flat"> | string | null
+  hasGasLine?: Prisma.BoolFilter<"Flat"> | boolean
+  hasWaterSupply?: Prisma.BoolFilter<"Flat"> | boolean
   description?: Prisma.StringNullableFilter<"Flat"> | string | null
   imageUrls?: Prisma.StringNullableListFilter<"Flat">
   amenities?: Prisma.StringNullableListFilter<"Flat">
@@ -409,6 +469,12 @@ export type FlatOrderByWithAggregationInput = {
   size?: Prisma.SortOrder
   price?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  completionDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  furnishing?: Prisma.SortOrderInput | Prisma.SortOrder
+  facing?: Prisma.SortOrderInput | Prisma.SortOrder
+  floorType?: Prisma.SortOrderInput | Prisma.SortOrder
+  hasGasLine?: Prisma.SortOrder
+  hasWaterSupply?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   imageUrls?: Prisma.SortOrder
   amenities?: Prisma.SortOrder
@@ -439,6 +505,12 @@ export type FlatScalarWhereWithAggregatesInput = {
   size?: Prisma.FloatWithAggregatesFilter<"Flat"> | number
   price?: Prisma.FloatWithAggregatesFilter<"Flat"> | number
   status?: Prisma.EnumFlatStatusWithAggregatesFilter<"Flat"> | $Enums.FlatStatus
+  completionDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Flat"> | Date | string | null
+  furnishing?: Prisma.StringNullableWithAggregatesFilter<"Flat"> | string | null
+  facing?: Prisma.StringNullableWithAggregatesFilter<"Flat"> | string | null
+  floorType?: Prisma.StringNullableWithAggregatesFilter<"Flat"> | string | null
+  hasGasLine?: Prisma.BoolWithAggregatesFilter<"Flat"> | boolean
+  hasWaterSupply?: Prisma.BoolWithAggregatesFilter<"Flat"> | boolean
   description?: Prisma.StringNullableWithAggregatesFilter<"Flat"> | string | null
   imageUrls?: Prisma.StringNullableListFilter<"Flat">
   amenities?: Prisma.StringNullableListFilter<"Flat">
@@ -460,6 +532,12 @@ export type FlatCreateInput = {
   size: number
   price: number
   status?: $Enums.FlatStatus
+  completionDate?: Date | string | null
+  furnishing?: string | null
+  facing?: string | null
+  floorType?: string | null
+  hasGasLine?: boolean
+  hasWaterSupply?: boolean
   description?: string | null
   imageUrls?: Prisma.FlatCreateimageUrlsInput | string[]
   amenities?: Prisma.FlatCreateamenitiesInput | string[]
@@ -483,6 +561,12 @@ export type FlatUncheckedCreateInput = {
   size: number
   price: number
   status?: $Enums.FlatStatus
+  completionDate?: Date | string | null
+  furnishing?: string | null
+  facing?: string | null
+  floorType?: string | null
+  hasGasLine?: boolean
+  hasWaterSupply?: boolean
   description?: string | null
   imageUrls?: Prisma.FlatCreateimageUrlsInput | string[]
   amenities?: Prisma.FlatCreateamenitiesInput | string[]
@@ -504,6 +588,12 @@ export type FlatUpdateInput = {
   size?: Prisma.FloatFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumFlatStatusFieldUpdateOperationsInput | $Enums.FlatStatus
+  completionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  furnishing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  facing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  floorType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasGasLine?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasWaterSupply?: Prisma.BoolFieldUpdateOperationsInput | boolean
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrls?: Prisma.FlatUpdateimageUrlsInput | string[]
   amenities?: Prisma.FlatUpdateamenitiesInput | string[]
@@ -527,6 +617,12 @@ export type FlatUncheckedUpdateInput = {
   size?: Prisma.FloatFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumFlatStatusFieldUpdateOperationsInput | $Enums.FlatStatus
+  completionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  furnishing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  facing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  floorType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasGasLine?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasWaterSupply?: Prisma.BoolFieldUpdateOperationsInput | boolean
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrls?: Prisma.FlatUpdateimageUrlsInput | string[]
   amenities?: Prisma.FlatUpdateamenitiesInput | string[]
@@ -549,6 +645,12 @@ export type FlatCreateManyInput = {
   size: number
   price: number
   status?: $Enums.FlatStatus
+  completionDate?: Date | string | null
+  furnishing?: string | null
+  facing?: string | null
+  floorType?: string | null
+  hasGasLine?: boolean
+  hasWaterSupply?: boolean
   description?: string | null
   imageUrls?: Prisma.FlatCreateimageUrlsInput | string[]
   amenities?: Prisma.FlatCreateamenitiesInput | string[]
@@ -570,6 +672,12 @@ export type FlatUpdateManyMutationInput = {
   size?: Prisma.FloatFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumFlatStatusFieldUpdateOperationsInput | $Enums.FlatStatus
+  completionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  furnishing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  facing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  floorType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasGasLine?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasWaterSupply?: Prisma.BoolFieldUpdateOperationsInput | boolean
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrls?: Prisma.FlatUpdateimageUrlsInput | string[]
   amenities?: Prisma.FlatUpdateamenitiesInput | string[]
@@ -592,6 +700,12 @@ export type FlatUncheckedUpdateManyInput = {
   size?: Prisma.FloatFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumFlatStatusFieldUpdateOperationsInput | $Enums.FlatStatus
+  completionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  furnishing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  facing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  floorType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasGasLine?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasWaterSupply?: Prisma.BoolFieldUpdateOperationsInput | boolean
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrls?: Prisma.FlatUpdateimageUrlsInput | string[]
   amenities?: Prisma.FlatUpdateamenitiesInput | string[]
@@ -624,6 +738,12 @@ export type FlatCountOrderByAggregateInput = {
   size?: Prisma.SortOrder
   price?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  completionDate?: Prisma.SortOrder
+  furnishing?: Prisma.SortOrder
+  facing?: Prisma.SortOrder
+  floorType?: Prisma.SortOrder
+  hasGasLine?: Prisma.SortOrder
+  hasWaterSupply?: Prisma.SortOrder
   description?: Prisma.SortOrder
   imageUrls?: Prisma.SortOrder
   amenities?: Prisma.SortOrder
@@ -656,6 +776,12 @@ export type FlatMaxOrderByAggregateInput = {
   size?: Prisma.SortOrder
   price?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  completionDate?: Prisma.SortOrder
+  furnishing?: Prisma.SortOrder
+  facing?: Prisma.SortOrder
+  floorType?: Prisma.SortOrder
+  hasGasLine?: Prisma.SortOrder
+  hasWaterSupply?: Prisma.SortOrder
   description?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
@@ -676,6 +802,12 @@ export type FlatMinOrderByAggregateInput = {
   size?: Prisma.SortOrder
   price?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  completionDate?: Prisma.SortOrder
+  furnishing?: Prisma.SortOrder
+  facing?: Prisma.SortOrder
+  floorType?: Prisma.SortOrder
+  hasGasLine?: Prisma.SortOrder
+  hasWaterSupply?: Prisma.SortOrder
   description?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
@@ -777,6 +909,12 @@ export type FlatCreateWithoutPropertyInput = {
   size: number
   price: number
   status?: $Enums.FlatStatus
+  completionDate?: Date | string | null
+  furnishing?: string | null
+  facing?: string | null
+  floorType?: string | null
+  hasGasLine?: boolean
+  hasWaterSupply?: boolean
   description?: string | null
   imageUrls?: Prisma.FlatCreateimageUrlsInput | string[]
   amenities?: Prisma.FlatCreateamenitiesInput | string[]
@@ -798,6 +936,12 @@ export type FlatUncheckedCreateWithoutPropertyInput = {
   size: number
   price: number
   status?: $Enums.FlatStatus
+  completionDate?: Date | string | null
+  furnishing?: string | null
+  facing?: string | null
+  floorType?: string | null
+  hasGasLine?: boolean
+  hasWaterSupply?: boolean
   description?: string | null
   imageUrls?: Prisma.FlatCreateimageUrlsInput | string[]
   amenities?: Prisma.FlatCreateamenitiesInput | string[]
@@ -849,6 +993,12 @@ export type FlatScalarWhereInput = {
   size?: Prisma.FloatFilter<"Flat"> | number
   price?: Prisma.FloatFilter<"Flat"> | number
   status?: Prisma.EnumFlatStatusFilter<"Flat"> | $Enums.FlatStatus
+  completionDate?: Prisma.DateTimeNullableFilter<"Flat"> | Date | string | null
+  furnishing?: Prisma.StringNullableFilter<"Flat"> | string | null
+  facing?: Prisma.StringNullableFilter<"Flat"> | string | null
+  floorType?: Prisma.StringNullableFilter<"Flat"> | string | null
+  hasGasLine?: Prisma.BoolFilter<"Flat"> | boolean
+  hasWaterSupply?: Prisma.BoolFilter<"Flat"> | boolean
   description?: Prisma.StringNullableFilter<"Flat"> | string | null
   imageUrls?: Prisma.StringNullableListFilter<"Flat">
   amenities?: Prisma.StringNullableListFilter<"Flat">
@@ -870,6 +1020,12 @@ export type FlatCreateManyPropertyInput = {
   size: number
   price: number
   status?: $Enums.FlatStatus
+  completionDate?: Date | string | null
+  furnishing?: string | null
+  facing?: string | null
+  floorType?: string | null
+  hasGasLine?: boolean
+  hasWaterSupply?: boolean
   description?: string | null
   imageUrls?: Prisma.FlatCreateimageUrlsInput | string[]
   amenities?: Prisma.FlatCreateamenitiesInput | string[]
@@ -891,6 +1047,12 @@ export type FlatUpdateWithoutPropertyInput = {
   size?: Prisma.FloatFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumFlatStatusFieldUpdateOperationsInput | $Enums.FlatStatus
+  completionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  furnishing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  facing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  floorType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasGasLine?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasWaterSupply?: Prisma.BoolFieldUpdateOperationsInput | boolean
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrls?: Prisma.FlatUpdateimageUrlsInput | string[]
   amenities?: Prisma.FlatUpdateamenitiesInput | string[]
@@ -912,6 +1074,12 @@ export type FlatUncheckedUpdateWithoutPropertyInput = {
   size?: Prisma.FloatFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumFlatStatusFieldUpdateOperationsInput | $Enums.FlatStatus
+  completionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  furnishing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  facing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  floorType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasGasLine?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasWaterSupply?: Prisma.BoolFieldUpdateOperationsInput | boolean
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrls?: Prisma.FlatUpdateimageUrlsInput | string[]
   amenities?: Prisma.FlatUpdateamenitiesInput | string[]
@@ -933,6 +1101,12 @@ export type FlatUncheckedUpdateManyWithoutPropertyInput = {
   size?: Prisma.FloatFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   status?: Prisma.EnumFlatStatusFieldUpdateOperationsInput | $Enums.FlatStatus
+  completionDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  furnishing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  facing?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  floorType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasGasLine?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasWaterSupply?: Prisma.BoolFieldUpdateOperationsInput | boolean
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrls?: Prisma.FlatUpdateimageUrlsInput | string[]
   amenities?: Prisma.FlatUpdateamenitiesInput | string[]
@@ -957,6 +1131,12 @@ export type FlatSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   size?: boolean
   price?: boolean
   status?: boolean
+  completionDate?: boolean
+  furnishing?: boolean
+  facing?: boolean
+  floorType?: boolean
+  hasGasLine?: boolean
+  hasWaterSupply?: boolean
   description?: boolean
   imageUrls?: boolean
   amenities?: boolean
@@ -980,6 +1160,12 @@ export type FlatSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   size?: boolean
   price?: boolean
   status?: boolean
+  completionDate?: boolean
+  furnishing?: boolean
+  facing?: boolean
+  floorType?: boolean
+  hasGasLine?: boolean
+  hasWaterSupply?: boolean
   description?: boolean
   imageUrls?: boolean
   amenities?: boolean
@@ -1003,6 +1189,12 @@ export type FlatSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   size?: boolean
   price?: boolean
   status?: boolean
+  completionDate?: boolean
+  furnishing?: boolean
+  facing?: boolean
+  floorType?: boolean
+  hasGasLine?: boolean
+  hasWaterSupply?: boolean
   description?: boolean
   imageUrls?: boolean
   amenities?: boolean
@@ -1026,6 +1218,12 @@ export type FlatSelectScalar = {
   size?: boolean
   price?: boolean
   status?: boolean
+  completionDate?: boolean
+  furnishing?: boolean
+  facing?: boolean
+  floorType?: boolean
+  hasGasLine?: boolean
+  hasWaterSupply?: boolean
   description?: boolean
   imageUrls?: boolean
   amenities?: boolean
@@ -1035,7 +1233,7 @@ export type FlatSelectScalar = {
   updatedAt?: boolean
 }
 
-export type FlatOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "propertyId" | "title" | "flatNumber" | "floorNumber" | "beds" | "baths" | "kitchens" | "balconies" | "size" | "price" | "status" | "description" | "imageUrls" | "amenities" | "isFeatured" | "isPublished" | "createdAt" | "updatedAt", ExtArgs["result"]["flat"]>
+export type FlatOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "propertyId" | "title" | "flatNumber" | "floorNumber" | "beds" | "baths" | "kitchens" | "balconies" | "size" | "price" | "status" | "completionDate" | "furnishing" | "facing" | "floorType" | "hasGasLine" | "hasWaterSupply" | "description" | "imageUrls" | "amenities" | "isFeatured" | "isPublished" | "createdAt" | "updatedAt", ExtArgs["result"]["flat"]>
 export type FlatInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
 }
@@ -1064,6 +1262,12 @@ export type $FlatPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     size: number
     price: number
     status: $Enums.FlatStatus
+    completionDate: Date | null
+    furnishing: string | null
+    facing: string | null
+    floorType: string | null
+    hasGasLine: boolean
+    hasWaterSupply: boolean
     description: string | null
     imageUrls: string[]
     amenities: string[]
@@ -1507,6 +1711,12 @@ export interface FlatFieldRefs {
   readonly size: Prisma.FieldRef<"Flat", 'Float'>
   readonly price: Prisma.FieldRef<"Flat", 'Float'>
   readonly status: Prisma.FieldRef<"Flat", 'FlatStatus'>
+  readonly completionDate: Prisma.FieldRef<"Flat", 'DateTime'>
+  readonly furnishing: Prisma.FieldRef<"Flat", 'String'>
+  readonly facing: Prisma.FieldRef<"Flat", 'String'>
+  readonly floorType: Prisma.FieldRef<"Flat", 'String'>
+  readonly hasGasLine: Prisma.FieldRef<"Flat", 'Boolean'>
+  readonly hasWaterSupply: Prisma.FieldRef<"Flat", 'Boolean'>
   readonly description: Prisma.FieldRef<"Flat", 'String'>
   readonly imageUrls: Prisma.FieldRef<"Flat", 'String[]'>
   readonly amenities: Prisma.FieldRef<"Flat", 'String[]'>

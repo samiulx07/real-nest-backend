@@ -11,4 +11,5 @@
 export type * from './models/User'
 export type * from './models/Property'
 export type * from './models/Flat'
+export type * from './models/Media'
 export type * from './commonInputTypes'

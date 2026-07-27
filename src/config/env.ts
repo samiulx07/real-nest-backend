@@ -11,6 +11,9 @@ const envVarsZodSchema = z.object({
   JWT_ACCESS_SECRET: z.string(),
   JWT_REFRESH_SECRET: z.string(),
   FRONTEND_URL: z.string().default("http://localhost:3000"),
+  SUPABASE_URL: z.string(),
+  SUPABASE_SERVICE_ROLE_KEY: z.string(),
+  SUPABASE_BUCKET_NAME: z.string().default("media"),
 });
 
 const envVars = envVarsZodSchema.safeParse(process.env);

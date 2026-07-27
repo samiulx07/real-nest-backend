@@ -53,7 +53,8 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Property: 'Property',
-  Flat: 'Flat'
+  Flat: 'Flat',
+  Media: 'Media'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -95,6 +96,10 @@ export const PropertyScalarFieldEnum = {
   address: 'address',
   area: 'area',
   city: 'city',
+  division: 'division',
+  district: 'district',
+  upazila: 'upazila',
+  union: 'union',
   latitude: 'latitude',
   longitude: 'longitude',
   floorLabel: 'floorLabel',
@@ -103,13 +108,21 @@ export const PropertyScalarFieldEnum = {
   unitsPerFloor: 'unitsPerFloor',
   startingPrice: 'startingPrice',
   handoverDate: 'handoverDate',
+  completionDate: 'completionDate',
+  constructionStart: 'constructionStart',
   landArea: 'landArea',
   facing: 'facing',
   roadSize: 'roadSize',
+  totalParkingSlots: 'totalParkingSlots',
+  totalBalconies: 'totalBalconies',
+  buildingAge: 'buildingAge',
   parkingAvailable: 'parkingAvailable',
   liftAvailable: 'liftAvailable',
   generatorBackup: 'generatorBackup',
   securityAvailable: 'securityAvailable',
+  developerName: 'developerName',
+  rajukApproval: 'rajukApproval',
+  reraRegistered: 'reraRegistered',
   imageUrls: 'imageUrls',
   amenities: 'amenities',
   status: 'status',
@@ -135,6 +148,12 @@ export const FlatScalarFieldEnum = {
   size: 'size',
   price: 'price',
   status: 'status',
+  completionDate: 'completionDate',
+  furnishing: 'furnishing',
+  facing: 'facing',
+  floorType: 'floorType',
+  hasGasLine: 'hasGasLine',
+  hasWaterSupply: 'hasWaterSupply',
   description: 'description',
   imageUrls: 'imageUrls',
   amenities: 'amenities',
@@ -145,6 +164,21 @@ export const FlatScalarFieldEnum = {
 } as const
 
 export type FlatScalarFieldEnum = (typeof FlatScalarFieldEnum)[keyof typeof FlatScalarFieldEnum]
+
+
+export const MediaScalarFieldEnum = {
+  id: 'id',
+  fileName: 'fileName',
+  fileUrl: 'fileUrl',
+  fileSize: 'fileSize',
+  mimeType: 'mimeType',
+  folder: 'folder',
+  uploadedBy: 'uploadedBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MediaScalarFieldEnum = (typeof MediaScalarFieldEnum)[keyof typeof MediaScalarFieldEnum]
 
 
 export const SortOrder = {

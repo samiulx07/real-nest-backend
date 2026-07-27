@@ -32,3 +32,8 @@ export type Property = Prisma.PropertyModel
  * 
  */
 export type Flat = Prisma.FlatModel
+/**
+ * Model Media
+ * 
+ */
+export type Media = Prisma.MediaModel
