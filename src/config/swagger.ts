@@ -198,6 +198,92 @@ export const swaggerDocument = {
         },
       },
     },
+    "/auth/forgot-password": {
+      post: {
+        summary: "Request Password Reset OTP",
+        description: "Request a 6-digit OTP code sent via email for password recovery.",
+        tags: ["Authentication"],
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/ForgotPasswordRequest",
+              },
+            },
+          },
+        },
+        responses: {
+          "200": {
+            description: "OTP email sent successfully",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    success: { type: "boolean", example: true },
+                    message: { type: "string", example: "An OTP reset code and link have been sent to your email address." },
+                  },
+                },
+              },
+            },
+          },
+          "404": {
+            description: "No account found with this email address",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "/auth/reset-password": {
+      post: {
+        summary: "Reset Password With OTP",
+        description: "Verify 6-digit OTP code and set a new password.",
+        tags: ["Authentication"],
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/ResetPasswordRequest",
+              },
+            },
+          },
+        },
+        responses: {
+          "200": {
+            description: "Password reset successful",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    success: { type: "boolean", example: true },
+                    message: { type: "string", example: "Password has been successfully reset. You can now log in." },
+                  },
+                },
+              },
+            },
+          },
+          "400": {
+            description: "Invalid or expired OTP code",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
     "/properties": {
       get: {
         summary: "Get All Properties",
@@ -906,6 +992,22 @@ export const swaggerDocument = {
               $ref: "#/components/schemas/Flat",
             },
           },
+        },
+      },
+      ForgotPasswordRequest: {
+        type: "object",
+        required: ["email"],
+        properties: {
+          email: { type: "string", format: "email", example: "user@example.com" },
+        },
+      },
+      ResetPasswordRequest: {
+        type: "object",
+        required: ["email", "otpCode", "newPassword"],
+        properties: {
+          email: { type: "string", format: "email", example: "user@example.com" },
+          otpCode: { type: "string", example: "123456" },
+          newPassword: { type: "string", example: "NewSecurePassword123!" },
         },
       },
     },
