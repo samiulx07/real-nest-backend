@@ -55,7 +55,7 @@ export const getAllProperties = async (filters: any, options: any) => {
   }
 
   if (status) {
-    andConditions.push({ status: { equals: status, mode: "insensitive" } });
+    andConditions.push({ status: { equals: status } });
   }
 
   if (isFeatured !== undefined) {
