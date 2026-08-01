@@ -659,6 +659,523 @@ export const swaggerDocument = {
         },
       },
     },
+    "/bookings": {
+      post: {
+        summary: "Create Flat Booking Request",
+        description: "Initiate a booking request for an available flat. Supports SSLCOMMERZ, BANK_TRANSFER, BKASH, NAGAD, and CASH payment methods.",
+        tags: ["Bookings"],
+        security: [{ bearerAuth: [] }],
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/CreateBookingRequest",
+              },
+            },
+          },
+        },
+        responses: {
+          "201": {
+            description: "Flat booking request created successfully",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/CreateBookingResponse",
+                },
+              },
+            },
+          },
+          "400": {
+            description: "Invalid input or flat is already booked/sold",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+          "401": {
+            description: "Unauthorized",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+          "404": {
+            description: "Target flat not found",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+        },
+      },
+      get: {
+        summary: "Get All Bookings (Admin/Staff)",
+        description: "Retrieve all booking records across the platform. Restricted to SUPER_ADMIN, ADMIN, or STAFF.",
+        tags: ["Bookings"],
+        security: [{ bearerAuth: [] }],
+        responses: {
+          "200": {
+            description: "All bookings retrieved successfully",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/BookingListResponse",
+                },
+              },
+            },
+          },
+          "401": {
+            description: "Unauthorized",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+          "403": {
+            description: "Forbidden",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "/bookings/my-bookings": {
+      get: {
+        summary: "Get Current User's Bookings",
+        description: "Retrieve all booking requests submitted by the currently logged-in customer.",
+        tags: ["Bookings"],
+        security: [{ bearerAuth: [] }],
+        responses: {
+          "200": {
+            description: "User bookings fetched successfully",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/BookingListResponse",
+                },
+              },
+            },
+          },
+          "401": {
+            description: "Unauthorized",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "/bookings/{id}/verify-payment": {
+      patch: {
+        summary: "Verify/Update Booking Payment (Admin/Staff)",
+        description: "Approve or reject a booking payment. Approving sets status to CONFIRMED and flat to BOOKED. Rejecting sets status to CANCELLED and flat to AVAILABLE. Restricted to SUPER_ADMIN, ADMIN, or STAFF.",
+        tags: ["Bookings"],
+        security: [{ bearerAuth: [] }],
+        parameters: [
+          { name: "id", in: "path", required: true, description: "Booking UUID", schema: { type: "string", format: "uuid" } },
+        ],
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/UpdateBookingStatusRequest",
+              },
+            },
+          },
+        },
+        responses: {
+          "200": {
+            description: "Booking payment status updated successfully",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/BookingResponse",
+                },
+              },
+            },
+          },
+          "400": {
+            description: "Invalid action or parameters",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+          "401": {
+            description: "Unauthorized",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+          "404": {
+            description: "Booking record not found",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "/payments/ssl-success": {
+      post: {
+        summary: "SSLCommerz Payment Success Callback (POST)",
+        description: "Callback URL invoked by SSLCommerz upon successful payment completion. Validates payment transaction and updates booking and payment records to VALIDATED, then redirects user to frontend dashboard.",
+        tags: ["Payments"],
+        parameters: [
+          { name: "val_id", in: "query", description: "SSLCommerz validation ID", schema: { type: "string" } },
+          { name: "tranId", in: "query", description: "Transaction ID", schema: { type: "string" } },
+          { name: "bookingId", in: "query", description: "Target Booking ID", schema: { type: "string", format: "uuid" } },
+        ],
+        responses: {
+          "302": {
+            description: "Redirects to frontend dashboard with payment status query parameter",
+          },
+        },
+      },
+      get: {
+        summary: "SSLCommerz Payment Success Callback (GET)",
+        description: "GET fallback URL for SSLCommerz payment success redirection.",
+        tags: ["Payments"],
+        parameters: [
+          { name: "val_id", in: "query", description: "SSLCommerz validation ID", schema: { type: "string" } },
+          { name: "tranId", in: "query", description: "Transaction ID", schema: { type: "string" } },
+          { name: "bookingId", in: "query", description: "Target Booking ID", schema: { type: "string", format: "uuid" } },
+        ],
+        responses: {
+          "302": {
+            description: "Redirects to frontend dashboard with payment status query parameter",
+          },
+        },
+      },
+    },
+    "/payments/ssl-fail": {
+      post: {
+        summary: "SSLCommerz Payment Failure Callback (POST)",
+        description: "Callback URL invoked by SSLCommerz when payment fails. Updates payment status to FAILED and redirects user to frontend dashboard.",
+        tags: ["Payments"],
+        parameters: [
+          { name: "tranId", in: "query", description: "Transaction ID", schema: { type: "string" } },
+        ],
+        responses: {
+          "302": {
+            description: "Redirects to frontend dashboard with payment=failed query parameter",
+          },
+        },
+      },
+      get: {
+        summary: "SSLCommerz Payment Failure Callback (GET)",
+        description: "GET fallback URL for SSLCommerz payment failure redirection.",
+        tags: ["Payments"],
+        parameters: [
+          { name: "tranId", in: "query", description: "Transaction ID", schema: { type: "string" } },
+        ],
+        responses: {
+          "302": {
+            description: "Redirects to frontend dashboard with payment=failed query parameter",
+          },
+        },
+      },
+    },
+    "/payments/ssl-cancel": {
+      post: {
+        summary: "SSLCommerz Payment Cancel Callback (POST)",
+        description: "Callback URL invoked by SSLCommerz when customer cancels transaction. Reverts booking status to CANCELLED and flat status to AVAILABLE.",
+        tags: ["Payments"],
+        parameters: [
+          { name: "tranId", in: "query", description: "Transaction ID", schema: { type: "string" } },
+        ],
+        responses: {
+          "302": {
+            description: "Redirects to frontend dashboard with payment=cancelled query parameter",
+          },
+        },
+      },
+      get: {
+        summary: "SSLCommerz Payment Cancel Callback (GET)",
+        description: "GET fallback URL for SSLCommerz payment cancellation redirection.",
+        tags: ["Payments"],
+        parameters: [
+          { name: "tranId", in: "query", description: "Transaction ID", schema: { type: "string" } },
+        ],
+        responses: {
+          "302": {
+            description: "Redirects to frontend dashboard with payment=cancelled query parameter",
+          },
+        },
+      },
+    },
+    "/payments/ssl-ipn": {
+      post: {
+        summary: "SSLCommerz Instant Payment Notification (IPN)",
+        description: "Server-to-server IPN webhook endpoint from SSLCommerz.",
+        tags: ["Payments"],
+        responses: {
+          "200": {
+            description: "IPN notification acknowledged",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    success: { type: "boolean", example: true },
+                    message: { type: "string", example: "IPN Received" },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "/media/upload": {
+      post: {
+        summary: "Upload Media File",
+        description: "Upload an image file (JPEG, PNG, WebP, GIF, SVG up to 10MB) to Supabase cloud storage.",
+        tags: ["Media"],
+        security: [{ bearerAuth: [] }],
+        requestBody: {
+          required: true,
+          content: {
+            "multipart/form-data": {
+              schema: {
+                type: "object",
+                required: ["file"],
+                properties: {
+                  file: { type: "string", format: "binary", description: "Image file to upload" },
+                  folder: { type: "string", default: "general", example: "properties", description: "Target storage folder" },
+                },
+              },
+            },
+          },
+        },
+        responses: {
+          "201": {
+            description: "File uploaded successfully",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/MediaResponse",
+                },
+              },
+            },
+          },
+          "400": {
+            description: "No file provided or invalid file format",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+          "401": {
+            description: "Unauthorized",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "/media": {
+      get: {
+        summary: "Get All Media Files",
+        description: "Retrieve a paginated list of media files with optional folder and search filters.",
+        tags: ["Media"],
+        security: [{ bearerAuth: [] }],
+        parameters: [
+          { name: "search", in: "query", description: "Search filename", schema: { type: "string" } },
+          { name: "folder", in: "query", description: "Filter by folder", schema: { type: "string" } },
+          { name: "page", in: "query", description: "Page number", schema: { type: "integer", default: 1 } },
+          { name: "limit", in: "query", description: "Records per page", schema: { type: "integer", default: 10 } },
+          { name: "sortBy", in: "query", description: "Field to sort by", schema: { type: "string", default: "createdAt" } },
+          { name: "sortOrder", in: "query", description: "Sort order", schema: { type: "string", enum: ["asc", "desc"], default: "desc" } },
+        ],
+        responses: {
+          "200": {
+            description: "Media files retrieved successfully",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/MediaListResponse",
+                },
+              },
+            },
+          },
+          "401": {
+            description: "Unauthorized",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "/media/{id}": {
+      get: {
+        summary: "Get Single Media File",
+        description: "Retrieve metadata details of a single media record by ID.",
+        tags: ["Media"],
+        security: [{ bearerAuth: [] }],
+        parameters: [
+          { name: "id", in: "path", required: true, description: "Media UUID", schema: { type: "string", format: "uuid" } },
+        ],
+        responses: {
+          "200": {
+            description: "Media record retrieved successfully",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/MediaResponse",
+                },
+              },
+            },
+          },
+          "404": {
+            description: "Media record not found",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+        },
+      },
+      delete: {
+        summary: "Delete Media File",
+        description: "Delete a media file from cloud storage and remove its database record.",
+        tags: ["Media"],
+        security: [{ bearerAuth: [] }],
+        parameters: [
+          { name: "id", in: "path", required: true, description: "Media UUID", schema: { type: "string", format: "uuid" } },
+        ],
+        responses: {
+          "200": {
+            description: "Media deleted successfully",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    success: { type: "boolean", example: true },
+                    message: { type: "string", example: "Media deleted successfully" },
+                  },
+                },
+              },
+            },
+          },
+          "404": {
+            description: "Media record not found",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "/media/bulk-delete": {
+      post: {
+        summary: "Bulk Delete Media Files (Admin/Staff)",
+        description: "Delete multiple media files by array of IDs. Restricted to SUPER_ADMIN, ADMIN, or STAFF.",
+        tags: ["Media"],
+        security: [{ bearerAuth: [] }],
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/BulkDeleteMediaRequest",
+              },
+            },
+          },
+        },
+        responses: {
+          "200": {
+            description: "Bulk media deletion completed",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    success: { type: "boolean", example: true },
+                    message: { type: "string", example: "Successfully deleted 3 media file(s)" },
+                  },
+                },
+              },
+            },
+          },
+          "400": {
+            description: "Array of media IDs not provided",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+          "401": {
+            description: "Unauthorized",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   },
   components: {
     securitySchemes: {
@@ -1008,6 +1525,178 @@ export const swaggerDocument = {
           email: { type: "string", format: "email", example: "user@example.com" },
           otpCode: { type: "string", example: "123456" },
           newPassword: { type: "string", example: "NewSecurePassword123!" },
+        },
+      },
+      Payment: {
+        type: "object",
+        properties: {
+          id: { type: "string", format: "uuid" },
+          tranId: { type: "string", example: "TXN-20260801-1234" },
+          bookingId: { type: "string", format: "uuid" },
+          userId: { type: "string", format: "uuid" },
+          paymentMethod: { type: "string", enum: ["SSLCOMMERZ", "BANK_TRANSFER", "BKASH", "NAGAD", "CASH"], example: "BANK_TRANSFER" },
+          amount: { type: "number", example: 500000 },
+          currency: { type: "string", example: "BDT" },
+          valId: { type: "string", nullable: true },
+          cardType: { type: "string", nullable: true },
+          bankTranId: { type: "string", nullable: true },
+          senderAccount: { type: "string", nullable: true },
+          receiptUrl: { type: "string", nullable: true },
+          status: { type: "string", enum: ["PENDING_APPROVAL", "VALIDATED", "REJECTED", "FAILED", "CANCELLED"], example: "PENDING_APPROVAL" },
+          adminNotes: { type: "string", nullable: true },
+          createdAt: { type: "string", format: "date-time" },
+          updatedAt: { type: "string", format: "date-time" },
+        },
+      },
+      Booking: {
+        type: "object",
+        properties: {
+          id: { type: "string", format: "uuid" },
+          bookingNumber: { type: "string", example: "BK-20260801-1234" },
+          userId: { type: "string", format: "uuid" },
+          flatId: { type: "string", format: "uuid" },
+          customerName: { type: "string", example: "John Doe" },
+          customerEmail: { type: "string", format: "email", example: "john@example.com" },
+          customerPhone: { type: "string", example: "+8801700000000" },
+          bookingAmount: { type: "number", example: 500000 },
+          paidAmount: { type: "number", example: 500000 },
+          paymentStatus: { type: "string", enum: ["PENDING_APPROVAL", "VALIDATED", "REJECTED"], example: "PENDING_APPROVAL" },
+          status: { type: "string", enum: ["PENDING", "CONFIRMED", "CANCELLED"], example: "PENDING" },
+          notes: { type: "string", nullable: true },
+          adminNotes: { type: "string", nullable: true },
+          createdAt: { type: "string", format: "date-time" },
+          updatedAt: { type: "string", format: "date-time" },
+          flat: {
+            $ref: "#/components/schemas/Flat",
+          },
+          payments: {
+            type: "array",
+            items: {
+              $ref: "#/components/schemas/Payment",
+            },
+          },
+        },
+      },
+      CreateBookingRequest: {
+        type: "object",
+        required: ["flatId", "customerName", "customerEmail", "customerPhone", "bookingAmount"],
+        properties: {
+          flatId: { type: "string", format: "uuid", example: "e2b3c4d5-6789-1011-1213-141516171819" },
+          customerName: { type: "string", example: "John Doe" },
+          customerEmail: { type: "string", format: "email", example: "john@example.com" },
+          customerPhone: { type: "string", example: "+8801700000000" },
+          bookingAmount: { type: "number", example: 500000 },
+          notes: { type: "string", example: "Requesting booking for flat 4A" },
+          paymentMethod: { type: "string", enum: ["SSLCOMMERZ", "BANK_TRANSFER", "BKASH", "NAGAD", "CASH"], default: "BANK_TRANSFER", example: "BANK_TRANSFER" },
+          senderAccount: { type: "string", example: "01700000000" },
+          bankTranId: { type: "string", example: "TRX987654321" },
+          receiptUrl: { type: "string", example: "https://example.com/receipt.pdf" },
+        },
+      },
+      CreateBookingResponse: {
+        type: "object",
+        properties: {
+          success: { type: "boolean", example: true },
+          message: { type: "string", example: "Flat booking request created successfully" },
+          data: {
+            type: "object",
+            properties: {
+              booking: {
+                $ref: "#/components/schemas/Booking",
+              },
+              gatewayUrl: { type: "string", nullable: true, example: "https://sandbox.sslcommerz.com/gwprocess/v4/gw.php?Q=..." },
+              paymentMethod: { type: "string", example: "SSLCOMMERZ" },
+            },
+          },
+        },
+      },
+      UpdateBookingStatusRequest: {
+        type: "object",
+        required: ["action"],
+        properties: {
+          action: { type: "string", enum: ["APPROVE", "REJECT"], example: "APPROVE" },
+          adminNotes: { type: "string", example: "Bank deposit verified and confirmed" },
+        },
+      },
+      BookingResponse: {
+        type: "object",
+        properties: {
+          success: { type: "boolean", example: true },
+          message: { type: "string", example: "Booking operation successful" },
+          data: {
+            $ref: "#/components/schemas/Booking",
+          },
+        },
+      },
+      BookingListResponse: {
+        type: "object",
+        properties: {
+          success: { type: "boolean", example: true },
+          message: { type: "string", example: "Bookings fetched successfully" },
+          data: {
+            type: "array",
+            items: {
+              $ref: "#/components/schemas/Booking",
+            },
+          },
+        },
+      },
+      Media: {
+        type: "object",
+        properties: {
+          id: { type: "string", format: "uuid" },
+          filename: { type: "string", example: "1722510000000-apartment.jpg" },
+          originalName: { type: "string", example: "apartment.jpg" },
+          mimeType: { type: "string", example: "image/jpeg" },
+          size: { type: "integer", example: 245000 },
+          url: { type: "string", example: "https://xyz.supabase.co/storage/v1/object/public/real-estate/general/1722510000000-apartment.jpg" },
+          folder: { type: "string", example: "general" },
+          userId: { type: "string", format: "uuid" },
+          createdAt: { type: "string", format: "date-time" },
+          updatedAt: { type: "string", format: "date-time" },
+        },
+      },
+      MediaResponse: {
+        type: "object",
+        properties: {
+          success: { type: "boolean", example: true },
+          message: { type: "string", example: "File uploaded successfully" },
+          data: {
+            $ref: "#/components/schemas/Media",
+          },
+        },
+      },
+      MediaListResponse: {
+        type: "object",
+        properties: {
+          success: { type: "boolean", example: true },
+          message: { type: "string", example: "Media retrieved successfully" },
+          meta: {
+            type: "object",
+            properties: {
+              page: { type: "integer" },
+              limit: { type: "integer" },
+              total: { type: "integer" },
+              totalPages: { type: "integer" },
+            },
+          },
+          data: {
+            type: "array",
+            items: {
+              $ref: "#/components/schemas/Media",
+            },
+          },
+        },
+      },
+      BulkDeleteMediaRequest: {
+        type: "object",
+        required: ["ids"],
+        properties: {
+          ids: {
+            type: "array",
+            items: { type: "string", format: "uuid" },
+            example: ["e2b3c4d5-6789-1011-1213-141516171819"],
+          },
         },
       },
     },
