@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import prisma from "../config/prisma";
 import { asyncHandler } from "../utils/asyncHandler";
 import { SSLCommerzService } from "../services/sslcommerz.service";
-import { env } from "../config/env";
+import { env, getPrimaryFrontendUrl } from "../config/env";
 
 export const handleSSLSuccess = asyncHandler(async (req: Request, res: Response) => {
   const body = req.body || {};
@@ -14,7 +14,7 @@ export const handleSSLSuccess = asyncHandler(async (req: Request, res: Response)
   const tranId = (query.tranId as string) || body.tran_id || (query.tran_id as string);
   const bookingId = (query.bookingId as string) || body.value_a;
 
-  const clientUrl = env.FRONTEND_URL || "http://localhost:3000";
+  const clientUrl = getPrimaryFrontendUrl();
 
   try {
     let isValid = false;
@@ -106,7 +106,7 @@ export const handleSSLSuccess = asyncHandler(async (req: Request, res: Response)
 
 export const handleSSLFail = asyncHandler(async (req: Request, res: Response) => {
   const tranId = (req.query.tranId as string) || req.body?.tran_id;
-  const clientUrl = env.FRONTEND_URL || "http://localhost:3000";
+  const clientUrl = getPrimaryFrontendUrl();
 
   if (tranId) {
     await prisma.payment.updateMany({
@@ -120,7 +120,7 @@ export const handleSSLFail = asyncHandler(async (req: Request, res: Response) =>
 
 export const handleSSLCancel = asyncHandler(async (req: Request, res: Response) => {
   const tranId = (req.query.tranId as string) || req.body?.tran_id;
-  const clientUrl = env.FRONTEND_URL || "http://localhost:3000";
+  const clientUrl = getPrimaryFrontendUrl();
 
   if (tranId) {
     const payment = await prisma.payment.findFirst({ where: { tranId } });

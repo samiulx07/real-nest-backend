@@ -30,3 +30,9 @@ if (!envVars.success) {
 }
 
 export const env = envVars.data;
+
+export const getPrimaryFrontendUrl = (): string => {
+  const rawUrl = env.FRONTEND_URL || "http://localhost:3000";
+  const firstUrl = rawUrl.split(",")[0].trim();
+  return firstUrl.replace(/\/+$/, "");
+};

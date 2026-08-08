@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import prisma from "../config/prisma";
 import { ApiError } from "../utils/ApiError";
 import { createToken, verifyToken } from "../utils/jwt";
-import { env } from "../config/env";
+import { env, getPrimaryFrontendUrl } from "../config/env";
 
 export const registerUser = async (payload: any) => {
   // Check if user exists
@@ -143,7 +143,7 @@ export const forgotPassword = async (payload: { email: string }) => {
   });
 
   // Construct reset link URL
-  const resetLink = `${env.FRONTEND_URL}/reset-password?email=${encodeURIComponent(user.email)}`;
+  const resetLink = `${getPrimaryFrontendUrl()}/reset-password?email=${encodeURIComponent(user.email)}`;
 
   // Send email via Resend
   const { sendOtpResetEmail } = await import("../utils/sendEmail");
