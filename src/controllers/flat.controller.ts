@@ -24,6 +24,11 @@ export const getAllFlats = asyncHandler(async (req: Request, res: Response) => {
     status: req.query.status,
     isFeatured: req.query.isFeatured,
     search: req.query.search,
+    hasGasLine: req.query.hasGasLine,
+    hasWaterSupply: req.query.hasWaterSupply,
+    furnishing: req.query.furnishing,
+    facing: req.query.facing,
+    city: req.query.city,
   };
 
   const options = {

@@ -32,7 +32,21 @@ export const createFlat = async (payload: any) => {
 
 export const getAllFlats = async (filters: any, options: any) => {
   const { page = 1, limit = 10, sortBy = "createdAt", sortOrder = "desc" } = options;
-  const { propertyId, beds, baths, minPrice, maxPrice, status, isFeatured, search } = filters;
+  const {
+    propertyId,
+    beds,
+    baths,
+    minPrice,
+    maxPrice,
+    status,
+    isFeatured,
+    search,
+    hasGasLine,
+    hasWaterSupply,
+    furnishing,
+    facing,
+    city,
+  } = filters;
 
   const skip = (Number(page) - 1) * Number(limit);
   const take = Number(limit);
@@ -55,8 +69,32 @@ export const getAllFlats = async (filters: any, options: any) => {
     andConditions.push({ status: { equals: status } });
   }
 
-  if (isFeatured !== undefined) {
+  if (isFeatured !== undefined && isFeatured !== "") {
     andConditions.push({ isFeatured: isFeatured === "true" || isFeatured === true });
+  }
+
+  if (hasGasLine !== undefined && hasGasLine !== "") {
+    andConditions.push({ hasGasLine: hasGasLine === "true" || hasGasLine === true });
+  }
+
+  if (hasWaterSupply !== undefined && hasWaterSupply !== "") {
+    andConditions.push({ hasWaterSupply: hasWaterSupply === "true" || hasWaterSupply === true });
+  }
+
+  if (furnishing) {
+    andConditions.push({ furnishing: { equals: furnishing, mode: "insensitive" } });
+  }
+
+  if (facing) {
+    andConditions.push({ facing: { equals: facing, mode: "insensitive" } });
+  }
+
+  if (city) {
+    andConditions.push({
+      property: {
+        city: { contains: city, mode: "insensitive" },
+      },
+    });
   }
 
   if (minPrice || maxPrice) {
