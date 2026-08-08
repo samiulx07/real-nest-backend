@@ -55,7 +55,11 @@ export const getAllProperties = async (filters: any, options: any) => {
   }
 
   if (status) {
-    andConditions.push({ status: { equals: status } });
+    const formattedStatus = String(status).toUpperCase().trim().replace(/[-\s]+/g, "_");
+    const validPropertyStatuses = ["UPCOMING", "ONGOING", "COMPLETED", "READY_TO_MOVE", "HANDOVERED"];
+    if (validPropertyStatuses.includes(formattedStatus)) {
+      andConditions.push({ status: { equals: formattedStatus as any } });
+    }
   }
 
   if (isFeatured !== undefined) {

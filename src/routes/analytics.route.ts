@@ -4,6 +4,6 @@ import { authMiddleware } from "../middlewares/auth.middleware";
 
 const router = Router();
 
-router.get("/summary", authMiddleware("SUPER_ADMIN", "ADMIN", "STAFF"), analyticsController.getDashboardSummary);
+router.get("/summary", authMiddleware(), analyticsController.getDashboardSummary);
 
 export default router;

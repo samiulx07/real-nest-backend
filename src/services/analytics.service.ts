@@ -1,6 +1,44 @@
 import prisma from "../config/prisma";
 
-export const getDashboardSummary = async () => {
+export const getDashboardSummary = async (userId: string, role: string) => {
+  if (role === "CUSTOMER") {
+    const [
+      myBookingsCount,
+      pendingPaymentsCount,
+      myRecentBookings,
+      myPayments,
+    ] = await Promise.all([
+      prisma.booking.count({ where: { userId } }),
+      prisma.payment.count({ where: { userId, status: "PENDING_APPROVAL" } }),
+      prisma.booking.findMany({
+        where: { userId },
+        take: 6,
+        orderBy: { createdAt: "desc" },
+        include: {
+          flat: {
+            include: { property: { select: { title: true, city: true } } },
+          },
+          payments: { select: { id: true, paymentMethod: true, status: true, receiptUrl: true } },
+        },
+      }),
+      prisma.payment.findMany({
+        where: { userId, status: "VALIDATED" },
+        select: { amount: true },
+      }),
+    ]);
+
+    const totalPaidAmount = myPayments.reduce((sum, p) => sum + (p.amount || 0), 0);
+
+    return {
+      isCustomer: true,
+      myBookingsCount,
+      pendingPaymentsCount,
+      totalPaidAmount,
+      myRecentBookings,
+    };
+  }
+
+  // Admin Summary
   const [
     totalProperties,
     totalFlats,
@@ -35,6 +73,7 @@ export const getDashboardSummary = async () => {
   ]);
 
   return {
+    isCustomer: false,
     totalProperties,
     totalFlats,
     totalBookings,

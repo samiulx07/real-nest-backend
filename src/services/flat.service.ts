@@ -66,7 +66,11 @@ export const getAllFlats = async (filters: any, options: any) => {
   }
 
   if (status) {
-    andConditions.push({ status: { equals: status } });
+    const formattedStatus = String(status).toUpperCase().trim().replace(/[-\s]+/g, "_");
+    const validFlatStatuses = ["AVAILABLE", "RESERVED", "BOOKED", "SOLD", "UNDER_RENOVATION"];
+    if (validFlatStatuses.includes(formattedStatus)) {
+      andConditions.push({ status: { equals: formattedStatus as any } });
+    }
   }
 
   if (isFeatured !== undefined && isFeatured !== "") {
