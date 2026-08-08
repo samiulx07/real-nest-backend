@@ -77,7 +77,7 @@ export const sendOtpResetEmail = async ({
     const { data, error } = await resend.emails.send({
       from: fromEmail,
       to: [to],
-      subject: `🔑 ${otpCode} is your Real Nest password reset code`,
+      subject: `${otpCode} is your Real Nest password reset code`,
       html: htmlContent,
     });
 
