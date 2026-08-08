@@ -13,6 +13,7 @@ import flatRoutes from "./flat.route";
 import mediaRoutes from "./media.route";
 import bookingRoutes from "./booking.route";
 import paymentRoutes from "./payment.route";
+import analyticsRoutes from "./analytics.route";
 
 // Mount routes
 router.use("/auth", authRoutes);
@@ -21,6 +22,7 @@ router.use("/flats", flatRoutes);
 router.use("/media", mediaRoutes);
 router.use("/bookings", bookingRoutes);
 router.use("/payments", paymentRoutes);
+router.use("/analytics", analyticsRoutes);
 
 export default router;
 

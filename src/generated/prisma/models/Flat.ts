@@ -30,7 +30,6 @@ export type FlatAvgAggregateOutputType = {
   floorNumber: number | null
   beds: number | null
   baths: number | null
-  kitchens: number | null
   balconies: number | null
   size: number | null
   price: number | null
@@ -40,7 +39,6 @@ export type FlatSumAggregateOutputType = {
   floorNumber: number | null
   beds: number | null
   baths: number | null
-  kitchens: number | null
   balconies: number | null
   size: number | null
   price: number | null
@@ -54,7 +52,7 @@ export type FlatMinAggregateOutputType = {
   floorNumber: number | null
   beds: number | null
   baths: number | null
-  kitchens: number | null
+  kitchens: boolean | null
   balconies: number | null
   size: number | null
   price: number | null
@@ -80,7 +78,7 @@ export type FlatMaxAggregateOutputType = {
   floorNumber: number | null
   beds: number | null
   baths: number | null
-  kitchens: number | null
+  kitchens: boolean | null
   balconies: number | null
   size: number | null
   price: number | null
@@ -132,7 +130,6 @@ export type FlatAvgAggregateInputType = {
   floorNumber?: true
   beds?: true
   baths?: true
-  kitchens?: true
   balconies?: true
   size?: true
   price?: true
@@ -142,7 +139,6 @@ export type FlatSumAggregateInputType = {
   floorNumber?: true
   beds?: true
   baths?: true
-  kitchens?: true
   balconies?: true
   size?: true
   price?: true
@@ -323,7 +319,7 @@ export type FlatGroupByOutputType = {
   floorNumber: number
   beds: number
   baths: number
-  kitchens: number
+  kitchens: boolean
   balconies: number
   size: number
   price: number
@@ -374,7 +370,7 @@ export type FlatWhereInput = {
   floorNumber?: Prisma.IntFilter<"Flat"> | number
   beds?: Prisma.IntFilter<"Flat"> | number
   baths?: Prisma.IntFilter<"Flat"> | number
-  kitchens?: Prisma.IntFilter<"Flat"> | number
+  kitchens?: Prisma.BoolFilter<"Flat"> | boolean
   balconies?: Prisma.IntFilter<"Flat"> | number
   size?: Prisma.FloatFilter<"Flat"> | number
   price?: Prisma.FloatFilter<"Flat"> | number
@@ -437,7 +433,7 @@ export type FlatWhereUniqueInput = Prisma.AtLeast<{
   floorNumber?: Prisma.IntFilter<"Flat"> | number
   beds?: Prisma.IntFilter<"Flat"> | number
   baths?: Prisma.IntFilter<"Flat"> | number
-  kitchens?: Prisma.IntFilter<"Flat"> | number
+  kitchens?: Prisma.BoolFilter<"Flat"> | boolean
   balconies?: Prisma.IntFilter<"Flat"> | number
   size?: Prisma.FloatFilter<"Flat"> | number
   price?: Prisma.FloatFilter<"Flat"> | number
@@ -503,7 +499,7 @@ export type FlatScalarWhereWithAggregatesInput = {
   floorNumber?: Prisma.IntWithAggregatesFilter<"Flat"> | number
   beds?: Prisma.IntWithAggregatesFilter<"Flat"> | number
   baths?: Prisma.IntWithAggregatesFilter<"Flat"> | number
-  kitchens?: Prisma.IntWithAggregatesFilter<"Flat"> | number
+  kitchens?: Prisma.BoolWithAggregatesFilter<"Flat"> | boolean
   balconies?: Prisma.IntWithAggregatesFilter<"Flat"> | number
   size?: Prisma.FloatWithAggregatesFilter<"Flat"> | number
   price?: Prisma.FloatWithAggregatesFilter<"Flat"> | number
@@ -530,7 +526,7 @@ export type FlatCreateInput = {
   floorNumber: number
   beds?: number
   baths?: number
-  kitchens?: number
+  kitchens?: boolean
   balconies?: number
   size: number
   price: number
@@ -560,7 +556,7 @@ export type FlatUncheckedCreateInput = {
   floorNumber: number
   beds?: number
   baths?: number
-  kitchens?: number
+  kitchens?: boolean
   balconies?: number
   size: number
   price: number
@@ -588,7 +584,7 @@ export type FlatUpdateInput = {
   floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
   beds?: Prisma.IntFieldUpdateOperationsInput | number
   baths?: Prisma.IntFieldUpdateOperationsInput | number
-  kitchens?: Prisma.IntFieldUpdateOperationsInput | number
+  kitchens?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balconies?: Prisma.IntFieldUpdateOperationsInput | number
   size?: Prisma.FloatFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -618,7 +614,7 @@ export type FlatUncheckedUpdateInput = {
   floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
   beds?: Prisma.IntFieldUpdateOperationsInput | number
   baths?: Prisma.IntFieldUpdateOperationsInput | number
-  kitchens?: Prisma.IntFieldUpdateOperationsInput | number
+  kitchens?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balconies?: Prisma.IntFieldUpdateOperationsInput | number
   size?: Prisma.FloatFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -647,7 +643,7 @@ export type FlatCreateManyInput = {
   floorNumber: number
   beds?: number
   baths?: number
-  kitchens?: number
+  kitchens?: boolean
   balconies?: number
   size: number
   price: number
@@ -674,7 +670,7 @@ export type FlatUpdateManyMutationInput = {
   floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
   beds?: Prisma.IntFieldUpdateOperationsInput | number
   baths?: Prisma.IntFieldUpdateOperationsInput | number
-  kitchens?: Prisma.IntFieldUpdateOperationsInput | number
+  kitchens?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balconies?: Prisma.IntFieldUpdateOperationsInput | number
   size?: Prisma.FloatFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -702,7 +698,7 @@ export type FlatUncheckedUpdateManyInput = {
   floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
   beds?: Prisma.IntFieldUpdateOperationsInput | number
   baths?: Prisma.IntFieldUpdateOperationsInput | number
-  kitchens?: Prisma.IntFieldUpdateOperationsInput | number
+  kitchens?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balconies?: Prisma.IntFieldUpdateOperationsInput | number
   size?: Prisma.FloatFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -764,7 +760,6 @@ export type FlatAvgOrderByAggregateInput = {
   floorNumber?: Prisma.SortOrder
   beds?: Prisma.SortOrder
   baths?: Prisma.SortOrder
-  kitchens?: Prisma.SortOrder
   balconies?: Prisma.SortOrder
   size?: Prisma.SortOrder
   price?: Prisma.SortOrder
@@ -826,7 +821,6 @@ export type FlatSumOrderByAggregateInput = {
   floorNumber?: Prisma.SortOrder
   beds?: Prisma.SortOrder
   baths?: Prisma.SortOrder
-  kitchens?: Prisma.SortOrder
   balconies?: Prisma.SortOrder
   size?: Prisma.SortOrder
   price?: Prisma.SortOrder
@@ -930,7 +924,7 @@ export type FlatCreateWithoutPropertyInput = {
   floorNumber: number
   beds?: number
   baths?: number
-  kitchens?: number
+  kitchens?: boolean
   balconies?: number
   size: number
   price: number
@@ -958,7 +952,7 @@ export type FlatUncheckedCreateWithoutPropertyInput = {
   floorNumber: number
   beds?: number
   baths?: number
-  kitchens?: number
+  kitchens?: boolean
   balconies?: number
   size: number
   price: number
@@ -1016,7 +1010,7 @@ export type FlatScalarWhereInput = {
   floorNumber?: Prisma.IntFilter<"Flat"> | number
   beds?: Prisma.IntFilter<"Flat"> | number
   baths?: Prisma.IntFilter<"Flat"> | number
-  kitchens?: Prisma.IntFilter<"Flat"> | number
+  kitchens?: Prisma.BoolFilter<"Flat"> | boolean
   balconies?: Prisma.IntFilter<"Flat"> | number
   size?: Prisma.FloatFilter<"Flat"> | number
   price?: Prisma.FloatFilter<"Flat"> | number
@@ -1043,7 +1037,7 @@ export type FlatCreateWithoutBookingsInput = {
   floorNumber: number
   beds?: number
   baths?: number
-  kitchens?: number
+  kitchens?: boolean
   balconies?: number
   size: number
   price: number
@@ -1072,7 +1066,7 @@ export type FlatUncheckedCreateWithoutBookingsInput = {
   floorNumber: number
   beds?: number
   baths?: number
-  kitchens?: number
+  kitchens?: boolean
   balconies?: number
   size: number
   price: number
@@ -1115,7 +1109,7 @@ export type FlatUpdateWithoutBookingsInput = {
   floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
   beds?: Prisma.IntFieldUpdateOperationsInput | number
   baths?: Prisma.IntFieldUpdateOperationsInput | number
-  kitchens?: Prisma.IntFieldUpdateOperationsInput | number
+  kitchens?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balconies?: Prisma.IntFieldUpdateOperationsInput | number
   size?: Prisma.FloatFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1144,7 +1138,7 @@ export type FlatUncheckedUpdateWithoutBookingsInput = {
   floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
   beds?: Prisma.IntFieldUpdateOperationsInput | number
   baths?: Prisma.IntFieldUpdateOperationsInput | number
-  kitchens?: Prisma.IntFieldUpdateOperationsInput | number
+  kitchens?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balconies?: Prisma.IntFieldUpdateOperationsInput | number
   size?: Prisma.FloatFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1171,7 +1165,7 @@ export type FlatCreateManyPropertyInput = {
   floorNumber: number
   beds?: number
   baths?: number
-  kitchens?: number
+  kitchens?: boolean
   balconies?: number
   size: number
   price: number
@@ -1198,7 +1192,7 @@ export type FlatUpdateWithoutPropertyInput = {
   floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
   beds?: Prisma.IntFieldUpdateOperationsInput | number
   baths?: Prisma.IntFieldUpdateOperationsInput | number
-  kitchens?: Prisma.IntFieldUpdateOperationsInput | number
+  kitchens?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balconies?: Prisma.IntFieldUpdateOperationsInput | number
   size?: Prisma.FloatFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1226,7 +1220,7 @@ export type FlatUncheckedUpdateWithoutPropertyInput = {
   floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
   beds?: Prisma.IntFieldUpdateOperationsInput | number
   baths?: Prisma.IntFieldUpdateOperationsInput | number
-  kitchens?: Prisma.IntFieldUpdateOperationsInput | number
+  kitchens?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balconies?: Prisma.IntFieldUpdateOperationsInput | number
   size?: Prisma.FloatFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1254,7 +1248,7 @@ export type FlatUncheckedUpdateManyWithoutPropertyInput = {
   floorNumber?: Prisma.IntFieldUpdateOperationsInput | number
   beds?: Prisma.IntFieldUpdateOperationsInput | number
   baths?: Prisma.IntFieldUpdateOperationsInput | number
-  kitchens?: Prisma.IntFieldUpdateOperationsInput | number
+  kitchens?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balconies?: Prisma.IntFieldUpdateOperationsInput | number
   size?: Prisma.FloatFieldUpdateOperationsInput | number
   price?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1449,7 +1443,7 @@ export type $FlatPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     floorNumber: number
     beds: number
     baths: number
-    kitchens: number
+    kitchens: boolean
     balconies: number
     size: number
     price: number
@@ -1899,7 +1893,7 @@ export interface FlatFieldRefs {
   readonly floorNumber: Prisma.FieldRef<"Flat", 'Int'>
   readonly beds: Prisma.FieldRef<"Flat", 'Int'>
   readonly baths: Prisma.FieldRef<"Flat", 'Int'>
-  readonly kitchens: Prisma.FieldRef<"Flat", 'Int'>
+  readonly kitchens: Prisma.FieldRef<"Flat", 'Boolean'>
   readonly balconies: Prisma.FieldRef<"Flat", 'Int'>
   readonly size: Prisma.FieldRef<"Flat", 'Float'>
   readonly price: Prisma.FieldRef<"Flat", 'Float'>

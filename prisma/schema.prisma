@@ -134,7 +134,7 @@ model Flat {
 
   beds          Int        @default(1)
   baths         Int        @default(1)
-  kitchens      Int        @default(1)
+  kitchens      Boolean    @default(true)
   balconies     Int        @default(1)
 
   size          Float      // Square footage e.g., 1650.0

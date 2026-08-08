@@ -142,3 +142,89 @@ export const handleSSLCancel = asyncHandler(async (req: Request, res: Response) 
 export const handleSSLIPN = asyncHandler(async (req: Request, res: Response) => {
   res.status(200).json({ success: true, message: "IPN Received" });
 });
+
+export const approvePayment = asyncHandler(async (req: Request, res: Response) => {
+  const id = req.params.id as string;
+  const payment = await prisma.payment.findUnique({
+    where: { id },
+  });
+
+  if (!payment) {
+    return res.status(404).json({ success: false, message: "Payment record not found" });
+  }
+
+  const booking = payment.bookingId
+    ? await prisma.booking.findUnique({ where: { id: payment.bookingId } })
+    : null;
+
+  await prisma.$transaction(async (tx) => {
+    await tx.payment.update({
+      where: { id },
+      data: { status: "VALIDATED" },
+    });
+
+    if (payment.bookingId) {
+      await tx.booking.update({
+        where: { id: payment.bookingId },
+        data: {
+          status: "CONFIRMED",
+          paymentStatus: "VALIDATED",
+          paidAmount: payment.amount,
+        },
+      });
+
+      if (booking?.flatId) {
+        await tx.flat.update({
+          where: { id: booking.flatId },
+          data: { status: "BOOKED" },
+        });
+      }
+    }
+  });
+
+  res.status(200).json({ success: true, message: "Payment approved and verified successfully" });
+});
+
+export const rejectPayment = asyncHandler(async (req: Request, res: Response) => {
+  const id = req.params.id as string;
+  const { adminNotes } = req.body || {};
+
+  const payment = await prisma.payment.findUnique({
+    where: { id },
+  });
+
+  if (!payment) {
+    return res.status(404).json({ success: false, message: "Payment record not found" });
+  }
+
+  const booking = payment.bookingId
+    ? await prisma.booking.findUnique({ where: { id: payment.bookingId } })
+    : null;
+
+  await prisma.$transaction(async (tx) => {
+    await tx.payment.update({
+      where: { id },
+      data: { status: "REJECTED", adminNotes },
+    });
+
+    if (payment.bookingId) {
+      await tx.booking.update({
+        where: { id: payment.bookingId },
+        data: {
+          status: "CANCELLED",
+          paymentStatus: "REJECTED",
+          adminNotes,
+        },
+      });
+
+      if (booking?.flatId) {
+        await tx.flat.update({
+          where: { id: booking.flatId },
+          data: { status: "AVAILABLE" },
+        });
+      }
+    }
+  });
+
+  res.status(200).json({ success: true, message: "Payment rejected successfully" });
+});
