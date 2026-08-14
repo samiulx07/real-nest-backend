@@ -35,6 +35,8 @@ export type PropertyAvgAggregateOutputType = {
   startingPrice: number | null
   totalParkingSlots: number | null
   totalBalconies: number | null
+  totalInstallmentMonths: number | null
+  initialBookingAmount: number | null
 }
 
 export type PropertySumAggregateOutputType = {
@@ -46,6 +48,8 @@ export type PropertySumAggregateOutputType = {
   startingPrice: number | null
   totalParkingSlots: number | null
   totalBalconies: number | null
+  totalInstallmentMonths: number | null
+  initialBookingAmount: number | null
 }
 
 export type PropertyMinAggregateOutputType = {
@@ -83,6 +87,9 @@ export type PropertyMinAggregateOutputType = {
   developerName: string | null
   rajukApproval: boolean | null
   reraRegistered: boolean | null
+  allowInstallment: boolean | null
+  totalInstallmentMonths: number | null
+  initialBookingAmount: number | null
   status: $Enums.PropertyStatus | null
   isFeatured: boolean | null
   isPublished: boolean | null
@@ -125,6 +132,9 @@ export type PropertyMaxAggregateOutputType = {
   developerName: string | null
   rajukApproval: boolean | null
   reraRegistered: boolean | null
+  allowInstallment: boolean | null
+  totalInstallmentMonths: number | null
+  initialBookingAmount: number | null
   status: $Enums.PropertyStatus | null
   isFeatured: boolean | null
   isPublished: boolean | null
@@ -167,6 +177,9 @@ export type PropertyCountAggregateOutputType = {
   developerName: number
   rajukApproval: number
   reraRegistered: number
+  allowInstallment: number
+  totalInstallmentMonths: number
+  initialBookingAmount: number
   imageUrls: number
   amenities: number
   status: number
@@ -187,6 +200,8 @@ export type PropertyAvgAggregateInputType = {
   startingPrice?: true
   totalParkingSlots?: true
   totalBalconies?: true
+  totalInstallmentMonths?: true
+  initialBookingAmount?: true
 }
 
 export type PropertySumAggregateInputType = {
@@ -198,6 +213,8 @@ export type PropertySumAggregateInputType = {
   startingPrice?: true
   totalParkingSlots?: true
   totalBalconies?: true
+  totalInstallmentMonths?: true
+  initialBookingAmount?: true
 }
 
 export type PropertyMinAggregateInputType = {
@@ -235,6 +252,9 @@ export type PropertyMinAggregateInputType = {
   developerName?: true
   rajukApproval?: true
   reraRegistered?: true
+  allowInstallment?: true
+  totalInstallmentMonths?: true
+  initialBookingAmount?: true
   status?: true
   isFeatured?: true
   isPublished?: true
@@ -277,6 +297,9 @@ export type PropertyMaxAggregateInputType = {
   developerName?: true
   rajukApproval?: true
   reraRegistered?: true
+  allowInstallment?: true
+  totalInstallmentMonths?: true
+  initialBookingAmount?: true
   status?: true
   isFeatured?: true
   isPublished?: true
@@ -319,6 +342,9 @@ export type PropertyCountAggregateInputType = {
   developerName?: true
   rajukApproval?: true
   reraRegistered?: true
+  allowInstallment?: true
+  totalInstallmentMonths?: true
+  initialBookingAmount?: true
   imageUrls?: true
   amenities?: true
   status?: true
@@ -450,6 +476,9 @@ export type PropertyGroupByOutputType = {
   developerName: string | null
   rajukApproval: boolean
   reraRegistered: boolean
+  allowInstallment: boolean
+  totalInstallmentMonths: number
+  initialBookingAmount: number
   imageUrls: string[]
   amenities: string[]
   status: $Enums.PropertyStatus
@@ -517,6 +546,9 @@ export type PropertyWhereInput = {
   developerName?: Prisma.StringNullableFilter<"Property"> | string | null
   rajukApproval?: Prisma.BoolFilter<"Property"> | boolean
   reraRegistered?: Prisma.BoolFilter<"Property"> | boolean
+  allowInstallment?: Prisma.BoolFilter<"Property"> | boolean
+  totalInstallmentMonths?: Prisma.IntFilter<"Property"> | number
+  initialBookingAmount?: Prisma.FloatFilter<"Property"> | number
   imageUrls?: Prisma.StringNullableListFilter<"Property">
   amenities?: Prisma.StringNullableListFilter<"Property">
   status?: Prisma.EnumPropertyStatusFilter<"Property"> | $Enums.PropertyStatus
@@ -562,6 +594,9 @@ export type PropertyOrderByWithRelationInput = {
   developerName?: Prisma.SortOrderInput | Prisma.SortOrder
   rajukApproval?: Prisma.SortOrder
   reraRegistered?: Prisma.SortOrder
+  allowInstallment?: Prisma.SortOrder
+  totalInstallmentMonths?: Prisma.SortOrder
+  initialBookingAmount?: Prisma.SortOrder
   imageUrls?: Prisma.SortOrder
   amenities?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -610,6 +645,9 @@ export type PropertyWhereUniqueInput = Prisma.AtLeast<{
   developerName?: Prisma.StringNullableFilter<"Property"> | string | null
   rajukApproval?: Prisma.BoolFilter<"Property"> | boolean
   reraRegistered?: Prisma.BoolFilter<"Property"> | boolean
+  allowInstallment?: Prisma.BoolFilter<"Property"> | boolean
+  totalInstallmentMonths?: Prisma.IntFilter<"Property"> | number
+  initialBookingAmount?: Prisma.FloatFilter<"Property"> | number
   imageUrls?: Prisma.StringNullableListFilter<"Property">
   amenities?: Prisma.StringNullableListFilter<"Property">
   status?: Prisma.EnumPropertyStatusFilter<"Property"> | $Enums.PropertyStatus
@@ -655,6 +693,9 @@ export type PropertyOrderByWithAggregationInput = {
   developerName?: Prisma.SortOrderInput | Prisma.SortOrder
   rajukApproval?: Prisma.SortOrder
   reraRegistered?: Prisma.SortOrder
+  allowInstallment?: Prisma.SortOrder
+  totalInstallmentMonths?: Prisma.SortOrder
+  initialBookingAmount?: Prisma.SortOrder
   imageUrls?: Prisma.SortOrder
   amenities?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -707,6 +748,9 @@ export type PropertyScalarWhereWithAggregatesInput = {
   developerName?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
   rajukApproval?: Prisma.BoolWithAggregatesFilter<"Property"> | boolean
   reraRegistered?: Prisma.BoolWithAggregatesFilter<"Property"> | boolean
+  allowInstallment?: Prisma.BoolWithAggregatesFilter<"Property"> | boolean
+  totalInstallmentMonths?: Prisma.IntWithAggregatesFilter<"Property"> | number
+  initialBookingAmount?: Prisma.FloatWithAggregatesFilter<"Property"> | number
   imageUrls?: Prisma.StringNullableListFilter<"Property">
   amenities?: Prisma.StringNullableListFilter<"Property">
   status?: Prisma.EnumPropertyStatusWithAggregatesFilter<"Property"> | $Enums.PropertyStatus
@@ -751,6 +795,9 @@ export type PropertyCreateInput = {
   developerName?: string | null
   rajukApproval?: boolean
   reraRegistered?: boolean
+  allowInstallment?: boolean
+  totalInstallmentMonths?: number
+  initialBookingAmount?: number
   imageUrls?: Prisma.PropertyCreateimageUrlsInput | string[]
   amenities?: Prisma.PropertyCreateamenitiesInput | string[]
   status?: $Enums.PropertyStatus
@@ -796,6 +843,9 @@ export type PropertyUncheckedCreateInput = {
   developerName?: string | null
   rajukApproval?: boolean
   reraRegistered?: boolean
+  allowInstallment?: boolean
+  totalInstallmentMonths?: number
+  initialBookingAmount?: number
   imageUrls?: Prisma.PropertyCreateimageUrlsInput | string[]
   amenities?: Prisma.PropertyCreateamenitiesInput | string[]
   status?: $Enums.PropertyStatus
@@ -841,6 +891,9 @@ export type PropertyUpdateInput = {
   developerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rajukApproval?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reraRegistered?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowInstallment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totalInstallmentMonths?: Prisma.IntFieldUpdateOperationsInput | number
+  initialBookingAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   imageUrls?: Prisma.PropertyUpdateimageUrlsInput | string[]
   amenities?: Prisma.PropertyUpdateamenitiesInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -886,6 +939,9 @@ export type PropertyUncheckedUpdateInput = {
   developerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rajukApproval?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reraRegistered?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowInstallment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totalInstallmentMonths?: Prisma.IntFieldUpdateOperationsInput | number
+  initialBookingAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   imageUrls?: Prisma.PropertyUpdateimageUrlsInput | string[]
   amenities?: Prisma.PropertyUpdateamenitiesInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -931,6 +987,9 @@ export type PropertyCreateManyInput = {
   developerName?: string | null
   rajukApproval?: boolean
   reraRegistered?: boolean
+  allowInstallment?: boolean
+  totalInstallmentMonths?: number
+  initialBookingAmount?: number
   imageUrls?: Prisma.PropertyCreateimageUrlsInput | string[]
   amenities?: Prisma.PropertyCreateamenitiesInput | string[]
   status?: $Enums.PropertyStatus
@@ -975,6 +1034,9 @@ export type PropertyUpdateManyMutationInput = {
   developerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rajukApproval?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reraRegistered?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowInstallment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totalInstallmentMonths?: Prisma.IntFieldUpdateOperationsInput | number
+  initialBookingAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   imageUrls?: Prisma.PropertyUpdateimageUrlsInput | string[]
   amenities?: Prisma.PropertyUpdateamenitiesInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -1019,6 +1081,9 @@ export type PropertyUncheckedUpdateManyInput = {
   developerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rajukApproval?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reraRegistered?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowInstallment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totalInstallmentMonths?: Prisma.IntFieldUpdateOperationsInput | number
+  initialBookingAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   imageUrls?: Prisma.PropertyUpdateimageUrlsInput | string[]
   amenities?: Prisma.PropertyUpdateamenitiesInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -1071,6 +1136,9 @@ export type PropertyCountOrderByAggregateInput = {
   developerName?: Prisma.SortOrder
   rajukApproval?: Prisma.SortOrder
   reraRegistered?: Prisma.SortOrder
+  allowInstallment?: Prisma.SortOrder
+  totalInstallmentMonths?: Prisma.SortOrder
+  initialBookingAmount?: Prisma.SortOrder
   imageUrls?: Prisma.SortOrder
   amenities?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -1089,6 +1157,8 @@ export type PropertyAvgOrderByAggregateInput = {
   startingPrice?: Prisma.SortOrder
   totalParkingSlots?: Prisma.SortOrder
   totalBalconies?: Prisma.SortOrder
+  totalInstallmentMonths?: Prisma.SortOrder
+  initialBookingAmount?: Prisma.SortOrder
 }
 
 export type PropertyMaxOrderByAggregateInput = {
@@ -1126,6 +1196,9 @@ export type PropertyMaxOrderByAggregateInput = {
   developerName?: Prisma.SortOrder
   rajukApproval?: Prisma.SortOrder
   reraRegistered?: Prisma.SortOrder
+  allowInstallment?: Prisma.SortOrder
+  totalInstallmentMonths?: Prisma.SortOrder
+  initialBookingAmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
@@ -1168,6 +1241,9 @@ export type PropertyMinOrderByAggregateInput = {
   developerName?: Prisma.SortOrder
   rajukApproval?: Prisma.SortOrder
   reraRegistered?: Prisma.SortOrder
+  allowInstallment?: Prisma.SortOrder
+  totalInstallmentMonths?: Prisma.SortOrder
+  initialBookingAmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
@@ -1184,6 +1260,8 @@ export type PropertySumOrderByAggregateInput = {
   startingPrice?: Prisma.SortOrder
   totalParkingSlots?: Prisma.SortOrder
   totalBalconies?: Prisma.SortOrder
+  totalInstallmentMonths?: Prisma.SortOrder
+  initialBookingAmount?: Prisma.SortOrder
 }
 
 export type PropertyScalarRelationFilter = {
@@ -1217,6 +1295,14 @@ export type IntFieldUpdateOperationsInput = {
 
 export type NullableIntFieldUpdateOperationsInput = {
   set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type FloatFieldUpdateOperationsInput = {
+  set?: number
   increment?: number
   decrement?: number
   multiply?: number
@@ -1286,6 +1372,9 @@ export type PropertyCreateWithoutFlatsInput = {
   developerName?: string | null
   rajukApproval?: boolean
   reraRegistered?: boolean
+  allowInstallment?: boolean
+  totalInstallmentMonths?: number
+  initialBookingAmount?: number
   imageUrls?: Prisma.PropertyCreateimageUrlsInput | string[]
   amenities?: Prisma.PropertyCreateamenitiesInput | string[]
   status?: $Enums.PropertyStatus
@@ -1330,6 +1419,9 @@ export type PropertyUncheckedCreateWithoutFlatsInput = {
   developerName?: string | null
   rajukApproval?: boolean
   reraRegistered?: boolean
+  allowInstallment?: boolean
+  totalInstallmentMonths?: number
+  initialBookingAmount?: number
   imageUrls?: Prisma.PropertyCreateimageUrlsInput | string[]
   amenities?: Prisma.PropertyCreateamenitiesInput | string[]
   status?: $Enums.PropertyStatus
@@ -1390,6 +1482,9 @@ export type PropertyUpdateWithoutFlatsInput = {
   developerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rajukApproval?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reraRegistered?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowInstallment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totalInstallmentMonths?: Prisma.IntFieldUpdateOperationsInput | number
+  initialBookingAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   imageUrls?: Prisma.PropertyUpdateimageUrlsInput | string[]
   amenities?: Prisma.PropertyUpdateamenitiesInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -1434,6 +1529,9 @@ export type PropertyUncheckedUpdateWithoutFlatsInput = {
   developerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rajukApproval?: Prisma.BoolFieldUpdateOperationsInput | boolean
   reraRegistered?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  allowInstallment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totalInstallmentMonths?: Prisma.IntFieldUpdateOperationsInput | number
+  initialBookingAmount?: Prisma.FloatFieldUpdateOperationsInput | number
   imageUrls?: Prisma.PropertyUpdateimageUrlsInput | string[]
   amenities?: Prisma.PropertyUpdateamenitiesInput | string[]
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
@@ -1509,6 +1607,9 @@ export type PropertySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   developerName?: boolean
   rajukApproval?: boolean
   reraRegistered?: boolean
+  allowInstallment?: boolean
+  totalInstallmentMonths?: boolean
+  initialBookingAmount?: boolean
   imageUrls?: boolean
   amenities?: boolean
   status?: boolean
@@ -1555,6 +1656,9 @@ export type PropertySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   developerName?: boolean
   rajukApproval?: boolean
   reraRegistered?: boolean
+  allowInstallment?: boolean
+  totalInstallmentMonths?: boolean
+  initialBookingAmount?: boolean
   imageUrls?: boolean
   amenities?: boolean
   status?: boolean
@@ -1599,6 +1703,9 @@ export type PropertySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   developerName?: boolean
   rajukApproval?: boolean
   reraRegistered?: boolean
+  allowInstallment?: boolean
+  totalInstallmentMonths?: boolean
+  initialBookingAmount?: boolean
   imageUrls?: boolean
   amenities?: boolean
   status?: boolean
@@ -1643,6 +1750,9 @@ export type PropertySelectScalar = {
   developerName?: boolean
   rajukApproval?: boolean
   reraRegistered?: boolean
+  allowInstallment?: boolean
+  totalInstallmentMonths?: boolean
+  initialBookingAmount?: boolean
   imageUrls?: boolean
   amenities?: boolean
   status?: boolean
@@ -1652,7 +1762,7 @@ export type PropertySelectScalar = {
   updatedAt?: boolean
 }
 
-export type PropertyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "description" | "address" | "area" | "city" | "division" | "district" | "upazila" | "union" | "latitude" | "longitude" | "floorLabel" | "totalFloors" | "totalUnits" | "unitsPerFloor" | "startingPrice" | "handoverDate" | "completionDate" | "constructionStart" | "landArea" | "facing" | "roadSize" | "totalParkingSlots" | "totalBalconies" | "buildingAge" | "parkingAvailable" | "liftAvailable" | "generatorBackup" | "securityAvailable" | "developerName" | "rajukApproval" | "reraRegistered" | "imageUrls" | "amenities" | "status" | "isFeatured" | "isPublished" | "createdAt" | "updatedAt", ExtArgs["result"]["property"]>
+export type PropertyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "description" | "address" | "area" | "city" | "division" | "district" | "upazila" | "union" | "latitude" | "longitude" | "floorLabel" | "totalFloors" | "totalUnits" | "unitsPerFloor" | "startingPrice" | "handoverDate" | "completionDate" | "constructionStart" | "landArea" | "facing" | "roadSize" | "totalParkingSlots" | "totalBalconies" | "buildingAge" | "parkingAvailable" | "liftAvailable" | "generatorBackup" | "securityAvailable" | "developerName" | "rajukApproval" | "reraRegistered" | "allowInstallment" | "totalInstallmentMonths" | "initialBookingAmount" | "imageUrls" | "amenities" | "status" | "isFeatured" | "isPublished" | "createdAt" | "updatedAt", ExtArgs["result"]["property"]>
 export type PropertyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   flats?: boolean | Prisma.Property$flatsArgs<ExtArgs>
   _count?: boolean | Prisma.PropertyCountOutputTypeDefaultArgs<ExtArgs>
@@ -1700,6 +1810,9 @@ export type $PropertyPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     developerName: string | null
     rajukApproval: boolean
     reraRegistered: boolean
+    allowInstallment: boolean
+    totalInstallmentMonths: number
+    initialBookingAmount: number
     imageUrls: string[]
     amenities: string[]
     status: $Enums.PropertyStatus
@@ -2165,6 +2278,9 @@ export interface PropertyFieldRefs {
   readonly developerName: Prisma.FieldRef<"Property", 'String'>
   readonly rajukApproval: Prisma.FieldRef<"Property", 'Boolean'>
   readonly reraRegistered: Prisma.FieldRef<"Property", 'Boolean'>
+  readonly allowInstallment: Prisma.FieldRef<"Property", 'Boolean'>
+  readonly totalInstallmentMonths: Prisma.FieldRef<"Property", 'Int'>
+  readonly initialBookingAmount: Prisma.FieldRef<"Property", 'Float'>
   readonly imageUrls: Prisma.FieldRef<"Property", 'String[]'>
   readonly amenities: Prisma.FieldRef<"Property", 'String[]'>
   readonly status: Prisma.FieldRef<"Property", 'PropertyStatus'>

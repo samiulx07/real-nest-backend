@@ -10,6 +10,7 @@ import {
   getUserBookings,
   getAllBookings,
   verifyBookingPayment,
+  payInstallment,
 } from "../controllers/booking.controller";
 
 const router = Router();
@@ -26,6 +27,12 @@ router.get(
   "/my-bookings",
   authMiddleware(),
   getUserBookings
+);
+
+router.post(
+  "/:id/pay-installment",
+  authMiddleware(),
+  payInstallment
 );
 
 // Admin / Staff endpoints

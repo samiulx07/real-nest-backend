@@ -48,6 +48,10 @@ export const createPropertySchema = z.object({
     status: z.enum(["UPCOMING", "ONGOING", "COMPLETED", "READY_TO_MOVE", "HANDOVERED"]).default("ONGOING"),
     isFeatured: z.boolean().default(false),
     isPublished: z.boolean().default(true),
+    // ─ Installment Settings ─
+    allowInstallment: z.boolean().default(true),
+    totalInstallmentMonths: z.number().int().min(1).max(60).default(12),
+    initialBookingAmount: z.number().min(0).default(100000),
   }),
 });
 
@@ -91,5 +95,9 @@ export const updatePropertySchema = z.object({
     status: z.enum(["UPCOMING", "ONGOING", "COMPLETED", "READY_TO_MOVE", "HANDOVERED"]).optional(),
     isFeatured: z.boolean().optional(),
     isPublished: z.boolean().optional(),
+    // ─ Installment Settings ─
+    allowInstallment: z.boolean().optional(),
+    totalInstallmentMonths: z.number().int().min(1).max(60).optional(),
+    initialBookingAmount: z.number().min(0).optional(),
   }),
 });

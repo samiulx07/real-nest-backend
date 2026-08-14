@@ -33,6 +33,8 @@ export type FlatAvgAggregateOutputType = {
   balconies: number | null
   size: number | null
   price: number | null
+  totalInstallmentMonths: number | null
+  initialBookingAmount: number | null
 }
 
 export type FlatSumAggregateOutputType = {
@@ -42,6 +44,8 @@ export type FlatSumAggregateOutputType = {
   balconies: number | null
   size: number | null
   price: number | null
+  totalInstallmentMonths: number | null
+  initialBookingAmount: number | null
 }
 
 export type FlatMinAggregateOutputType = {
@@ -64,6 +68,9 @@ export type FlatMinAggregateOutputType = {
   hasGasLine: boolean | null
   hasWaterSupply: boolean | null
   description: string | null
+  useCustomInstallment: boolean | null
+  totalInstallmentMonths: number | null
+  initialBookingAmount: number | null
   isFeatured: boolean | null
   isPublished: boolean | null
   createdAt: Date | null
@@ -90,6 +97,9 @@ export type FlatMaxAggregateOutputType = {
   hasGasLine: boolean | null
   hasWaterSupply: boolean | null
   description: string | null
+  useCustomInstallment: boolean | null
+  totalInstallmentMonths: number | null
+  initialBookingAmount: number | null
   isFeatured: boolean | null
   isPublished: boolean | null
   createdAt: Date | null
@@ -118,6 +128,9 @@ export type FlatCountAggregateOutputType = {
   description: number
   imageUrls: number
   amenities: number
+  useCustomInstallment: number
+  totalInstallmentMonths: number
+  initialBookingAmount: number
   isFeatured: number
   isPublished: number
   createdAt: number
@@ -133,6 +146,8 @@ export type FlatAvgAggregateInputType = {
   balconies?: true
   size?: true
   price?: true
+  totalInstallmentMonths?: true
+  initialBookingAmount?: true
 }
 
 export type FlatSumAggregateInputType = {
@@ -142,6 +157,8 @@ export type FlatSumAggregateInputType = {
   balconies?: true
   size?: true
   price?: true
+  totalInstallmentMonths?: true
+  initialBookingAmount?: true
 }
 
 export type FlatMinAggregateInputType = {
@@ -164,6 +181,9 @@ export type FlatMinAggregateInputType = {
   hasGasLine?: true
   hasWaterSupply?: true
   description?: true
+  useCustomInstallment?: true
+  totalInstallmentMonths?: true
+  initialBookingAmount?: true
   isFeatured?: true
   isPublished?: true
   createdAt?: true
@@ -190,6 +210,9 @@ export type FlatMaxAggregateInputType = {
   hasGasLine?: true
   hasWaterSupply?: true
   description?: true
+  useCustomInstallment?: true
+  totalInstallmentMonths?: true
+  initialBookingAmount?: true
   isFeatured?: true
   isPublished?: true
   createdAt?: true
@@ -218,6 +241,9 @@ export type FlatCountAggregateInputType = {
   description?: true
   imageUrls?: true
   amenities?: true
+  useCustomInstallment?: true
+  totalInstallmentMonths?: true
+  initialBookingAmount?: true
   isFeatured?: true
   isPublished?: true
   createdAt?: true
@@ -333,6 +359,9 @@ export type FlatGroupByOutputType = {
   description: string | null
   imageUrls: string[]
   amenities: string[]
+  useCustomInstallment: boolean
+  totalInstallmentMonths: number | null
+  initialBookingAmount: number | null
   isFeatured: boolean
   isPublished: boolean
   createdAt: Date
@@ -384,6 +413,9 @@ export type FlatWhereInput = {
   description?: Prisma.StringNullableFilter<"Flat"> | string | null
   imageUrls?: Prisma.StringNullableListFilter<"Flat">
   amenities?: Prisma.StringNullableListFilter<"Flat">
+  useCustomInstallment?: Prisma.BoolFilter<"Flat"> | boolean
+  totalInstallmentMonths?: Prisma.IntNullableFilter<"Flat"> | number | null
+  initialBookingAmount?: Prisma.FloatNullableFilter<"Flat"> | number | null
   isFeatured?: Prisma.BoolFilter<"Flat"> | boolean
   isPublished?: Prisma.BoolFilter<"Flat"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Flat"> | Date | string
@@ -414,6 +446,9 @@ export type FlatOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   imageUrls?: Prisma.SortOrder
   amenities?: Prisma.SortOrder
+  useCustomInstallment?: Prisma.SortOrder
+  totalInstallmentMonths?: Prisma.SortOrderInput | Prisma.SortOrder
+  initialBookingAmount?: Prisma.SortOrderInput | Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -447,6 +482,9 @@ export type FlatWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"Flat"> | string | null
   imageUrls?: Prisma.StringNullableListFilter<"Flat">
   amenities?: Prisma.StringNullableListFilter<"Flat">
+  useCustomInstallment?: Prisma.BoolFilter<"Flat"> | boolean
+  totalInstallmentMonths?: Prisma.IntNullableFilter<"Flat"> | number | null
+  initialBookingAmount?: Prisma.FloatNullableFilter<"Flat"> | number | null
   isFeatured?: Prisma.BoolFilter<"Flat"> | boolean
   isPublished?: Prisma.BoolFilter<"Flat"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Flat"> | Date | string
@@ -477,6 +515,9 @@ export type FlatOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   imageUrls?: Prisma.SortOrder
   amenities?: Prisma.SortOrder
+  useCustomInstallment?: Prisma.SortOrder
+  totalInstallmentMonths?: Prisma.SortOrderInput | Prisma.SortOrder
+  initialBookingAmount?: Prisma.SortOrderInput | Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -513,6 +554,9 @@ export type FlatScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"Flat"> | string | null
   imageUrls?: Prisma.StringNullableListFilter<"Flat">
   amenities?: Prisma.StringNullableListFilter<"Flat">
+  useCustomInstallment?: Prisma.BoolWithAggregatesFilter<"Flat"> | boolean
+  totalInstallmentMonths?: Prisma.IntNullableWithAggregatesFilter<"Flat"> | number | null
+  initialBookingAmount?: Prisma.FloatNullableWithAggregatesFilter<"Flat"> | number | null
   isFeatured?: Prisma.BoolWithAggregatesFilter<"Flat"> | boolean
   isPublished?: Prisma.BoolWithAggregatesFilter<"Flat"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Flat"> | Date | string
@@ -540,6 +584,9 @@ export type FlatCreateInput = {
   description?: string | null
   imageUrls?: Prisma.FlatCreateimageUrlsInput | string[]
   amenities?: Prisma.FlatCreateamenitiesInput | string[]
+  useCustomInstallment?: boolean
+  totalInstallmentMonths?: number | null
+  initialBookingAmount?: number | null
   isFeatured?: boolean
   isPublished?: boolean
   createdAt?: Date | string
@@ -570,6 +617,9 @@ export type FlatUncheckedCreateInput = {
   description?: string | null
   imageUrls?: Prisma.FlatCreateimageUrlsInput | string[]
   amenities?: Prisma.FlatCreateamenitiesInput | string[]
+  useCustomInstallment?: boolean
+  totalInstallmentMonths?: number | null
+  initialBookingAmount?: number | null
   isFeatured?: boolean
   isPublished?: boolean
   createdAt?: Date | string
@@ -598,6 +648,9 @@ export type FlatUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrls?: Prisma.FlatUpdateimageUrlsInput | string[]
   amenities?: Prisma.FlatUpdateamenitiesInput | string[]
+  useCustomInstallment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totalInstallmentMonths?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  initialBookingAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -628,6 +681,9 @@ export type FlatUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrls?: Prisma.FlatUpdateimageUrlsInput | string[]
   amenities?: Prisma.FlatUpdateamenitiesInput | string[]
+  useCustomInstallment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totalInstallmentMonths?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  initialBookingAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -657,6 +713,9 @@ export type FlatCreateManyInput = {
   description?: string | null
   imageUrls?: Prisma.FlatCreateimageUrlsInput | string[]
   amenities?: Prisma.FlatCreateamenitiesInput | string[]
+  useCustomInstallment?: boolean
+  totalInstallmentMonths?: number | null
+  initialBookingAmount?: number | null
   isFeatured?: boolean
   isPublished?: boolean
   createdAt?: Date | string
@@ -684,6 +743,9 @@ export type FlatUpdateManyMutationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrls?: Prisma.FlatUpdateimageUrlsInput | string[]
   amenities?: Prisma.FlatUpdateamenitiesInput | string[]
+  useCustomInstallment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totalInstallmentMonths?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  initialBookingAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -712,6 +774,9 @@ export type FlatUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrls?: Prisma.FlatUpdateimageUrlsInput | string[]
   amenities?: Prisma.FlatUpdateamenitiesInput | string[]
+  useCustomInstallment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totalInstallmentMonths?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  initialBookingAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -750,6 +815,9 @@ export type FlatCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   imageUrls?: Prisma.SortOrder
   amenities?: Prisma.SortOrder
+  useCustomInstallment?: Prisma.SortOrder
+  totalInstallmentMonths?: Prisma.SortOrder
+  initialBookingAmount?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -763,6 +831,8 @@ export type FlatAvgOrderByAggregateInput = {
   balconies?: Prisma.SortOrder
   size?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  totalInstallmentMonths?: Prisma.SortOrder
+  initialBookingAmount?: Prisma.SortOrder
 }
 
 export type FlatMaxOrderByAggregateInput = {
@@ -785,6 +855,9 @@ export type FlatMaxOrderByAggregateInput = {
   hasGasLine?: Prisma.SortOrder
   hasWaterSupply?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  useCustomInstallment?: Prisma.SortOrder
+  totalInstallmentMonths?: Prisma.SortOrder
+  initialBookingAmount?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -811,6 +884,9 @@ export type FlatMinOrderByAggregateInput = {
   hasGasLine?: Prisma.SortOrder
   hasWaterSupply?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  useCustomInstallment?: Prisma.SortOrder
+  totalInstallmentMonths?: Prisma.SortOrder
+  initialBookingAmount?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   isPublished?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -824,6 +900,8 @@ export type FlatSumOrderByAggregateInput = {
   balconies?: Prisma.SortOrder
   size?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  totalInstallmentMonths?: Prisma.SortOrder
+  initialBookingAmount?: Prisma.SortOrder
 }
 
 export type FlatScalarRelationFilter = {
@@ -881,14 +959,6 @@ export type FlatCreateamenitiesInput = {
   set: string[]
 }
 
-export type FloatFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type EnumFlatStatusFieldUpdateOperationsInput = {
   set?: $Enums.FlatStatus
 }
@@ -938,6 +1008,9 @@ export type FlatCreateWithoutPropertyInput = {
   description?: string | null
   imageUrls?: Prisma.FlatCreateimageUrlsInput | string[]
   amenities?: Prisma.FlatCreateamenitiesInput | string[]
+  useCustomInstallment?: boolean
+  totalInstallmentMonths?: number | null
+  initialBookingAmount?: number | null
   isFeatured?: boolean
   isPublished?: boolean
   createdAt?: Date | string
@@ -966,6 +1039,9 @@ export type FlatUncheckedCreateWithoutPropertyInput = {
   description?: string | null
   imageUrls?: Prisma.FlatCreateimageUrlsInput | string[]
   amenities?: Prisma.FlatCreateamenitiesInput | string[]
+  useCustomInstallment?: boolean
+  totalInstallmentMonths?: number | null
+  initialBookingAmount?: number | null
   isFeatured?: boolean
   isPublished?: boolean
   createdAt?: Date | string
@@ -1024,6 +1100,9 @@ export type FlatScalarWhereInput = {
   description?: Prisma.StringNullableFilter<"Flat"> | string | null
   imageUrls?: Prisma.StringNullableListFilter<"Flat">
   amenities?: Prisma.StringNullableListFilter<"Flat">
+  useCustomInstallment?: Prisma.BoolFilter<"Flat"> | boolean
+  totalInstallmentMonths?: Prisma.IntNullableFilter<"Flat"> | number | null
+  initialBookingAmount?: Prisma.FloatNullableFilter<"Flat"> | number | null
   isFeatured?: Prisma.BoolFilter<"Flat"> | boolean
   isPublished?: Prisma.BoolFilter<"Flat"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Flat"> | Date | string
@@ -1051,6 +1130,9 @@ export type FlatCreateWithoutBookingsInput = {
   description?: string | null
   imageUrls?: Prisma.FlatCreateimageUrlsInput | string[]
   amenities?: Prisma.FlatCreateamenitiesInput | string[]
+  useCustomInstallment?: boolean
+  totalInstallmentMonths?: number | null
+  initialBookingAmount?: number | null
   isFeatured?: boolean
   isPublished?: boolean
   createdAt?: Date | string
@@ -1080,6 +1162,9 @@ export type FlatUncheckedCreateWithoutBookingsInput = {
   description?: string | null
   imageUrls?: Prisma.FlatCreateimageUrlsInput | string[]
   amenities?: Prisma.FlatCreateamenitiesInput | string[]
+  useCustomInstallment?: boolean
+  totalInstallmentMonths?: number | null
+  initialBookingAmount?: number | null
   isFeatured?: boolean
   isPublished?: boolean
   createdAt?: Date | string
@@ -1123,6 +1208,9 @@ export type FlatUpdateWithoutBookingsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrls?: Prisma.FlatUpdateimageUrlsInput | string[]
   amenities?: Prisma.FlatUpdateamenitiesInput | string[]
+  useCustomInstallment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totalInstallmentMonths?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  initialBookingAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1152,6 +1240,9 @@ export type FlatUncheckedUpdateWithoutBookingsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrls?: Prisma.FlatUpdateimageUrlsInput | string[]
   amenities?: Prisma.FlatUpdateamenitiesInput | string[]
+  useCustomInstallment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totalInstallmentMonths?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  initialBookingAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1179,6 +1270,9 @@ export type FlatCreateManyPropertyInput = {
   description?: string | null
   imageUrls?: Prisma.FlatCreateimageUrlsInput | string[]
   amenities?: Prisma.FlatCreateamenitiesInput | string[]
+  useCustomInstallment?: boolean
+  totalInstallmentMonths?: number | null
+  initialBookingAmount?: number | null
   isFeatured?: boolean
   isPublished?: boolean
   createdAt?: Date | string
@@ -1206,6 +1300,9 @@ export type FlatUpdateWithoutPropertyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrls?: Prisma.FlatUpdateimageUrlsInput | string[]
   amenities?: Prisma.FlatUpdateamenitiesInput | string[]
+  useCustomInstallment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totalInstallmentMonths?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  initialBookingAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1234,6 +1331,9 @@ export type FlatUncheckedUpdateWithoutPropertyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrls?: Prisma.FlatUpdateimageUrlsInput | string[]
   amenities?: Prisma.FlatUpdateamenitiesInput | string[]
+  useCustomInstallment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totalInstallmentMonths?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  initialBookingAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1262,6 +1362,9 @@ export type FlatUncheckedUpdateManyWithoutPropertyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imageUrls?: Prisma.FlatUpdateimageUrlsInput | string[]
   amenities?: Prisma.FlatUpdateamenitiesInput | string[]
+  useCustomInstallment?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  totalInstallmentMonths?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  initialBookingAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   isFeatured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1321,6 +1424,9 @@ export type FlatSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   description?: boolean
   imageUrls?: boolean
   amenities?: boolean
+  useCustomInstallment?: boolean
+  totalInstallmentMonths?: boolean
+  initialBookingAmount?: boolean
   isFeatured?: boolean
   isPublished?: boolean
   createdAt?: boolean
@@ -1352,6 +1458,9 @@ export type FlatSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   description?: boolean
   imageUrls?: boolean
   amenities?: boolean
+  useCustomInstallment?: boolean
+  totalInstallmentMonths?: boolean
+  initialBookingAmount?: boolean
   isFeatured?: boolean
   isPublished?: boolean
   createdAt?: boolean
@@ -1381,6 +1490,9 @@ export type FlatSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   description?: boolean
   imageUrls?: boolean
   amenities?: boolean
+  useCustomInstallment?: boolean
+  totalInstallmentMonths?: boolean
+  initialBookingAmount?: boolean
   isFeatured?: boolean
   isPublished?: boolean
   createdAt?: boolean
@@ -1410,13 +1522,16 @@ export type FlatSelectScalar = {
   description?: boolean
   imageUrls?: boolean
   amenities?: boolean
+  useCustomInstallment?: boolean
+  totalInstallmentMonths?: boolean
+  initialBookingAmount?: boolean
   isFeatured?: boolean
   isPublished?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type FlatOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "propertyId" | "title" | "flatNumber" | "floorNumber" | "beds" | "baths" | "kitchens" | "balconies" | "size" | "price" | "status" | "completionDate" | "furnishing" | "facing" | "floorType" | "hasGasLine" | "hasWaterSupply" | "description" | "imageUrls" | "amenities" | "isFeatured" | "isPublished" | "createdAt" | "updatedAt", ExtArgs["result"]["flat"]>
+export type FlatOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "propertyId" | "title" | "flatNumber" | "floorNumber" | "beds" | "baths" | "kitchens" | "balconies" | "size" | "price" | "status" | "completionDate" | "furnishing" | "facing" | "floorType" | "hasGasLine" | "hasWaterSupply" | "description" | "imageUrls" | "amenities" | "useCustomInstallment" | "totalInstallmentMonths" | "initialBookingAmount" | "isFeatured" | "isPublished" | "createdAt" | "updatedAt", ExtArgs["result"]["flat"]>
 export type FlatInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
   bookings?: boolean | Prisma.Flat$bookingsArgs<ExtArgs>
@@ -1457,6 +1572,9 @@ export type $FlatPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     description: string | null
     imageUrls: string[]
     amenities: string[]
+    useCustomInstallment: boolean
+    totalInstallmentMonths: number | null
+    initialBookingAmount: number | null
     isFeatured: boolean
     isPublished: boolean
     createdAt: Date
@@ -1907,6 +2025,9 @@ export interface FlatFieldRefs {
   readonly description: Prisma.FieldRef<"Flat", 'String'>
   readonly imageUrls: Prisma.FieldRef<"Flat", 'String[]'>
   readonly amenities: Prisma.FieldRef<"Flat", 'String[]'>
+  readonly useCustomInstallment: Prisma.FieldRef<"Flat", 'Boolean'>
+  readonly totalInstallmentMonths: Prisma.FieldRef<"Flat", 'Int'>
+  readonly initialBookingAmount: Prisma.FieldRef<"Flat", 'Float'>
   readonly isFeatured: Prisma.FieldRef<"Flat", 'Boolean'>
   readonly isPublished: Prisma.FieldRef<"Flat", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Flat", 'DateTime'>

@@ -63,12 +63,24 @@ export const handleSSLSuccess = asyncHandler(async (req: Request, res: Response)
 
       if (targetBookingId) {
         await prisma.$transaction(async (tx) => {
+          const currentBooking = await tx.booking.findUnique({ where: { id: targetBookingId } });
+          const paymentDetails = (payment?.paymentDetails as any) || {};
+          const isNextInstallment = paymentDetails.isNextInstallment;
+          const additionalCount = paymentDetails.installmentCountPaid || 0;
+          const targetCount = paymentDetails.targetInstallmentsCount || (currentBooking?.installmentsPaidCount || 1) + additionalCount;
+
+          const paymentAmount = payment?.amount || 0;
+          const newPaidAmount = isNextInstallment && currentBooking
+            ? (currentBooking.paidAmount || 0) + paymentAmount
+            : paymentAmount;
+
           const booking = await tx.booking.update({
             where: { id: targetBookingId },
             data: {
               status: "CONFIRMED",
               paymentStatus: "VALIDATED",
-              paidAmount: payment?.amount || undefined,
+              paidAmount: newPaidAmount,
+              installmentsPaidCount: targetCount,
             },
           });
 
@@ -80,7 +92,7 @@ export const handleSSLSuccess = asyncHandler(async (req: Request, res: Response)
                 cardType: card_type || valData?.card_type || "SSLCOMMERZ",
                 bankTranId: bank_tran_id || valData?.bank_tran_id || tranId,
                 status: "VALIDATED",
-                paymentDetails: body,
+                paymentDetails: { ...paymentDetails, gatewayData: body },
               },
             });
           }
@@ -163,17 +175,27 @@ export const approvePayment = asyncHandler(async (req: Request, res: Response) =
       data: { status: "VALIDATED" },
     });
 
-    if (payment.bookingId) {
+    if (payment.bookingId && booking) {
+      const paymentDetails = (payment.paymentDetails as any) || {};
+      const isNextInstallment = paymentDetails.isNextInstallment;
+      const additionalCount = paymentDetails.installmentCountPaid || 0;
+      const targetCount = paymentDetails.targetInstallmentsCount || (booking.installmentsPaidCount || 1) + additionalCount;
+
+      const newPaidAmount = isNextInstallment
+        ? (booking.paidAmount || 0) + payment.amount
+        : payment.amount;
+
       await tx.booking.update({
         where: { id: payment.bookingId },
         data: {
           status: "CONFIRMED",
           paymentStatus: "VALIDATED",
-          paidAmount: payment.amount,
+          paidAmount: newPaidAmount,
+          installmentsPaidCount: targetCount,
         },
       });
 
-      if (booking?.flatId) {
+      if (booking.flatId) {
         await tx.flat.update({
           where: { id: booking.flatId },
           data: { status: "BOOKED" },

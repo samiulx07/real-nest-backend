@@ -32,6 +32,10 @@ export const createFlatSchema = z.object({
     amenities: z.array(z.string()).default([]),
     isFeatured: z.boolean().default(false),
     isPublished: z.boolean().default(true),
+    // ─ Custom Installment Override ─
+    useCustomInstallment: z.boolean().default(false),
+    totalInstallmentMonths: z.number().int().min(1).max(60).optional().nullable(),
+    initialBookingAmount: z.number().min(0).optional().nullable(),
   }),
 });
 
@@ -59,5 +63,9 @@ export const updateFlatSchema = z.object({
     amenities: z.array(z.string()).optional(),
     isFeatured: z.boolean().optional(),
     isPublished: z.boolean().optional(),
+    // ─ Custom Installment Override ─
+    useCustomInstallment: z.boolean().optional(),
+    totalInstallmentMonths: z.number().int().min(1).max(60).optional().nullable(),
+    initialBookingAmount: z.number().min(0).optional().nullable(),
   }),
 });

@@ -6,6 +6,7 @@ import {
   getUserBookingsService,
   getAllBookingsService,
   verifyBookingPaymentService,
+  payInstallmentService,
 } from "../services/booking.service";
 
 export const createBooking = asyncHandler(async (req: Request, res: Response) => {
@@ -53,6 +54,24 @@ export const verifyBookingPayment = asyncHandler(async (req: Request, res: Respo
     statusCode: 200,
     success: true,
     message: `Booking payment ${action.toLowerCase()}d successfully`,
+    data: result,
+  });
+});
+
+export const payInstallment = asyncHandler(async (req: Request, res: Response) => {
+  const userId = req.user!.id;
+  const { id } = req.params;
+  const payload = {
+    ...req.body,
+    bookingId: id as string,
+  };
+
+  const result = await payInstallmentService(userId, payload);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Installment payment submitted successfully",
     data: result,
   });
 });

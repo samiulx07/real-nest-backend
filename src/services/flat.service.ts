@@ -1,5 +1,6 @@
 import prisma from "../config/prisma";
 import { ApiError } from "../utils/ApiError";
+import { generateSchedule, getEffectiveInstallmentParams } from "../utils/installmentCalculator";
 
 export const createFlat = async (payload: any) => {
   // Check if target property exists
@@ -172,6 +173,9 @@ export const getFlatById = async (id: string) => {
           latitude: true,
           longitude: true,
           amenities: true,
+          allowInstallment: true,
+          totalInstallmentMonths: true,
+          initialBookingAmount: true,
         },
       },
     },
@@ -181,7 +185,19 @@ export const getFlatById = async (id: string) => {
     throw new ApiError(404, "Flat not found");
   }
 
-  return result;
+  // Compute effective installment schedule
+  const effectiveParams = getEffectiveInstallmentParams(
+    result.property,
+    result
+  );
+  const schedule = result.property.allowInstallment
+    ? generateSchedule(result.price, effectiveParams.totalInstallmentMonths, effectiveParams.initialBookingAmount)
+    : null;
+
+  return {
+    ...result,
+    installmentSchedule: schedule,
+  };
 };
 
 export const updateFlat = async (id: string, payload: any) => {

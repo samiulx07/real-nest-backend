@@ -1,6 +1,7 @@
 import prisma from "../config/prisma";
 import { ApiError } from "../utils/ApiError";
 import { SSLCommerzService } from "./sslcommerz.service";
+import { generateSchedule, getEffectiveInstallmentParams } from "../utils/installmentCalculator";
 
 export interface CreateBookingDTO {
   flatId: string;
@@ -14,6 +15,8 @@ export interface CreateBookingDTO {
   senderAccount?: string;
   bankTranId?: string;
   receiptUrl?: string;
+
+  installmentsPaidCount?: number;
 }
 
 export const createBookingService = async (userId: string, payload: CreateBookingDTO) => {
@@ -53,6 +56,7 @@ export const createBookingService = async (userId: string, payload: CreateBookin
           paidAmount: 0,
           paymentStatus: "PENDING_APPROVAL",
           status: "PENDING",
+          installmentsPaidCount: payload.installmentsPaidCount || 1,
           notes: payload.notes,
         },
       });
@@ -110,6 +114,7 @@ export const createBookingService = async (userId: string, payload: CreateBookin
         paidAmount: payload.bookingAmount, // Submitted deposit
         paymentStatus: "PENDING_APPROVAL",
         status: "PENDING",
+        installmentsPaidCount: payload.installmentsPaidCount || 1,
         notes: payload.notes,
       },
     });
@@ -144,7 +149,7 @@ export const createBookingService = async (userId: string, payload: CreateBookin
 };
 
 export const getUserBookingsService = async (userId: string) => {
-  return prisma.booking.findMany({
+  const bookings = await prisma.booking.findMany({
     where: { userId },
     include: {
       flat: {
@@ -158,10 +163,28 @@ export const getUserBookingsService = async (userId: string) => {
     },
     orderBy: { createdAt: "desc" },
   });
+
+  // Attach computed installment schedule to each booking
+  return bookings.map((booking) => {
+    const flat = booking.flat;
+    const property = flat.property;
+    if (!property.allowInstallment) {
+      return { ...booking, installmentSchedule: null };
+    }
+    const effectiveParams = getEffectiveInstallmentParams(property, flat);
+    const schedule = generateSchedule(
+      flat.price,
+      effectiveParams.totalInstallmentMonths,
+      effectiveParams.initialBookingAmount,
+      booking.installmentsPaidCount,
+      booking.createdAt
+    );
+    return { ...booking, installmentSchedule: schedule };
+  });
 };
 
 export const getAllBookingsService = async () => {
-  return prisma.booking.findMany({
+  const bookings = await prisma.booking.findMany({
     include: {
       user: {
         select: {
@@ -182,6 +205,115 @@ export const getAllBookingsService = async () => {
     },
     orderBy: { createdAt: "desc" },
   });
+
+  return bookings.map((booking) => {
+    const flat = booking.flat;
+    const property = flat.property;
+    if (!property.allowInstallment) {
+      return { ...booking, installmentSchedule: null };
+    }
+    const effectiveParams = getEffectiveInstallmentParams(property, flat);
+    const schedule = generateSchedule(
+      flat.price,
+      effectiveParams.totalInstallmentMonths,
+      effectiveParams.initialBookingAmount,
+      booking.installmentsPaidCount,
+      booking.createdAt
+    );
+    return { ...booking, installmentSchedule: schedule };
+  });
+};
+
+export interface PayInstallmentDTO {
+  bookingId: string;
+  installmentsToPayCount: number;
+  amount: number;
+  paymentMethod: "SSLCOMMERZ" | "BANK_TRANSFER" | "BKASH" | "NAGAD" | "CASH";
+  senderAccount?: string;
+  bankTranId?: string;
+  receiptUrl?: string;
+  notes?: string;
+}
+
+export const payInstallmentService = async (userId: string, payload: PayInstallmentDTO) => {
+  const booking = await prisma.booking.findUnique({
+    where: { id: payload.bookingId },
+    include: { flat: { include: { property: true } } },
+  });
+
+  if (!booking) {
+    throw new ApiError(404, "Booking record not found");
+  }
+
+  const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+  const randCode = Math.floor(1000 + Math.random() * 9000);
+  const tranId = `TXN-${dateStr}-${randCode}`;
+
+  const currentPaidCount = booking.installmentsPaidCount || 1;
+  const newTargetCount = currentPaidCount + payload.installmentsToPayCount;
+
+  if (payload.paymentMethod === "SSLCOMMERZ") {
+    const payment = await prisma.payment.create({
+      data: {
+        tranId,
+        bookingId: booking.id,
+        userId,
+        paymentMethod: "SSLCOMMERZ",
+        amount: payload.amount,
+        currency: "BDT",
+        status: "PENDING_APPROVAL",
+        paymentDetails: {
+          installmentCountPaid: payload.installmentsToPayCount,
+          targetInstallmentsCount: newTargetCount,
+          isNextInstallment: true,
+          notes: payload.notes,
+        },
+      },
+    });
+
+    const sslSession = await SSLCommerzService.initiateSession({
+      bookingId: booking.id,
+      tranId,
+      amount: payload.amount,
+      customerName: booking.customerName,
+      customerEmail: booking.customerEmail,
+      customerPhone: booking.customerPhone,
+      flatTitle: `${booking.flat?.property?.title || "Building"} - Installment Payment (Month ${currentPaidCount + 1}${payload.installmentsToPayCount > 1 ? ` to ${newTargetCount}` : ""})`,
+    });
+
+    return {
+      payment,
+      gatewayUrl: sslSession.gatewayUrl,
+      paymentMethod: "SSLCOMMERZ",
+    };
+  }
+
+  // Bank Transfer / Mobile Banking
+  const payment = await prisma.payment.create({
+    data: {
+      tranId,
+      bookingId: booking.id,
+      userId,
+      paymentMethod: payload.paymentMethod,
+      amount: payload.amount,
+      currency: "BDT",
+      bankTranId: payload.bankTranId || tranId,
+      senderAccount: payload.senderAccount,
+      receiptUrl: payload.receiptUrl,
+      status: "PENDING_APPROVAL",
+      paymentDetails: {
+        installmentCountPaid: payload.installmentsToPayCount,
+        targetInstallmentsCount: newTargetCount,
+        isNextInstallment: true,
+        notes: payload.notes,
+      },
+    },
+  });
+
+  return {
+    payment,
+    paymentMethod: payload.paymentMethod,
+  };
 };
 
 export const verifyBookingPaymentService = async (

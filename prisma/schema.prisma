@@ -97,6 +97,11 @@ model Property {
   rajukApproval     Boolean        @default(false)
   reraRegistered    Boolean        @default(false)
 
+  // ─ Installment Settings (Global Defaults for all flats) ─
+  allowInstallment       Boolean  @default(true)
+  totalInstallmentMonths Int      @default(12)
+  initialBookingAmount   Float    @default(100000)
+
   imageUrls         String[]
   amenities         String[]
 
@@ -153,6 +158,11 @@ model Flat {
   description   String?
   imageUrls     String[]   @default([])
   amenities     String[]   @default([])
+
+  // ─ Custom Installment Override (per-flat) ─
+  useCustomInstallment   Boolean  @default(false)
+  totalInstallmentMonths Int?
+  initialBookingAmount   Float?
 
   isFeatured    Boolean    @default(false)
   isPublished   Boolean    @default(true)
@@ -224,6 +234,8 @@ model Booking {
   paidAmount    Float         @default(0)
   paymentStatus PaymentStatus @default(PENDING_APPROVAL)
   status        BookingStatus @default(PENDING)
+
+  installmentsPaidCount Int  @default(1)
 
   notes         String?
   adminNotes    String?
