@@ -183,6 +183,53 @@ export const getUserBookingsService = async (userId: string) => {
   });
 };
 
+export const getSingleBookingService = async (id: string, userId?: string, role?: string) => {
+  const booking = await prisma.booking.findUnique({
+    where: { id },
+    include: {
+      user: {
+        select: {
+          id: true,
+          fullName: true,
+          email: true,
+          phone: true,
+        },
+      },
+      flat: {
+        include: {
+          property: true,
+        },
+      },
+      payments: {
+        orderBy: { createdAt: "desc" },
+      },
+    },
+  });
+
+  if (!booking) {
+    throw new ApiError(404, "Booking reservation not found");
+  }
+
+  if (userId && role === "CUSTOMER" && booking.userId !== userId) {
+    throw new ApiError(403, "You do not have permission to access this booking");
+  }
+
+  const flat = booking.flat;
+  const property = flat.property;
+  if (!property.allowInstallment) {
+    return { ...booking, installmentSchedule: null };
+  }
+  const effectiveParams = getEffectiveInstallmentParams(property, flat);
+  const schedule = generateSchedule(
+    flat.price,
+    effectiveParams.totalInstallmentMonths,
+    effectiveParams.initialBookingAmount,
+    booking.installmentsPaidCount,
+    booking.createdAt
+  );
+  return { ...booking, installmentSchedule: schedule };
+};
+
 export const getAllBookingsService = async () => {
   const bookings = await prisma.booking.findMany({
     include: {

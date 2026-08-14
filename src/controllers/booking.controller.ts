@@ -4,10 +4,25 @@ import { sendResponse } from "../utils/sendResponse";
 import {
   createBookingService,
   getUserBookingsService,
+  getSingleBookingService,
   getAllBookingsService,
   verifyBookingPaymentService,
   payInstallmentService,
 } from "../services/booking.service";
+
+export const getSingleBooking = asyncHandler(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const userId = req.user?.id;
+  const role = req.user?.role;
+  const booking = await getSingleBookingService(id as string, userId, role);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Booking reservation fetched successfully",
+    data: booking,
+  });
+});
 
 export const createBooking = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.user!.id;

@@ -8,6 +8,7 @@ import {
 import {
   createBooking,
   getUserBookings,
+  getSingleBooking,
   getAllBookings,
   verifyBookingPayment,
   payInstallment,
@@ -27,6 +28,12 @@ router.get(
   "/my-bookings",
   authMiddleware(),
   getUserBookings
+);
+
+router.get(
+  "/:id",
+  authMiddleware(),
+  getSingleBooking
 );
 
 router.post(
