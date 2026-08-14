@@ -787,6 +787,122 @@ export const swaggerDocument = {
         },
       },
     },
+    "/bookings/{id}": {
+      get: {
+        summary: "Get Single Booking by ID",
+        description: "Retrieve complete booking reservation record by ID with computed installment schedule and payment history. Accessible by booking owner or ADMIN/STAFF.",
+        tags: ["Bookings"],
+        security: [{ bearerAuth: [] }],
+        parameters: [
+          { name: "id", in: "path", required: true, description: "Booking UUID", schema: { type: "string", format: "uuid" } },
+        ],
+        responses: {
+          "200": {
+            description: "Booking details fetched successfully",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/BookingResponse",
+                },
+              },
+            },
+          },
+          "401": {
+            description: "Unauthorized",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+          "403": {
+            description: "Forbidden",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+          "404": {
+            description: "Booking not found",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "/bookings/{id}/pay-installment": {
+      post: {
+        summary: "Pay Next Installment(s)",
+        description: "Submit installment payment for an existing booking reservation via SSLCommerz or direct bank transfer.",
+        tags: ["Bookings"],
+        security: [{ bearerAuth: [] }],
+        parameters: [
+          { name: "id", in: "path", required: true, description: "Booking UUID", schema: { type: "string", format: "uuid" } },
+        ],
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/PayInstallmentRequest",
+              },
+            },
+          },
+        },
+        responses: {
+          "200": {
+            description: "Installment payment initiated or recorded successfully",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/PayInstallmentResponse",
+                },
+              },
+            },
+          },
+          "400": {
+            description: "Invalid request parameters",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+          "401": {
+            description: "Unauthorized",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+          "404": {
+            description: "Booking not found",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/ErrorResponse",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
     "/bookings/{id}/verify-payment": {
       patch: {
         summary: "Verify/Update Booking Payment (Admin/Staff)",
@@ -1598,6 +1714,35 @@ export const swaggerDocument = {
         properties: {
           success: { type: "boolean", example: true },
           message: { type: "string", example: "Flat booking request created successfully" },
+          data: {
+            type: "object",
+            properties: {
+              booking: {
+                $ref: "#/components/schemas/Booking",
+              },
+              gatewayUrl: { type: "string", nullable: true, example: "https://sandbox.sslcommerz.com/gwprocess/v4/gw.php?Q=..." },
+              paymentMethod: { type: "string", example: "SSLCOMMERZ" },
+            },
+          },
+        },
+      },
+      PayInstallmentRequest: {
+        type: "object",
+        required: ["installmentsToPayCount", "amount", "paymentMethod"],
+        properties: {
+          installmentsToPayCount: { type: "integer", minimum: 1, example: 1 },
+          amount: { type: "number", minimum: 1, example: 100000 },
+          paymentMethod: { type: "string", enum: ["SSLCOMMERZ", "BANK_TRANSFER", "BKASH", "NAGAD", "CASH"], example: "SSLCOMMERZ" },
+          senderAccount: { type: "string", example: "01700000000" },
+          bankTranId: { type: "string", example: "TXN-987654" },
+          notes: { type: "string", example: "Payment for Month 2" },
+        },
+      },
+      PayInstallmentResponse: {
+        type: "object",
+        properties: {
+          success: { type: "boolean", example: true },
+          message: { type: "string", example: "Installment payment processed successfully" },
           data: {
             type: "object",
             properties: {
