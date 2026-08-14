@@ -75,6 +75,14 @@ export const getAllProperties = async (filters: any, options: any) => {
     orderBy: {
       [sortBy]: sortOrder,
     },
+    include: {
+      flats: {
+        select: {
+          id: true,
+          status: true,
+        },
+      },
+    },
   });
 
   const total = await prisma.property.count({
