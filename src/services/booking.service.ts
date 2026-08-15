@@ -16,6 +16,11 @@ export interface CreateBookingDTO {
   bankTranId?: string;
   receiptUrl?: string;
 
+  // Direct Bank Deposit metadata (Stored in paymentDetails JSON)
+  accountName?: string;
+  branchName?: string;
+  paymentTime?: string;
+
   installmentsPaidCount?: number;
 }
 
@@ -131,6 +136,12 @@ export const createBookingService = async (userId: string, payload: CreateBookin
         senderAccount: payload.senderAccount,
         receiptUrl: payload.receiptUrl,
         status: "PENDING_APPROVAL",
+        paymentDetails: {
+          accountName: payload.accountName || undefined,
+          branchName: payload.branchName || undefined,
+          paymentTime: payload.paymentTime || undefined,
+          notes: payload.notes || undefined,
+        },
       },
     });
 
@@ -280,6 +291,11 @@ export interface PayInstallmentDTO {
   bankTranId?: string;
   receiptUrl?: string;
   notes?: string;
+
+  // Direct Bank Deposit metadata (Stored in paymentDetails JSON)
+  accountName?: string;
+  branchName?: string;
+  paymentTime?: string;
 }
 
 export const payInstallmentService = async (userId: string, payload: PayInstallmentDTO) => {
@@ -352,7 +368,10 @@ export const payInstallmentService = async (userId: string, payload: PayInstallm
         installmentCountPaid: payload.installmentsToPayCount,
         targetInstallmentsCount: newTargetCount,
         isNextInstallment: true,
-        notes: payload.notes,
+        accountName: payload.accountName || undefined,
+        branchName: payload.branchName || undefined,
+        paymentTime: payload.paymentTime || undefined,
+        notes: payload.notes || undefined,
       },
     },
   });

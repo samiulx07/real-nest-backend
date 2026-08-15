@@ -14,6 +14,9 @@ export const createBookingValidation = z.object({
     senderAccount: z.string().optional(),
     bankTranId: z.string().optional(),
     receiptUrl: z.string().optional(),
+    accountName: z.string().optional(),
+    branchName: z.string().optional(),
+    paymentTime: z.string().optional(),
 
     // Installment tracking
     installmentsPaidCount: z.number().int().min(1).default(1),
